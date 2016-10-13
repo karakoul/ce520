@@ -1,8 +1,14 @@
-enum { AM_BRIGHTNESS = 3 };
+enum { AM_ID = 3 };
 
-typedef nx_struct BrightnessMessage {
-
+typedef nx_struct BrightnessMsg
+{
 	nx_uint16_t brightness;
-	nx_uint16_t nodeId;
+	
+} brightness_t;
 
-} Bright_Msg;
+typedef nx_struct SamplingPeriodMsg
+{
+	nx_uint16_t sampling_period;
+
+} period_t;
+

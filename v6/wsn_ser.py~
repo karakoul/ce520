@@ -2,6 +2,7 @@
 
 import sys
 import tos
+import os
 import threading
 import Queue
 import time
@@ -34,16 +35,14 @@ class SerialManager(threading.Thread):
 			sys.exit()
 		
 	def run(self):
-		print "AMessage communication started ! "
+		print "A Message communication started ! "
 		while True:
 			while self.tx.empty() == False:
 				tx_pckt = self.tx.get()
 				self.am.write(tx_pckt,self.AMChannel)
-				#self.rx.put(tx_pckt)
 			try:
 				pckt = self.am.read(timeout=0.4)
 				if pckt:
-					#print pckt
 					msg = AppMsg(pckt.data)
 					self.rx.put(msg)
 			except: 				
@@ -53,8 +52,8 @@ class SerialManager(threading.Thread):
 def receiver(rx):
 	while True:
 		msg = rx.get()
-		print "Imote -> PC: "+ str(msg.counter)
-		if(msg.counter < 50):
+		print "Brightness : "+ str(msg.counter)
+		if(msg.counter < 40):
 			print "Led on"
 		else:
 			print "Led off"  	
@@ -65,7 +64,7 @@ def transmitter(tx):
 		var = raw_input(" ")
 		if var == "q":
 			os._exit(1)
-		print "PC -> Imote: " + var
+		print "Sampling period : " + var
 		msg=AppMsg((int(var),[]));
                 tx.put(msg)
 		print "sent"

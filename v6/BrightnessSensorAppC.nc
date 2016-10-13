@@ -1,6 +1,7 @@
 configuration BrightnessSensorAppC {}
 
-implementation {
+implementation 
+{
 
   components MainC, BrightnessSensorC, LedsC;
   components new TimerMilliC() as Timer;
@@ -8,8 +9,8 @@ implementation {
   components new HamamatsuS1087ParC();
   
   components SerialActiveMessageC;
-  components new SerialAMSenderC(AM_BRIGHTNESS);
-  components new SerialAMReceiverC(AM_BRIGHTNESS);
+  components new SerialAMSenderC( AM_ID );
+  components new SerialAMReceiverC( AM_ID );
   
 
   BrightnessSensorC -> MainC.Boot;

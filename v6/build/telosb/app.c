@@ -453,7 +453,7 @@ enum __nesc_unnamed4247 {
   FALSE = 0, TRUE = 1
 };
 typedef nx_int8_t nx_bool;
-uint16_t TOS_NODE_ID = 1;
+
 
 
 
@@ -833,20 +833,29 @@ TMicro;
 # 1 "BrightnessSensor.h"
 enum __nesc_unnamed4261 {
 #line 1
-  AM_BRIGHTNESS = 3
+  AM_ID = 3
 };
 
 
 
 
-
 #line 3
-typedef nx_struct BrightnessMessage {
+typedef nx_struct BrightnessMsg {
 
   nx_uint16_t brightness;
-  nx_uint16_t nodeId;
 } __attribute__((packed)) 
-Bright_Msg;
+brightness_t;
+
+
+
+
+
+#line 9
+typedef nx_struct SamplingPeriodMsg {
+
+  nx_uint16_t sampling_period;
+} __attribute__((packed)) 
+period_t;
 # 43 "/opt/tinyos-2.1.2/tos/types/Leds.h"
 enum __nesc_unnamed4262 {
   LEDS_LED0 = 1 << 0, 
@@ -2154,9 +2163,7 @@ static void BrightnessSensorC__CheckBrightness__runTask(void );
 static void BrightnessSensorC__Timer__fired(void );
 # 62 "/opt/tinyos-2.1.2/tos/interfaces/Init.nc"
 static error_t LedsP__Init__init(void );
-# 72 "/opt/tinyos-2.1.2/tos/interfaces/Leds.nc"
-static void LedsP__Leds__led1On(void );
-#line 94
+# 94 "/opt/tinyos-2.1.2/tos/interfaces/Leds.nc"
 static void LedsP__Leds__led2Off(void );
 #line 89
 static void LedsP__Leds__led2On(void );
@@ -2192,11 +2199,6 @@ static void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__set(void );
 static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__makeOutput(void );
 #line 48
 static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__set(void );
-
-
-
-
-static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr(void );
 #line 85
 static void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__makeOutput(void );
 #line 48
@@ -2266,7 +2268,7 @@ static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__set(void );
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__makeOutput(void );
 #line 40
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__set(void );
-static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr(void );
+
 
 
 
@@ -2387,13 +2389,13 @@ error_t result, AdcP__Read__val_t val);
 # 66 "/opt/tinyos-2.1.2/tos/interfaces/ReadNow.nc"
 static void AdcP__ReadNow__default__readDone(
 # 39 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409eb5a0, 
+uint8_t arg_0x409ea5a0, 
 # 66 "/opt/tinyos-2.1.2/tos/interfaces/ReadNow.nc"
 error_t result, AdcP__ReadNow__val_t val);
 # 58 "/opt/tinyos-2.1.2/tos/interfaces/AdcConfigure.nc"
 static AdcP__Config__adc_config_t AdcP__Config__default__getConfiguration(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409e98e8);
+uint8_t arg_0x409e68e8);
 # 189 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t AdcP__SingleChannel__default__getData(
 # 49 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
@@ -2419,15 +2421,15 @@ uint16_t data);
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__default__release(
 # 44 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409ea170);
+uint8_t arg_0x409ed170);
 # 88 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__default__request(
 # 44 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409ea170);
+uint8_t arg_0x409ed170);
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static void AdcP__ResourceRead__granted(
 # 44 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409ea170);
+uint8_t arg_0x409ed170);
 # 75 "/opt/tinyos-2.1.2/tos/interfaces/TaskBasic.nc"
 static void AdcP__readDone__runTask(void );
 # 107 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/Msp430Adc12MultiChannel.nc"
@@ -2763,7 +2765,7 @@ uint8_t len);
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(
 # 47 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x40c31ae8, 
+am_id_t arg_0x40c34ae8, 
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -2883,7 +2885,7 @@ static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__receive
 # 75 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__send(
 # 51 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x40ccb560, 
+uart_id_t arg_0x40cf6560, 
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -2897,7 +2899,7 @@ uint8_t len);
 #line 100
 static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(
 # 51 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x40ccb560, 
+uart_id_t arg_0x40cf6560, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -3066,15 +3068,15 @@ uint8_t arg_0x40d71c90);
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__release(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x40d76710);
+uint8_t arg_0x40d77710);
 # 97 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__immediateRequest(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x40d76710);
+uint8_t arg_0x40d77710);
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__granted(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x40d76710);
+uint8_t arg_0x40d77710);
 # 54 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/HplMsp430UsartInterrupts.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartInterrupts__rxDone(
 # 51 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
@@ -3247,7 +3249,7 @@ error_t error);
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40eda490, 
+am_id_t arg_0x40ed9490, 
 # 103 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4022,9 +4024,7 @@ message_t * msg,
 uint8_t len);
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/TaskBasic.nc"
 static error_t BrightnessSensorC__SendMessage__postTask(void );
-# 72 "/opt/tinyos-2.1.2/tos/interfaces/Leds.nc"
-static void BrightnessSensorC__Leds__led1On(void );
-#line 94
+# 94 "/opt/tinyos-2.1.2/tos/interfaces/Leds.nc"
 static void BrightnessSensorC__Leds__led2Off(void );
 #line 89
 static void BrightnessSensorC__Leds__led2On(void );
@@ -4034,44 +4034,38 @@ static error_t BrightnessSensorC__Control__start(void );
 static error_t BrightnessSensorC__CheckBrightness__postTask(void );
 # 64 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
 static void BrightnessSensorC__Timer__startPeriodic(uint32_t dt);
-# 25 "BrightnessSensorC.nc"
+# 28 "BrightnessSensorC.nc"
 enum BrightnessSensorC____nesc_unnamed4303 {
-#line 25
+#line 28
   BrightnessSensorC__CheckBrightness = 0U
 };
-#line 25
+#line 28
 typedef int BrightnessSensorC____nesc_sillytask_CheckBrightness[BrightnessSensorC__CheckBrightness];
-#line 46
+#line 53
 enum BrightnessSensorC____nesc_unnamed4304 {
-#line 46
+#line 53
   BrightnessSensorC__SendMessage = 1U
 };
-#line 46
+#line 53
 typedef int BrightnessSensorC____nesc_sillytask_SendMessage[BrightnessSensorC__SendMessage];
-#line 20
+#line 22
 uint16_t BrightnessSensorC__brightness;
 bool BrightnessSensorC__ledIsOn = FALSE;
 message_t BrightnessSensorC__packet;
 bool BrightnessSensorC__busy = FALSE;
+uint16_t BrightnessSensorC__T = 1000;
 
 static inline void BrightnessSensorC__CheckBrightness__runTask(void );
-#line 41
+#line 48
 static inline void BrightnessSensorC__Boot__booted(void );
 
 
 
 
 static inline void BrightnessSensorC__SendMessage__runTask(void );
-#line 66
+#line 76
 static inline void BrightnessSensorC__Control__startDone(error_t error);
-
-
-
-
-
-
-
-
+#line 88
 static inline void BrightnessSensorC__Control__stopDone(error_t error);
 
 
@@ -4083,9 +4077,12 @@ static inline void BrightnessSensorC__Timer__fired(void );
 
 
 
+
 static void BrightnessSensorC__Read__readDone(error_t result, uint16_t data);
-#line 101
+#line 118
 static inline void BrightnessSensorC__AMSend__sendDone(message_t *msg, error_t error);
+
+
 
 
 
@@ -4104,7 +4101,7 @@ static void LedsP__Led0__set(void );
 static void LedsP__Led1__makeOutput(void );
 #line 40
 static void LedsP__Led1__set(void );
-static void LedsP__Led1__clr(void );
+
 
 
 
@@ -4115,8 +4112,6 @@ static void LedsP__Led2__set(void );
 static void LedsP__Led2__clr(void );
 # 56 "/opt/tinyos-2.1.2/tos/system/LedsP.nc"
 static inline error_t LedsP__Init__init(void );
-#line 89
-static inline void LedsP__Leds__led1On(void );
 #line 104
 static inline void LedsP__Leds__led2On(void );
 
@@ -4149,7 +4144,7 @@ static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__set(v
 static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__makeOutput(void );
 #line 56
 static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__set(void );
-static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr(void );
+
 
 
 
@@ -4245,14 +4240,9 @@ static inline void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__makeOutp
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__makeOutput(void );
 #line 48
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__set(void );
-
-
-
-
-static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__clr(void );
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/pins/Msp430GpioC.nc"
 static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__set(void );
-static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr(void );
+
 
 
 
@@ -4567,13 +4557,13 @@ error_t result, AdcP__Read__val_t val);
 # 66 "/opt/tinyos-2.1.2/tos/interfaces/ReadNow.nc"
 static void AdcP__ReadNow__readDone(
 # 39 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409eb5a0, 
+uint8_t arg_0x409ea5a0, 
 # 66 "/opt/tinyos-2.1.2/tos/interfaces/ReadNow.nc"
 error_t result, AdcP__ReadNow__val_t val);
 # 58 "/opt/tinyos-2.1.2/tos/interfaces/AdcConfigure.nc"
 static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409e98e8);
+uint8_t arg_0x409e68e8);
 # 189 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t AdcP__SingleChannel__getData(
 # 49 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
@@ -4587,11 +4577,11 @@ const msp430adc12_channel_config_t * config);
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__release(
 # 44 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409ea170);
+uint8_t arg_0x409ed170);
 # 88 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__request(
 # 44 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x409ea170);
+uint8_t arg_0x409ed170);
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/TaskBasic.nc"
 static error_t AdcP__readDone__postTask(void );
 # 136 "/opt/tinyos-2.1.2/tos/chips/msp430/adc12/AdcP.nc"
@@ -5565,7 +5555,7 @@ uint8_t len);
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(
 # 47 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x40c31ae8, 
+am_id_t arg_0x40c34ae8, 
 # 103 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -6069,7 +6059,7 @@ static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__rece
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(
 # 51 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x40ccb560, 
+uart_id_t arg_0x40cf6560, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -6364,7 +6354,7 @@ uint8_t arg_0x40d71c90);
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x40d76710);
+uint8_t arg_0x40d77710);
 #line 59
 uint16_t /*Msp430Uart1P.UartP*/Msp430UartP__0__m_tx_len;
 #line 59
@@ -6832,7 +6822,7 @@ static inline void /*BrightnessSensorAppC.SerialAMSenderC.AMQueueEntryP*/AMQueue
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40eda490, 
+am_id_t arg_0x40ed9490, 
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -9457,11 +9447,11 @@ inline static bool RealMainP__Scheduler__runNextTask(void ){
 #line 65
 }
 #line 65
-# 101 "BrightnessSensorC.nc"
+# 118 "BrightnessSensorC.nc"
 static inline void BrightnessSensorC__AMSend__sendDone(message_t *msg, error_t error)
-#line 101
 {
-  if (&BrightnessSensorC__packet == msg) {
+  if (&BrightnessSensorC__packet == msg) 
+    {
       BrightnessSensorC__busy = FALSE;
     }
 }
@@ -9560,13 +9550,13 @@ inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__errorTask_
 }
 #line 67
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
-inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x40eda490, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x40ed9490, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x40eda490, addr, msg, len);
+  __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x40ed9490, addr, msg, len);
 #line 80
 
 #line 80
@@ -9698,16 +9688,6 @@ static inline void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__tryToSend(voi
           /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__errorTask__postTask();
         }
     }
-}
-
-# 310 "/usr/lib/ncc/nesc_nx.h"
-static __inline  uint16_t __nesc_ntoh_uint16(const void * source)
-#line 310
-{
-  const uint8_t *base = source;
-
-#line 312
-  return ((uint16_t )base[0] << 8) | base[1];
 }
 
 # 131 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
@@ -9958,9 +9938,9 @@ static inline void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__gran
 }
 
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
-inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(uint8_t arg_0x40d76710){
+inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(uint8_t arg_0x40d77710){
 #line 102
-  switch (arg_0x40d76710) {
+  switch (arg_0x40d77710) {
 #line 102
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 102
@@ -9970,7 +9950,7 @@ inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(uint8
 #line 102
     default:
 #line 102
-      /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__granted(arg_0x40d76710);
+      /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__granted(arg_0x40d77710);
 #line 102
       break;
 #line 102
@@ -10406,9 +10386,9 @@ static inline void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendD
 }
 
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
-inline static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(am_id_t arg_0x40c31ae8, message_t * msg, error_t error){
+inline static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(am_id_t arg_0x40c34ae8, message_t * msg, error_t error){
 #line 110
-  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x40c31ae8, msg, error);
+  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x40c34ae8, msg, error);
 #line 110
 }
 #line 110
@@ -10427,9 +10407,9 @@ static inline void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
 }
 
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
-inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(uart_id_t arg_0x40ccb560, message_t * msg, error_t error){
+inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(uart_id_t arg_0x40cf6560, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x40ccb560) {
+  switch (arg_0x40cf6560) {
 #line 100
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 100
@@ -10439,7 +10419,7 @@ inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
 #line 100
     default:
 #line 100
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(arg_0x40ccb560, msg, error);
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(arg_0x40cf6560, msg, error);
 #line 100
       break;
 #line 100
@@ -10480,68 +10460,99 @@ static inline void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
     }
 }
 
-# 57 "/opt/tinyos-2.1.2/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
-static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr(void )
-#line 57
+# 310 "/usr/lib/ncc/nesc_nx.h"
+static __inline  uint16_t __nesc_ntoh_uint16(const void * source)
+#line 310
 {
-#line 57
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 57
-    * (volatile uint8_t * )49U &= ~(0x01 << 5);
-#line 57
-    __nesc_atomic_end(__nesc_atomic); }
+  const uint8_t *base = source;
+
+#line 312
+  return ((uint16_t )base[0] << 8) | base[1];
 }
 
-# 53 "/opt/tinyos-2.1.2/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-inline static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__clr(void ){
-#line 53
-  /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr();
-#line 53
+# 64 "/opt/tinyos-2.1.2/tos/lib/timer/Counter.nc"
+inline static /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Counter__size_type /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Counter__get(void ){
+#line 64
+  unsigned long __nesc_result;
+#line 64
+
+#line 64
+  __nesc_result = /*CounterMilli32C.Transform*/TransformCounterC__0__Counter__get();
+#line 64
+
+#line 64
+  return __nesc_result;
+#line 64
 }
-#line 53
-# 49 "/opt/tinyos-2.1.2/tos/chips/msp430/pins/Msp430GpioC.nc"
-static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr(void )
-#line 49
+#line 64
+# 86 "/opt/tinyos-2.1.2/tos/lib/timer/TransformAlarmC.nc"
+static inline /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__to_size_type /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Alarm__getNow(void )
 {
-#line 49
-  /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__clr();
+  return /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Counter__get();
 }
 
-# 41 "/opt/tinyos-2.1.2/tos/interfaces/GeneralIO.nc"
-inline static void LedsP__Led1__clr(void ){
-#line 41
-  /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr();
-#line 41
+# 109 "/opt/tinyos-2.1.2/tos/lib/timer/Alarm.nc"
+inline static /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__size_type /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__getNow(void ){
+#line 109
+  unsigned long __nesc_result;
+#line 109
+
+#line 109
+  __nesc_result = /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Alarm__getNow();
+#line 109
+
+#line 109
+  return __nesc_result;
+#line 109
 }
-#line 41
-# 89 "/opt/tinyos-2.1.2/tos/system/LedsP.nc"
-static inline void LedsP__Leds__led1On(void )
-#line 89
+#line 109
+# 96 "/opt/tinyos-2.1.2/tos/lib/timer/AlarmToTimerC.nc"
+static inline uint32_t /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Timer__getNow(void )
 {
-  LedsP__Led1__clr();
-  ;
-#line 91
-  ;
+#line 97
+  return /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__getNow();
 }
 
-# 72 "/opt/tinyos-2.1.2/tos/interfaces/Leds.nc"
-inline static void BrightnessSensorC__Leds__led1On(void ){
-#line 72
-  LedsP__Leds__led1On();
-#line 72
+# 136 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
+inline static uint32_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__getNow(void ){
+#line 136
+  unsigned long __nesc_result;
+#line 136
+
+#line 136
+  __nesc_result = /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Timer__getNow();
+#line 136
+
+#line 136
+  return __nesc_result;
+#line 136
 }
-#line 72
-# 107 "BrightnessSensorC.nc"
+#line 136
+# 154 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
+static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(uint8_t num, uint32_t dt)
+{
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(num, /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__getNow(), dt, FALSE);
+}
+
+# 64 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
+inline static void BrightnessSensorC__Timer__startPeriodic(uint32_t dt){
+#line 64
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(0U, dt);
+#line 64
+}
+#line 64
+# 126 "BrightnessSensorC.nc"
 static inline message_t *BrightnessSensorC__Receive__receive(message_t *msg, void *payload, uint8_t len)
-#line 107
 {
-  if (len == sizeof(nx_uint16_t )) {
-      Bright_Msg *br_message;
+  if (len == sizeof(period_t )) {
+      period_t *period;
 
-#line 110
-      br_message = (Bright_Msg *)payload;
-      BrightnessSensorC__Leds__led1On();
+#line 130
+      period = (period_t *)payload;
+      BrightnessSensorC__T = __nesc_ntoh_uint16(period->sampling_period.nxdata);
+      BrightnessSensorC__Timer__startPeriodic(BrightnessSensorC__T);
     }
+  return msg;
 }
 
 # 109 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
@@ -10703,9 +10714,24 @@ static inline void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
     __nesc_atomic_end(__nesc_atomic); }
 }
 
-# 75 "BrightnessSensorC.nc"
+# 67 "/opt/tinyos-2.1.2/tos/interfaces/TaskBasic.nc"
+inline static error_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask(void ){
+#line 67
+  unsigned char __nesc_result;
+#line 67
+
+#line 67
+  __nesc_result = SchedulerBasicP__TaskBasic__postTask(/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer);
+#line 67
+
+#line 67
+  return __nesc_result;
+#line 67
+}
+#line 67
+# 88 "BrightnessSensorC.nc"
 static inline void BrightnessSensorC__Control__stopDone(error_t error)
-#line 75
+#line 88
 {
 }
 
@@ -11142,77 +11168,6 @@ static inline void SerialP__stopDoneTask__runTask(void )
   SerialP__SerialFlush__flush();
 }
 
-# 64 "/opt/tinyos-2.1.2/tos/lib/timer/Counter.nc"
-inline static /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Counter__size_type /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Counter__get(void ){
-#line 64
-  unsigned long __nesc_result;
-#line 64
-
-#line 64
-  __nesc_result = /*CounterMilli32C.Transform*/TransformCounterC__0__Counter__get();
-#line 64
-
-#line 64
-  return __nesc_result;
-#line 64
-}
-#line 64
-# 86 "/opt/tinyos-2.1.2/tos/lib/timer/TransformAlarmC.nc"
-static inline /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__to_size_type /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Alarm__getNow(void )
-{
-  return /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Counter__get();
-}
-
-# 109 "/opt/tinyos-2.1.2/tos/lib/timer/Alarm.nc"
-inline static /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__size_type /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__getNow(void ){
-#line 109
-  unsigned long __nesc_result;
-#line 109
-
-#line 109
-  __nesc_result = /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Alarm__getNow();
-#line 109
-
-#line 109
-  return __nesc_result;
-#line 109
-}
-#line 109
-# 96 "/opt/tinyos-2.1.2/tos/lib/timer/AlarmToTimerC.nc"
-static inline uint32_t /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Timer__getNow(void )
-{
-#line 97
-  return /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__getNow();
-}
-
-# 136 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
-inline static uint32_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__getNow(void ){
-#line 136
-  unsigned long __nesc_result;
-#line 136
-
-#line 136
-  __nesc_result = /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Timer__getNow();
-#line 136
-
-#line 136
-  return __nesc_result;
-#line 136
-}
-#line 136
-# 154 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(uint8_t num, uint32_t dt)
-{
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(num, /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__getNow(), dt, FALSE);
-}
-
-# 64 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
-inline static void BrightnessSensorC__Timer__startPeriodic(uint32_t dt){
-#line 64
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(0U, dt);
-#line 64
-}
-#line 64
 # 104 "/opt/tinyos-2.1.2/tos/interfaces/SplitControl.nc"
 inline static error_t BrightnessSensorC__Control__start(void ){
 #line 104
@@ -11228,15 +11183,16 @@ inline static error_t BrightnessSensorC__Control__start(void ){
 #line 104
 }
 #line 104
-# 66 "BrightnessSensorC.nc"
+# 76 "BrightnessSensorC.nc"
 static inline void BrightnessSensorC__Control__startDone(error_t error)
-#line 66
 {
-  if (error != SUCCESS) {
+  if (error != SUCCESS) 
+    {
       BrightnessSensorC__Control__start();
     }
-  else {
-      BrightnessSensorC__Timer__startPeriodic(1000);
+  else 
+    {
+      BrightnessSensorC__Timer__startPeriodic(BrightnessSensorC__T);
     }
 }
 
@@ -11508,20 +11464,6 @@ inline static error_t SerialP__startDoneTask__postTask(void ){
 
 #line 67
   __nesc_result = SchedulerBasicP__TaskBasic__postTask(SerialP__startDoneTask);
-#line 67
-
-#line 67
-  return __nesc_result;
-#line 67
-}
-#line 67
-inline static error_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask(void ){
-#line 67
-  unsigned char __nesc_result;
-#line 67
-
-#line 67
-  __nesc_result = SchedulerBasicP__TaskBasic__postTask(/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer);
 #line 67
 
 #line 67
@@ -12985,13 +12927,13 @@ AdcP__Config__default__getConfiguration(uint8_t client)
 }
 
 # 58 "/opt/tinyos-2.1.2/tos/interfaces/AdcConfigure.nc"
-inline static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(uint8_t arg_0x409e98e8){
+inline static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(uint8_t arg_0x409e68e8){
 #line 58
   struct __nesc_unnamed4270 const *__nesc_result;
 #line 58
 
 #line 58
-  switch (arg_0x409e98e8) {
+  switch (arg_0x409e68e8) {
 #line 58
     case /*BrightnessSensorAppC.HamamatsuS1087ParC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 58
@@ -13001,7 +12943,7 @@ inline static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(uint8_t 
 #line 58
     default:
 #line 58
-      __nesc_result = AdcP__Config__default__getConfiguration(arg_0x409e98e8);
+      __nesc_result = AdcP__Config__default__getConfiguration(arg_0x409e68e8);
 #line 58
       break;
 #line 58
@@ -13417,13 +13359,13 @@ static inline error_t AdcP__ResourceRead__default__release(uint8_t client)
 }
 
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
-inline static error_t AdcP__ResourceRead__release(uint8_t arg_0x409ea170){
+inline static error_t AdcP__ResourceRead__release(uint8_t arg_0x409ed170){
 #line 120
   unsigned char __nesc_result;
 #line 120
 
 #line 120
-  switch (arg_0x409ea170) {
+  switch (arg_0x409ed170) {
 #line 120
     case /*BrightnessSensorAppC.HamamatsuS1087ParC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 120
@@ -13433,7 +13375,7 @@ inline static error_t AdcP__ResourceRead__release(uint8_t arg_0x409ea170){
 #line 120
     default:
 #line 120
-      __nesc_result = AdcP__ResourceRead__default__release(arg_0x409ea170);
+      __nesc_result = AdcP__ResourceRead__default__release(arg_0x409ed170);
 #line 120
       break;
 #line 120
@@ -13620,13 +13562,13 @@ static inline error_t AdcP__ResourceRead__default__request(uint8_t client)
 }
 
 # 88 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
-inline static error_t AdcP__ResourceRead__request(uint8_t arg_0x409ea170){
+inline static error_t AdcP__ResourceRead__request(uint8_t arg_0x409ed170){
 #line 88
   unsigned char __nesc_result;
 #line 88
 
 #line 88
-  switch (arg_0x409ea170) {
+  switch (arg_0x409ed170) {
 #line 88
     case /*BrightnessSensorAppC.HamamatsuS1087ParC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 88
@@ -13636,7 +13578,7 @@ inline static error_t AdcP__ResourceRead__request(uint8_t arg_0x409ea170){
 #line 88
     default:
 #line 88
-      __nesc_result = AdcP__ResourceRead__default__request(arg_0x409ea170);
+      __nesc_result = AdcP__ResourceRead__default__request(arg_0x409ed170);
 #line 88
       break;
 #line 88
@@ -13669,11 +13611,10 @@ inline static error_t BrightnessSensorC__Read__read(void ){
 #line 55
 }
 #line 55
-# 80 "BrightnessSensorC.nc"
+# 93 "BrightnessSensorC.nc"
 static inline void BrightnessSensorC__Timer__fired(void )
-#line 80
 {
-  ;
+
   BrightnessSensorC__Read__read();
 }
 
@@ -14121,24 +14062,25 @@ inline static void * BrightnessSensorC__Packet__getPayload(message_t * msg, uint
 #line 126
 }
 #line 126
-# 46 "BrightnessSensorC.nc"
+# 53 "BrightnessSensorC.nc"
 static inline void BrightnessSensorC__SendMessage__runTask(void )
-#line 46
 {
-  if (!BrightnessSensorC__busy) {
-      Bright_Msg *send_message;
+  if (!BrightnessSensorC__busy) 
+    {
+      brightness_t *brightness_msg;
 
-#line 49
-      send_message = (Bright_Msg *)BrightnessSensorC__Packet__getPayload(&BrightnessSensorC__packet, sizeof(Bright_Msg ));
+#line 58
+      brightness_msg = (brightness_t *)BrightnessSensorC__Packet__getPayload(&BrightnessSensorC__packet, sizeof(brightness_t ));
 
-      if (send_message == (void *)0) {
+      if (brightness_msg == (void *)0) 
+        {
           return;
         }
 
-      __nesc_hton_uint16(send_message->brightness.nxdata, BrightnessSensorC__brightness);
-      __nesc_hton_uint16(send_message->nodeId.nxdata, TOS_NODE_ID);
+      __nesc_hton_uint16(brightness_msg->brightness.nxdata, BrightnessSensorC__brightness);
 
-      if (BrightnessSensorC__AMSend__send(AM_BROADCAST_ADDR, &BrightnessSensorC__packet, sizeof(Bright_Msg )) == SUCCESS) {
+      if (BrightnessSensorC__AMSend__send(AM_BROADCAST_ADDR, &BrightnessSensorC__packet, sizeof(brightness_t )) == SUCCESS) 
+        {
           BrightnessSensorC__busy = TRUE;
         }
     }
@@ -14212,19 +14154,21 @@ inline static void BrightnessSensorC__Leds__led2On(void ){
 #line 89
 }
 #line 89
-# 25 "BrightnessSensorC.nc"
+# 28 "BrightnessSensorC.nc"
 static inline void BrightnessSensorC__CheckBrightness__runTask(void )
-#line 25
 {
-
-  if (BrightnessSensorC__brightness < 40) {
-      if (!BrightnessSensorC__ledIsOn) {
+  if (BrightnessSensorC__brightness < 40) 
+    {
+      if (!BrightnessSensorC__ledIsOn) 
+        {
           BrightnessSensorC__Leds__led2On();
           BrightnessSensorC__ledIsOn = TRUE;
         }
     }
-  else {
-      if (BrightnessSensorC__ledIsOn) {
+  else 
+    {
+      if (BrightnessSensorC__ledIsOn) 
+        {
           BrightnessSensorC__Leds__led2Off();
           BrightnessSensorC__ledIsOn = FALSE;
         }
@@ -14436,9 +14380,8 @@ inline static error_t RealMainP__SoftwareInit__init(void ){
 #line 62
 }
 #line 62
-# 41 "BrightnessSensorC.nc"
+# 48 "BrightnessSensorC.nc"
 static inline void BrightnessSensorC__Boot__booted(void )
-#line 41
 {
   BrightnessSensorC__Control__start();
 }
@@ -15167,9 +15110,9 @@ static inline void AdcP__ReadNow__default__readDone(uint8_t client, error_t resu
 }
 
 # 66 "/opt/tinyos-2.1.2/tos/interfaces/ReadNow.nc"
-inline static void AdcP__ReadNow__readDone(uint8_t arg_0x409eb5a0, error_t result, AdcP__ReadNow__val_t val){
+inline static void AdcP__ReadNow__readDone(uint8_t arg_0x409ea5a0, error_t result, AdcP__ReadNow__val_t val){
 #line 66
-    AdcP__ReadNow__default__readDone(arg_0x409eb5a0, result, val);
+    AdcP__ReadNow__default__readDone(arg_0x409ea5a0, result, val);
 #line 66
 }
 #line 66
@@ -16723,6 +16666,19 @@ static void HplMsp430Usart1P__Usart__disableUart(void )
   }
 }
 
+# 144 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot)
+{
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer_t *timer = &/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__m_timers[num];
+
+#line 147
+  timer->t0 = t0;
+  timer->dt = dt;
+  timer->isoneshot = isoneshot;
+  timer->isrunning = TRUE;
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask();
+}
+
 # 177 "/opt/tinyos-2.1.2/tos/system/ArbiterP.nc"
 static bool /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0__Resource__isOwner(uint8_t id)
 #line 177
@@ -16789,20 +16745,6 @@ static error_t SerialP__SplitControl__start(void )
   return SUCCESS;
 }
 
-# 144 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot)
-{
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer_t *timer = &/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__m_timers[num];
-
-#line 147
-  timer->t0 = t0;
-  timer->dt = dt;
-  timer->isoneshot = isoneshot;
-  timer->isrunning = TRUE;
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask();
-}
-
-# 357 "/opt/tinyos-2.1.2/tos/lib/serial/SerialP.nc"
 static void SerialP__testOff(void )
 #line 357
 {
@@ -17229,18 +17171,19 @@ static void AdcP__ResourceRead__granted(uint8_t client)
     }
 }
 
-# 86 "BrightnessSensorC.nc"
+# 100 "BrightnessSensorC.nc"
 static void BrightnessSensorC__Read__readDone(error_t result, uint16_t data)
-#line 86
 {
-  ;
-  if (result == SUCCESS) {
+
+  if (result == SUCCESS) 
+    {
       BrightnessSensorC__brightness = data;
       BrightnessSensorC__CheckBrightness__postTask();
 
       BrightnessSensorC__SendMessage__postTask();
     }
-  else {
+  else 
+    {
       return;
     }
 }

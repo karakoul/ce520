@@ -3,7 +3,8 @@
 
 #define B 40
 
-module BrightnessSensorC {
+module BrightnessSensorC 
+{
 	uses interface Timer<TMilli> as Timer;
 	uses interface Leds;
 	uses interface Boot;
@@ -16,46 +17,55 @@ module BrightnessSensorC {
 	uses interface Receive;
 }
 
-implementation {
+implementation 
+{
 	uint16_t brightness;
 	bool ledIsOn = FALSE;
 	message_t packet;
 	bool busy = FALSE;
+	uint16_t T = 1000;
 	
-	task void CheckBrightness() {
-		
-		if(brightness < B) {
-			if(!ledIsOn){
+	task void CheckBrightness() 
+	{	
+		if ( brightness < B ) 
+		{
+			if ( !ledIsOn )
+			{
 				call Leds.led2On();
 				ledIsOn = TRUE;
 			}
  		}
-		else {
-			if(ledIsOn) {
+		else 
+		{
+			if ( ledIsOn ) 
+			{
 				call Leds.led2Off();
 				ledIsOn = FALSE;
 			}
 		}
 	}
 	
-	event void Boot.booted() {
-		call Control.start();
-		
+	event void Boot.booted() 
+	{
+		call Control.start();	
 	}
 	
-	task void SendMessage() {
-		if(!busy){
-			Bright_Msg *send_message; 
-			send_message = (Bright_Msg*) (call Packet.getPayload(&packet, sizeof(Bright_Msg)));
+	task void SendMessage() 
+	{
+		if( !busy )
+		{
+			brightness_t *brightness_msg; 
+			brightness_msg = ( brightness_t* ) ( call Packet.getPayload( &packet, sizeof( brightness_t ) ) );
 			
-			if(send_message == NULL){
+			if ( brightness_msg == NULL )
+			{
 				return;
 			}
 			
-			send_message->brightness = brightness;
-			send_message->nodeId = TOS_NODE_ID;
+			brightness_msg->brightness = brightness;
 			
-			if( call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(Bright_Msg)) == SUCCESS){
+			if ( call AMSend.send( AM_BROADCAST_ADDR, &packet, sizeof( brightness_t ) ) == SUCCESS )
+			{
 				busy = TRUE;
 			}
 		}
@@ -63,53 +73,65 @@ implementation {
 	
 	
 /*********************************************************************/
-	event void Control.startDone(error_t error){
-		if(error != SUCCESS){
+	event void Control.startDone( error_t error )
+	{
+		if ( error != SUCCESS )
+		{
 			call Control.start();
 		}
-		else {
-			call Timer.startPeriodic( 1000 );
+		else 
+		{
+			call Timer.startPeriodic( T );
 		}
 	}
 	
-	event void Control.stopDone(error_t error) {}
+	event void Control.stopDone( error_t error ) {}
 /*********************************************************************/
 
 
 
-	event void Timer.fired() {
-		dbg("BrightnessSensor", "Check %s \n", sim_time_string());
+	event void Timer.fired() 
+	{
+// 		dbg("BrightnessSensor", "Check %s \n", sim_time_string());
 		call Read.read();
 	}
 	
 	
-	event void Read.readDone(error_t result, uint16_t data) {
-		dbg("Brightness", "Check %d \n", data);
-		if(result == SUCCESS) {
+	event void Read.readDone(error_t result, uint16_t data) 
+	{
+// 		dbg("Brightness", "Check %d \n", data);
+		if(result == SUCCESS) 
+		{
 			brightness = data;
 			post CheckBrightness();
 			
 			post SendMessage();
 		}
-		else {
+		else 
+		{
 			return;
 		}
 		
 		
 	}
 	
-	event void AMSend.sendDone(message_t* msg, error_t error){
-		if(&packet == msg) {
+	event void AMSend.sendDone(message_t* msg, error_t error)
+	{
+		if(&packet == msg) 
+		{
 			busy = FALSE;
 		}
 	}
 	
-	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len){
-		if(len == sizeof(nx_uint16_t)){
-			Bright_Msg* br_message;
-			br_message = (Bright_Msg*)payload;
-			call Leds.led1On();
+	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)
+	{
+		if(len == sizeof(period_t)){
+			period_t *period;
+			period = (period_t*)payload;
+			T = period->sampling_period;
+			call Timer.startPeriodic( T );
 		}
+		return msg;
 	}
 	
 }
