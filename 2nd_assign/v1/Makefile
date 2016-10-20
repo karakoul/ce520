@@ -1,0 +1,3 @@
+COMPONENT=BcastAppC
+include $(MAKERULES)
+

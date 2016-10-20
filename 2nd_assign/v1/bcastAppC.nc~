@@ -1,0 +1,23 @@
+configuration bcastAppC {}
+
+implementation 
+{
+
+  components MainC, LedsC;
+  components new TimerMilliC() as Timer;
+  
+  components SerialActiveMessageC;
+  components new SerialAMSenderC( AM_ID );
+  components new SerialAMReceiverC( AM_ID );
+  
+  
+  bcastC.Leds  -> LedsC;
+  bcastC.Timer -> Timer;
+  
+  bcastC.Packet -> SerialAMSenderC;
+  bcastC.AMPacket -> SerialAMSenderC;
+  bcastC.AMSend -> SerialAMSenderC;
+  bcastC.Control -> SerialActiveMessageC;
+  bcastC.Receive -> SerialAMReceiverC;
+  
+ }
