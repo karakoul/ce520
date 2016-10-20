@@ -1,3 +1,0 @@
-COMPONENT=BrightnessSensorAppC
-include $(MAKERULES)
-
