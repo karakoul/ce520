@@ -1,0 +1,61 @@
+#include "bcast.h"
+#include "Timer.h"
+
+module bcastC 
+{
+	uses interface Boot;
+	uses interface Leds;
+	uses interface Timer<TMilli> as Timer;
+	
+	uses interface SplitControl as Control;
+	uses interface AMSend;
+	uses interface Packet;
+	uses interface AMPacket;
+	uses interface Receive;
+}
+
+implementation 
+{
+	message_t packet;
+	bool busy = FALSE;
+	
+	
+	
+	event void Boot.booted() 
+	{
+		call Control.start();	
+	}
+	
+	event void Control.startDone( error_t error )
+	{
+		if ( error != SUCCESS )
+		{
+			call Control.start();
+		}
+		else 
+		{
+			call Timer.startPeriodic( TIMER_PERIOD_MILLI );
+		}
+	}
+	
+	event void Control.stopDone( error_t error ) {}
+	
+	event void Timer.fired()
+	{
+		if( !busy )
+		{
+			msg_t *bcast_msg; 
+			bcast_msg = ( msg_t* ) ( call Packet.getPayload( &packet, sizeof( msg_t) ) );
+			
+			if ( bcast_msg == NULL )
+			{
+				return;
+			}
+			if( call AMSend.send( AM_BROADCAST_ADDR, &packet, sizeof( msg_t ) ) == SUCCESS)
+			{
+				busy = TRUE;
+			}
+		}
+	}
+
+}
