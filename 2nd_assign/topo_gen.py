@@ -52,8 +52,11 @@ fd = open("topo.txt",'w')
 for i in nodes.keys():
 	for j in nodes[i]:
 		gain = round(random.uniform(gain_low,gain_max),1)
-
-		fd.write(str(i) + " " + str(j) + " -" + str(gain))
+		if(gain != 0.0):
+			gain = "-" + str(gain)
+		else:
+			gain = str(gain)
+		fd.write(str(i) + " " + str(j) + " " + gain)
 		fd.write("\n")
 
 fd.close()
