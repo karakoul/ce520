@@ -42,8 +42,7 @@ while message!='q':
 		reg_res = reg.search(line)
 		if(reg_res):
 			counter += 1
-	if(message == 'q'):
-		print counter
+	print counter
 
 
 
