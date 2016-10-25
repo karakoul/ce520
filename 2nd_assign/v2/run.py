@@ -4,13 +4,13 @@ import sys
 
 t = Tossim([])
 r = t.radio()
-f = open("tree.txt", "r")
+f = open("topo.txt", "r")
 
 for line in f:
   s = line.split()
   if s:
     print " ", s[0], " ", s[1], " ", s[2];
-    r.add(int(s[0]), int(s[1]), float(0))
+    r.add(int(s[0]), int(s[1]), float(s[2]))
 
 t.addChannel("Receive", sys.stdout)
 t.addChannel("Send", sys.stdout)
