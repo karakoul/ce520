@@ -1,0 +1,121 @@
+<?xml version="1.0" ?><component loc="43:/opt/tinyos-2.1.2/tos/chips/cc2420/alarm/AlarmMultiplexC.nc" nicename="tos.chips.cc2420.alarm.AlarmMultiplexC" qname="AlarmMultiplexC">
+      <documentation loc="32:/opt/tinyos-2.1.2/tos/chips/cc2420/alarm/AlarmMultiplexC.nc">
+        <short>
+ A component that multiplexes the use of an alarm.</short>
+        <long>
+ A component that multiplexes the use of an alarm. The assumption is
+ that its use is mutually exclusive and users check whether the
+ events are for them.
+
+ @author Jonathan Hui &lt;jhui@archrock.com&gt;
+ @version $Revision: 1.1 $ $Date: 2007-07-04 00:37:14 $
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="54:/opt/tinyos-2.1.2/tos/chips/cc2420/alarm/AlarmMultiplexC.nc">
+          <from><interface-ref name="Init" ref="0x407854b8" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x40878010" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/chips/cc2420/alarm/AlarmMultiplexC.nc">
+          <from><interface-ref name="Alarm32khz32" ref="0x40785a80" scoped=""/></from>
+          <to><interface-ref name="Alarm" ref="0x4077f560" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="45:/opt/tinyos-2.1.2/tos/chips/cc2420/alarm/AlarmMultiplexC.nc" name="Init" provided="1" ref="0x407854b8">
+      <component-ref nicename="tos.chips.cc2420.alarm.AlarmMultiplexC" qname="AlarmMultiplexC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Init" ref="0x407854b8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x40785690" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/chips/cc2420/alarm/AlarmMultiplexC.nc" name="Alarm32khz32" provided="1" ref="0x40785a80">
+      <component-ref nicename="tos.chips.cc2420.alarm.AlarmMultiplexC" qname="AlarmMultiplexC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Alarm32khz32" ref="0x40785a80" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Alarm" qname="Alarm"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4d40"/>
+            <typename><typedef-ref name="T32khz" ref="0x403a4f08"/></typename>
+          </type-tag>
+          <type-int alignment="I:1" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40213848"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x40780010" scoped=""/>
+        <function-ref name="fired" ref="0x40782718" scoped=""/>
+        <function-ref name="startAt" ref="0x40782c08" scoped=""/>
+        <function-ref name="isRunning" ref="0x40782990" scoped=""/>
+        <function-ref name="getAlarm" ref="0x40780288" scoped=""/>
+        <function-ref name="start" ref="0x40782200" scoped=""/>
+        <function-ref name="stop" ref="0x407824a0" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="87:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420AlarmC.nc" name="Init" provided="1" ref="0x40878010">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420AlarmC" qname="AlarmMultiplexC.Alarm"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Init" ref="0x40878010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x408781e8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="86:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420AlarmC.nc" name="Alarm" provided="1" ref="0x4077f560">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420AlarmC" qname="AlarmMultiplexC.Alarm"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Alarm" ref="0x4077f560" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Alarm" qname="Alarm"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4d40"/>
+            <typename><typedef-ref name="T32khz" ref="0x403a4f08"/></typename>
+          </type-tag>
+          <type-int alignment="I:1" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40213848"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x4077eab8" scoped=""/>
+        <function-ref name="fired" ref="0x4077e288" scoped=""/>
+        <function-ref name="startAt" ref="0x4077e778" scoped=""/>
+        <function-ref name="isRunning" ref="0x4077e500" scoped=""/>
+        <function-ref name="getAlarm" ref="0x4077ed30" scoped=""/>
+        <function-ref name="start" ref="0x4077fcb0" scoped=""/>
+        <function-ref name="stop" ref="0x4077e010" scoped=""/>
+      </interface-functions>
+    </interface><component loc="85(AlarmMultiplexC.Alarm):/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420AlarmC.nc" nicename="tos.platforms.micaz.chips.cc2420.HplCC2420AlarmC" qname="AlarmMultiplexC.Alarm">
+      <documentation loc="70:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420AlarmC.nc">
+        <short>
+ A platform independent abstraction of an asynchronous 32KHz, 16-bit
+ timer for the CC2420.</short>
+        <long>
+ A platform independent abstraction of an asynchronous 32KHz, 16-bit
+ timer for the CC2420. As these timers (the Alarm interface) are
+ usually part of an HAL, they are platform specific. But as the
+ CC2420 needs to be cross-platform, this component bridges between
+ the two, providing a platform-independent abstraction of
+ CC2420-specific Alarm. This is a Atmega128 implementation that
+ uses the Compare1A register.
+
+ @author Philip Levis
+ @version $Revision: 1.6 $ $Date: 2010-06-29 22:07:54 $
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420AlarmC" qname="HplCC2420AlarmC"/>
+      </instance>
+      <configuration/>
+      <wiring>
+        <wire loc="94:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420AlarmC.nc">
+          <from><interface-ref name="Alarm" ref="0x4077f560" scoped=""/></from>
+          <to><interface-ref name="Alarm" ref="0x40f09378" scoped=""/></to>
+        </wire>
+        <wire loc="93:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420AlarmC.nc">
+          <from><interface-ref name="Init" ref="0x40878010" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x40877278" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component></referenced></component>

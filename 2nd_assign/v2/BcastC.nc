@@ -26,50 +26,6 @@ implementation
 	msg_t cache[ MAX_ARRAY_SIZE ];
 	uint16_t index = 0;
 	
-// 	task void forward()
-// 	{
-// 
-// 		msg_t *bcast_msg; 
-// 		bcast_msg = ( msg_t* ) ( call Packet.getPayload( &packet, sizeof( msg_t) ) );
-// 		
-// 		
-// 		if ( bcast_msg == NULL )
-// 		{
-// 			return;
-// 		}
-// 		
-// 		bcast_msg->nodeid = rec_msg->nodeid;
-// 		bcast_msg->seq_num = rec_msg->seq_num;
-// 		
-// 		
-// 		if( call AMSend.send( AM_BROADCAST_ADDR, &packet, sizeof( rec_msg ) ) == SUCCESS)
-// 		{
-// 			busy = TRUE;
-// 		}
-// 		
-// 		dbg("Send", "send %d %d\n", rec_msg->nodeid, rec_msg->seq_num);
-// 		
-// 		cache[ index ] = *rec_msg;
-// 		
-// 		index = ( index + 1 ) % MAX_ARRAY_SIZE;
-// 	}
-	
-// 	task void search()
-// 	{
-// 		int i;
-// 		
-// 		for ( i = 0; i < MAX_ARRAY_SIZE; i++ )
-// 		{
-// 			if ( ( cache[i].nodeid == rec_msg->nodeid ) && ( cache[i].seq_num >= rec_msg->seq_num ) )
-// 			{
-// 				return;
-// 			}
-// 		}
-// 		
-// 		call Forward_timer.startOneShot(node_id*10);
-		//post forward();
-		
-// 	}
 	
 	task void init()
 	{
@@ -92,6 +48,8 @@ implementation
 	
 	event void Control.startDone( error_t error )
 	{
+		int i = 0;
+		
 		if ( error != SUCCESS )
 		{
 			call Control.start();
@@ -99,7 +57,9 @@ implementation
 		else 
 		{
 			node_id = TOS_NODE_ID;
-			call Timer.startOneShot(node_id*10);
+			i = rand()%100;
+			i++;
+			call Timer.startPeriodic(i);
 		}
 	}
 	
@@ -107,7 +67,12 @@ implementation
 	
 	event void Timer.fired()
 	{
-		if( (!busy) && ((node_id == 1)||(node_id == 2)||(node_id == 3)))
+		if ( busy == TRUE )
+		{
+			return;
+		}
+
+		if( (!busy) && ((node_id%2 == 1)))
 		{
 			msg_t *bcast_msg; 
 			bcast_msg = ( msg_t* ) ( call Packet.getPayload( &packet, sizeof( msg_t) ) );
@@ -137,6 +102,13 @@ implementation
 	event void Forward_timer.fired() 
 	{
 		msg_t *bcast_msg; 
+
+		if ( busy == TRUE )
+		{
+			call Forward_timer.startOneShot( node_id*10 );
+			return;
+		}
+
 		bcast_msg = ( msg_t* ) ( call Packet.getPayload( &packet, sizeof( msg_t) ) );
 		
 		
@@ -149,22 +121,21 @@ implementation
 		bcast_msg->seq_num = rec_msg->seq_num;
 		
 		
-		if( call AMSend.send( AM_BROADCAST_ADDR, &packet, sizeof( rec_msg ) ) == SUCCESS)
+		if( call AMSend.send( AM_BROADCAST_ADDR, &packet, sizeof( bcast_msg ) ) == SUCCESS)
 		{
 			busy = TRUE;
 		}
 		
-		dbg("Send", "send %d %d\n", rec_msg->nodeid, rec_msg->seq_num);
+		dbg("Send", "send %d %d\n", bcast_msg->nodeid, bcast_msg->seq_num);
+
 		
-		cache[ index ] = *rec_msg;
-		
-		index = ( index + 1 ) % MAX_ARRAY_SIZE;
 		
 	}
 	event void AMSend.sendDone( message_t* msg, error_t error )
 	{
 		if( &packet == msg ) 
 		{
+			dbg("Send", "BUSY\n");
 			busy = FALSE;
 		}
 	}
@@ -176,7 +147,7 @@ implementation
 		{
 			rec_msg = ( msg_t* ) payload;
 			dbg("Receive", "receive %d %d, time: %s\n", rec_msg->nodeid, rec_msg->seq_num, sim_time_string());
-		
+
 			for ( i = 0; i < MAX_ARRAY_SIZE; i++ )
 			{
 				if ( ( cache[i].nodeid == rec_msg->nodeid ) && ( cache[i].seq_num >= rec_msg->seq_num ) )
@@ -184,11 +155,16 @@ implementation
 					return msg;
 				}
 			}
-			
-			call Forward_timer.startOneShot(node_id*10);
+
+			cache[ index ] = *rec_msg;
+		
+			index = ( index + 1 ) % MAX_ARRAY_SIZE;
+
+			call Forward_timer.startOneShot(node_id/10);
 			//post search();
 			
 		}
+
 		return msg;
 	}
 

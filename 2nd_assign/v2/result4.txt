@@ -1,0 +1,423 @@
+  1   2   -10.0
+  2   1   -10.0
+  2   3   -10.0
+  3   2   -10.0
+  1   3   -10.0
+  3   1   -10.0
+Creating noise model for  1
+Creating noise model for  2
+Creating noise model for  3
+DEBUG (1): send 1 1, time: 0:0:5.859375010
+DEBUG (3): receive 1 1, time: 0:0:5.865753146
+DEBUG (2): receive 1 1, time: 0:0:5.865753146
+DEBUG (2): send 1 1
+DEBUG (3): receive 1 1, time: 0:0:5.893020591
+DEBUG (1): receive 1 1, time: 0:0:5.893020591
+DEBUG (3): send 1 1
+DEBUG (1): receive 1 1, time: 0:0:5.928787201
+DEBUG (2): receive 1 1, time: 0:0:5.928787201
+DEBUG (1): send 1 2, time: 0:0:11.718750010
+DEBUG (3): receive 1 2, time: 0:0:11.725921599
+DEBUG (2): receive 1 2, time: 0:0:11.725921599
+DEBUG (2): send 1 2
+DEBUG (3): receive 1 2, time: 0:0:11.751892060
+DEBUG (1): receive 1 2, time: 0:0:11.751892060
+DEBUG (3): send 1 2
+DEBUG (1): receive 1 2, time: 0:0:11.781372073
+DEBUG (2): receive 1 2, time: 0:0:11.781372073
+DEBUG (1): send 1 3, time: 0:0:17.578125010
+DEBUG (3): receive 1 3, time: 0:0:17.587676956
+DEBUG (2): receive 1 3, time: 0:0:17.587676956
+DEBUG (2): send 1 3
+DEBUG (3): receive 1 3, time: 0:0:17.609298699
+DEBUG (1): receive 1 3, time: 0:0:17.609298699
+DEBUG (3): send 1 3
+DEBUG (1): receive 1 3, time: 0:0:17.645675622
+DEBUG (2): receive 1 3, time: 0:0:17.645675622
+DEBUG (1): send 1 4, time: 0:0:23.437500010
+DEBUG (3): receive 1 4, time: 0:0:23.441345202
+DEBUG (2): receive 1 4, time: 0:0:23.441345202
+DEBUG (2): send 1 4
+DEBUG (3): receive 1 4, time: 0:0:23.469299271
+DEBUG (1): receive 1 4, time: 0:0:23.469299271
+DEBUG (3): send 1 4
+DEBUG (1): receive 1 4, time: 0:0:23.500717157
+DEBUG (2): receive 1 4, time: 0:0:23.500717157
+DEBUG (1): send 1 5, time: 0:0:29.296875010
+DEBUG (3): receive 1 5, time: 0:0:29.303070042
+DEBUG (2): receive 1 5, time: 0:0:29.303070042
+DEBUG (2): send 1 5
+DEBUG (3): send 1 5
+DEBUG (3): receive 1 5, time: 0:0:29.332138013
+DEBUG (1): receive 1 5, time: 0:0:29.332138013
+DEBUG (1): receive 1 5, time: 0:0:29.335891711
+DEBUG (2): receive 1 5, time: 0:0:29.335891711
+DEBUG (1): send 1 6, time: 0:0:35.156250010
+DEBUG (3): receive 1 6, time: 0:0:35.159790028
+DEBUG (2): receive 1 6, time: 0:0:35.159790028
+DEBUG (2): send 1 6
+DEBUG (3): receive 1 6, time: 0:0:35.180694578
+DEBUG (1): receive 1 6, time: 0:0:35.180694578
+DEBUG (3): send 1 6
+DEBUG (1): receive 1 6, time: 0:0:35.215011577
+DEBUG (2): receive 1 6, time: 0:0:35.215011577
+DEBUG (1): send 1 7, time: 0:0:41.015625010
+DEBUG (3): receive 1 7, time: 0:0:41.021820042
+DEBUG (2): receive 1 7, time: 0:0:41.021820042
+DEBUG (2): send 1 7
+DEBUG (3): receive 1 7, time: 0:0:41.044860827
+DEBUG (1): receive 1 7, time: 0:0:41.044860827
+DEBUG (3): send 1 7
+DEBUG (1): receive 1 7, time: 0:0:41.083236646
+DEBUG (2): receive 1 7, time: 0:0:41.083236646
+DEBUG (1): send 1 8, time: 0:0:46.875000010
+DEBUG (3): receive 1 8, time: 0:0:46.878112784
+DEBUG (2): receive 1 8, time: 0:0:46.878112784
+DEBUG (2): send 1 8
+DEBUG (3): receive 1 8, time: 0:0:46.905975302
+DEBUG (1): receive 1 8, time: 0:0:46.905975302
+DEBUG (3): send 1 8
+DEBUG (1): receive 1 8, time: 0:0:46.938064564
+DEBUG (2): receive 1 8, time: 0:0:46.938064564
+DEBUG (1): send 1 9, time: 0:0:52.734375010
+DEBUG (3): receive 1 9, time: 0:0:52.740737887
+DEBUG (2): receive 1 9, time: 0:0:52.740737887
+DEBUG (2): send 1 9
+DEBUG (3): receive 1 9, time: 0:0:52.766479463
+DEBUG (1): receive 1 9, time: 0:0:52.766479463
+DEBUG (3): send 1 9
+DEBUG (1): receive 1 9, time: 0:0:52.800003032
+DEBUG (2): receive 1 9, time: 0:0:52.800003032
+DEBUG (1): send 1 10, time: 0:0:58.593750010
+DEBUG (3): receive 1 10, time: 0:0:58.596603386
+DEBUG (2): receive 1 10, time: 0:0:58.596603386
+DEBUG (2): send 1 10
+DEBUG (3): receive 1 10, time: 0:0:58.624847366
+DEBUG (1): receive 1 10, time: 0:0:58.624847366
+DEBUG (3): send 1 10
+DEBUG (1): receive 1 10, time: 0:0:58.656799306
+DEBUG (2): receive 1 10, time: 0:0:58.656799306
+DEBUG (1): send 1 11, time: 0:1:4.453125010
+DEBUG (3): receive 1 11, time: 0:1:4.459274266
+DEBUG (2): receive 1 11, time: 0:1:4.459274266
+DEBUG (2): send 1 11
+DEBUG (3): receive 1 11, time: 0:1:4.485290497
+DEBUG (1): receive 1 11, time: 0:1:4.485290497
+DEBUG (3): send 1 11
+DEBUG (1): receive 1 11, time: 0:1:4.519241310
+DEBUG (2): receive 1 11, time: 0:1:4.519241310
+DEBUG (1): send 1 12, time: 0:1:10.312500010
+DEBUG (3): receive 1 12, time: 0:1:10.321868851
+DEBUG (2): receive 1 12, time: 0:1:10.321868851
+DEBUG (2): send 1 12
+DEBUG (3): receive 1 12, time: 0:1:10.345520002
+DEBUG (1): receive 1 12, time: 0:1:10.345520002
+DEBUG (3): send 1 12
+DEBUG (1): receive 1 12, time: 0:1:10.378677351
+DEBUG (2): receive 1 12, time: 0:1:10.378677351
+DEBUG (1): send 1 13, time: 0:1:16.171875010
+DEBUG (3): receive 1 13, time: 0:1:16.176605207
+DEBUG (2): receive 1 13, time: 0:1:16.176605207
+DEBUG (2): send 1 13
+DEBUG (3): receive 1 13, time: 0:1:16.203704795
+DEBUG (1): receive 1 13, time: 0:1:16.203704795
+DEBUG (3): send 1 13
+DEBUG (1): receive 1 13, time: 0:1:16.237976051
+DEBUG (2): receive 1 13, time: 0:1:16.237976051
+DEBUG (1): send 1 14, time: 0:1:22.031250010
+DEBUG (3): receive 1 14, time: 0:1:22.035934430
+DEBUG (2): receive 1 14, time: 0:1:22.035934430
+DEBUG (2): send 1 14
+DEBUG (3): receive 1 14, time: 0:1:22.063919023
+DEBUG (1): receive 1 14, time: 0:1:22.063919023
+DEBUG (3): send 1 14
+DEBUG (1): receive 1 14, time: 0:1:22.094940182
+DEBUG (2): receive 1 14, time: 0:1:22.094940182
+DEBUG (1): send 1 15, time: 0:1:27.890625010
+DEBUG (3): receive 1 15, time: 0:1:27.899459797
+DEBUG (2): receive 1 15, time: 0:1:27.899459797
+DEBUG (2): send 1 15
+DEBUG (3): receive 1 15, time: 0:1:27.928207353
+DEBUG (1): receive 1 15, time: 0:1:27.928207353
+DEBUG (3): send 1 15
+DEBUG (1): receive 1 15, time: 0:1:27.961166367
+DEBUG (2): receive 1 15, time: 0:1:27.961166367
+DEBUG (1): send 1 16, time: 0:1:33.750000010
+DEBUG (3): receive 1 16, time: 0:1:33.760040234
+DEBUG (2): receive 1 16, time: 0:1:33.760040234
+DEBUG (2): send 1 16
+DEBUG (3): receive 1 16, time: 0:1:33.788528398
+DEBUG (1): receive 1 16, time: 0:1:33.788528398
+DEBUG (3): send 1 16
+DEBUG (1): receive 1 16, time: 0:1:33.824111909
+DEBUG (2): receive 1 16, time: 0:1:33.824111909
+DEBUG (1): send 1 17, time: 0:1:39.609375010
+DEBUG (3): receive 1 17, time: 0:1:39.612792958
+DEBUG (2): receive 1 17, time: 0:1:39.612792958
+DEBUG (2): send 1 17
+DEBUG (3): receive 1 17, time: 0:1:39.635070791
+DEBUG (1): receive 1 17, time: 0:1:39.635070791
+DEBUG (3): send 1 17
+DEBUG (1): receive 1 17, time: 0:1:39.666198728
+DEBUG (2): receive 1 17, time: 0:1:39.666198728
+DEBUG (1): send 1 18, time: 0:1:45.468750010
+DEBUG (3): receive 1 18, time: 0:1:45.475402803
+DEBUG (2): receive 1 18, time: 0:1:45.475402803
+DEBUG (2): send 1 18
+DEBUG (3): receive 1 18, time: 0:1:45.502624472
+DEBUG (1): receive 1 18, time: 0:1:45.502624472
+DEBUG (3): send 1 18
+DEBUG (1): receive 1 18, time: 0:1:45.540420488
+DEBUG (2): receive 1 18, time: 0:1:45.540420488
+DEBUG (1): send 1 19, time: 0:1:51.328125010
+DEBUG (3): receive 1 19, time: 0:1:51.331954943
+DEBUG (2): receive 1 19, time: 0:1:51.331954943
+DEBUG (2): send 1 19
+DEBUG (3): receive 1 19, time: 0:1:51.355072005
+DEBUG (1): receive 1 19, time: 0:1:51.355072005
+DEBUG (3): send 1 19
+DEBUG (1): receive 1 19, time: 0:1:51.388336165
+DEBUG (2): receive 1 19, time: 0:1:51.388336165
+DEBUG (1): send 1 20, time: 0:1:57.187500010
+DEBUG (3): receive 1 20, time: 0:1:57.193374609
+DEBUG (2): receive 1 20, time: 0:1:57.193374609
+DEBUG (2): send 1 20
+DEBUG (3): receive 1 20, time: 0:1:57.221176109
+DEBUG (1): receive 1 20, time: 0:1:57.221176109
+DEBUG (3): send 1 20
+DEBUG (1): receive 1 20, time: 0:1:57.260345408
+DEBUG (2): receive 1 20, time: 0:1:57.260345408
+DEBUG (1): send 1 21, time: 0:2:3.046875010
+DEBUG (3): receive 1 21, time: 0:2:3.056961010
+DEBUG (2): receive 1 21, time: 0:2:3.056961010
+DEBUG (2): send 1 21
+DEBUG (3): receive 1 21, time: 0:2:3.085250811
+DEBUG (1): receive 1 21, time: 0:2:3.085250811
+DEBUG (3): send 1 21
+DEBUG (1): receive 1 21, time: 0:2:3.116470334
+DEBUG (2): receive 1 21, time: 0:2:3.116470334
+DEBUG (1): send 1 22, time: 0:2:8.906250010
+DEBUG (3): receive 1 22, time: 0:2:8.913436857
+DEBUG (2): receive 1 22, time: 0:2:8.913436857
+DEBUG (2): send 1 22
+DEBUG (3): receive 1 22, time: 0:2:8.938461279
+DEBUG (1): receive 1 22, time: 0:2:8.938461279
+DEBUG (3): send 1 22
+DEBUG (1): receive 1 22, time: 0:2:8.970794664
+DEBUG (2): receive 1 22, time: 0:2:8.970794664
+DEBUG (1): send 1 23, time: 0:2:14.765625010
+DEBUG (3): receive 1 23, time: 0:2:14.773818931
+DEBUG (2): receive 1 23, time: 0:2:14.773818931
+DEBUG (2): send 1 23
+DEBUG (3): receive 1 23, time: 0:2:14.802535964
+DEBUG (1): receive 1 23, time: 0:2:14.802535964
+DEBUG (3): send 1 23
+DEBUG (1): receive 1 23, time: 0:2:14.840820265
+DEBUG (2): receive 1 23, time: 0:2:14.840820265
+DEBUG (1): send 1 24, time: 0:2:20.625000010
+DEBUG (3): receive 1 24, time: 0:2:20.627655023
+DEBUG (2): receive 1 24, time: 0:2:20.627655023
+DEBUG (2): send 1 24
+DEBUG (3): receive 1 24, time: 0:2:20.650817855
+DEBUG (1): receive 1 24, time: 0:2:20.650817855
+DEBUG (3): send 1 24
+DEBUG (1): receive 1 24, time: 0:2:20.685409522
+DEBUG (2): receive 1 24, time: 0:2:20.685409522
+DEBUG (1): send 1 25, time: 0:2:26.484375010
+DEBUG (3): receive 1 25, time: 0:2:26.487548819
+DEBUG (2): receive 1 25, time: 0:2:26.487548819
+DEBUG (2): send 1 25
+DEBUG (3): receive 1 25, time: 0:2:26.513275118
+DEBUG (1): receive 1 25, time: 0:2:26.513275118
+DEBUG (3): send 1 25
+DEBUG (1): receive 1 25, time: 0:2:26.545120231
+DEBUG (2): receive 1 25, time: 0:2:26.545120231
+DEBUG (1): send 1 26, time: 0:2:32.343750010
+DEBUG (3): receive 1 26, time: 0:2:32.347991928
+DEBUG (2): receive 1 26, time: 0:2:32.347991928
+DEBUG (2): send 1 26
+DEBUG (3): receive 1 26, time: 0:2:32.374816860
+DEBUG (1): receive 1 26, time: 0:2:32.374816860
+DEBUG (3): send 1 26
+DEBUG (1): receive 1 26, time: 0:2:32.411361657
+DEBUG (2): receive 1 26, time: 0:2:32.411361657
+DEBUG (1): send 1 27, time: 0:2:38.203125010
+DEBUG (3): receive 1 27, time: 0:2:38.211685140
+DEBUG (2): receive 1 27, time: 0:2:38.211685140
+DEBUG (2): send 1 27
+DEBUG (3): receive 1 27, time: 0:2:38.231613162
+DEBUG (1): receive 1 27, time: 0:2:38.231613162
+DEBUG (3): send 1 27
+DEBUG (1): receive 1 27, time: 0:2:38.262130739
+DEBUG (2): receive 1 27, time: 0:2:38.262130739
+DEBUG (1): send 1 28, time: 0:2:44.062500010
+DEBUG (3): receive 1 28, time: 0:2:44.067520122
+DEBUG (2): receive 1 28, time: 0:2:44.067520122
+DEBUG (2): send 1 28
+DEBUG (3): receive 1 28, time: 0:2:44.096221879
+DEBUG (1): receive 1 28, time: 0:2:44.096221879
+DEBUG (3): send 1 28
+DEBUG (1): receive 1 28, time: 0:2:44.132217375
+DEBUG (2): receive 1 28, time: 0:2:44.132217375
+DEBUG (1): send 1 29, time: 0:2:49.921875010
+DEBUG (3): receive 1 29, time: 0:2:49.931823682
+DEBUG (2): receive 1 29, time: 0:2:49.931823682
+DEBUG (2): send 1 29
+DEBUG (3): receive 1 29, time: 0:2:49.955017077
+DEBUG (1): receive 1 29, time: 0:2:49.955017077
+DEBUG (3): send 1 29
+DEBUG (1): receive 1 29, time: 0:2:49.991180384
+DEBUG (2): receive 1 29, time: 0:2:49.991180384
+DEBUG (1): send 1 30, time: 0:2:55.781250010
+DEBUG (3): receive 1 30, time: 0:2:55.787384007
+DEBUG (2): receive 1 30, time: 0:2:55.787384007
+DEBUG (2): send 1 30
+DEBUG (3): send 1 30
+DEBUG (3): receive 1 30, time: 0:2:55.818496644
+DEBUG (1): receive 1 30, time: 0:2:55.818496644
+DEBUG (1): receive 1 30, time: 0:2:55.820617661
+DEBUG (2): receive 1 30, time: 0:2:55.820617661
+DEBUG (1): send 1 31, time: 0:3:1.640625010
+DEBUG (3): receive 1 31, time: 0:3:1.648605310
+DEBUG (2): receive 1 31, time: 0:3:1.648605310
+DEBUG (2): send 1 31
+DEBUG (3): receive 1 31, time: 0:3:1.673873876
+DEBUG (1): receive 1 31, time: 0:3:1.673873876
+DEBUG (3): send 1 31
+DEBUG (1): receive 1 31, time: 0:3:1.709213231
+DEBUG (2): receive 1 31, time: 0:3:1.709213231
+DEBUG (1): send 1 32, time: 0:3:7.500000010
+DEBUG (3): receive 1 32, time: 0:3:7.506866425
+DEBUG (2): receive 1 32, time: 0:3:7.506866425
+DEBUG (2): send 1 32
+DEBUG (3): receive 1 32, time: 0:3:7.533065766
+DEBUG (1): receive 1 32, time: 0:3:7.533065766
+DEBUG (3): send 1 32
+DEBUG (1): receive 1 32, time: 0:3:7.571746776
+DEBUG (2): receive 1 32, time: 0:3:7.571746776
+DEBUG (1): send 1 33, time: 0:3:13.359375010
+DEBUG (3): receive 1 33, time: 0:3:13.368759110
+DEBUG (2): receive 1 33, time: 0:3:13.368759110
+DEBUG (2): send 1 33
+DEBUG (3): receive 1 33, time: 0:3:13.397323562
+DEBUG (1): receive 1 33, time: 0:3:13.397323562
+DEBUG (3): send 1 33
+DEBUG (1): receive 1 33, time: 0:3:13.435317947
+DEBUG (2): receive 1 33, time: 0:3:13.435317947
+DEBUG (1): send 1 34, time: 0:3:19.218750010
+DEBUG (3): receive 1 34, time: 0:3:19.220932004
+DEBUG (2): receive 1 34, time: 0:3:19.220932004
+DEBUG (2): send 1 34
+DEBUG (3): receive 1 34, time: 0:3:19.246734591
+DEBUG (1): receive 1 34, time: 0:3:19.246734591
+DEBUG (3): send 1 34
+DEBUG (1): receive 1 34, time: 0:3:19.281005836
+DEBUG (2): receive 1 34, time: 0:3:19.281005836
+DEBUG (1): send 1 35, time: 0:3:25.078125010
+DEBUG (3): receive 1 35, time: 0:3:25.083129863
+DEBUG (2): receive 1 35, time: 0:3:25.083129863
+DEBUG (2): send 1 35
+DEBUG (3): receive 1 35, time: 0:3:25.110580407
+DEBUG (1): receive 1 35, time: 0:3:25.110580407
+DEBUG (3): send 1 35
+DEBUG (1): receive 1 35, time: 0:3:25.141006471
+DEBUG (2): receive 1 35, time: 0:3:25.141006471
+DEBUG (1): send 1 36, time: 0:3:30.937500010
+DEBUG (3): receive 1 36, time: 0:3:30.941665635
+DEBUG (2): receive 1 36, time: 0:3:30.941665635
+DEBUG (2): send 1 36
+DEBUG (3): send 1 36
+DEBUG (3): receive 1 36, time: 0:3:30.970886182
+DEBUG (1): receive 1 36, time: 0:3:30.970886182
+DEBUG (1): receive 1 36, time: 0:3:30.976150490
+DEBUG (2): receive 1 36, time: 0:3:30.976150490
+DEBUG (1): send 1 37, time: 0:3:36.796875010
+DEBUG (3): receive 1 37, time: 0:3:36.807067821
+DEBUG (2): receive 1 37, time: 0:3:36.807067821
+DEBUG (2): send 1 37
+DEBUG (3): receive 1 37, time: 0:3:36.835052448
+DEBUG (1): receive 1 37, time: 0:3:36.835052448
+DEBUG (3): send 1 37
+DEBUG (1): receive 1 37, time: 0:3:36.865310672
+DEBUG (2): receive 1 37, time: 0:3:36.865310672
+DEBUG (1): send 1 38, time: 0:3:42.656250010
+DEBUG (3): receive 1 38, time: 0:3:42.665252643
+DEBUG (2): receive 1 38, time: 0:3:42.665252643
+DEBUG (2): send 1 38
+DEBUG (3): receive 1 38, time: 0:3:42.687957753
+DEBUG (1): receive 1 38, time: 0:3:42.687957753
+DEBUG (3): send 1 38
+DEBUG (1): receive 1 38, time: 0:3:42.722442604
+DEBUG (2): receive 1 38, time: 0:3:42.722442604
+DEBUG (1): send 1 39, time: 0:3:48.515625010
+DEBUG (3): receive 1 39, time: 0:3:48.521743748
+DEBUG (2): receive 1 39, time: 0:3:48.521743748
+DEBUG (2): send 1 39
+DEBUG (3): receive 1 39, time: 0:3:48.543807977
+DEBUG (1): receive 1 39, time: 0:3:48.543807977
+DEBUG (3): send 1 39
+DEBUG (1): receive 1 39, time: 0:3:48.582733103
+DEBUG (2): receive 1 39, time: 0:3:48.582733103
+DEBUG (1): send 1 40, time: 0:3:54.375000010
+DEBUG (3): receive 1 40, time: 0:3:54.382858240
+DEBUG (2): receive 1 40, time: 0:3:54.382858240
+DEBUG (2): send 1 40
+DEBUG (3): receive 1 40, time: 0:3:54.411209064
+DEBUG (1): receive 1 40, time: 0:3:54.411209064
+DEBUG (3): send 1 40
+DEBUG (1): receive 1 40, time: 0:3:54.445724466
+DEBUG (2): receive 1 40, time: 0:3:54.445724466
+DEBUG (1): send 1 41, time: 0:4:0.234375010
+DEBUG (3): receive 1 41, time: 0:4:0.243026692
+DEBUG (2): receive 1 41, time: 0:4:0.243026692
+DEBUG (2): send 1 41
+DEBUG (3): receive 1 41, time: 0:4:0.268844572
+DEBUG (1): receive 1 41, time: 0:4:0.268844572
+DEBUG (3): send 1 41
+DEBUG (1): receive 1 41, time: 0:4:0.305541957
+DEBUG (2): receive 1 41, time: 0:4:0.305541957
+DEBUG (1): send 1 42, time: 0:4:6.093750010
+DEBUG (3): receive 1 42, time: 0:4:6.104034373
+DEBUG (2): receive 1 42, time: 0:4:6.104034373
+DEBUG (2): send 1 42
+DEBUG (3): receive 1 42, time: 0:4:6.129028295
+DEBUG (1): receive 1 42, time: 0:4:6.129028295
+DEBUG (3): send 1 42
+DEBUG (1): receive 1 42, time: 0:4:6.159744263
+DEBUG (2): receive 1 42, time: 0:4:6.159744263
+DEBUG (1): send 1 43, time: 0:4:11.953125010
+DEBUG (3): receive 1 43, time: 0:4:11.954421999
+DEBUG (2): receive 1 43, time: 0:4:11.954421999
+DEBUG (2): send 1 43
+DEBUG (3): receive 1 43, time: 0:4:11.979415869
+DEBUG (1): receive 1 43, time: 0:4:11.979415869
+DEBUG (3): send 1 43
+DEBUG (1): receive 1 43, time: 0:4:12.017745923
+DEBUG (2): receive 1 43, time: 0:4:12.017745923
+DEBUG (1): send 1 44, time: 0:4:17.812500010
+DEBUG (3): receive 1 44, time: 0:4:17.817977883
+DEBUG (2): receive 1 44, time: 0:4:17.817977883
+DEBUG (2): send 1 44
+DEBUG (3): send 1 44
+DEBUG (3): receive 1 44, time: 0:4:17.846939038
+DEBUG (1): receive 1 44, time: 0:4:17.846939038
+DEBUG (1): receive 1 44, time: 0:4:17.851577740
+DEBUG (2): receive 1 44, time: 0:4:17.851577740
+DEBUG (1): send 1 45, time: 0:4:23.671875010
+DEBUG (3): receive 1 45, time: 0:4:23.678985564
+DEBUG (2): receive 1 45, time: 0:4:23.678985564
+DEBUG (2): send 1 45
+DEBUG (3): receive 1 45, time: 0:4:23.700088500
+DEBUG (1): receive 1 45, time: 0:4:23.700088500
+DEBUG (3): send 1 45
+DEBUG (1): receive 1 45, time: 0:4:23.743896404
+DEBUG (2): receive 1 45, time: 0:4:23.743896404
+DEBUG (1): send 1 46, time: 0:4:29.531250010
+DEBUG (3): receive 1 46, time: 0:4:29.541168165
+DEBUG (2): receive 1 46, time: 0:4:29.541168165
+DEBUG (2): send 1 46
+DEBUG (3): receive 1 46, time: 0:4:29.569839433
+DEBUG (1): receive 1 46, time: 0:4:29.569839433
+DEBUG (3): send 1 46
+DEBUG (1): receive 1 46, time: 0:4:29.601516716
+DEBUG (2): receive 1 46, time: 0:4:29.601516716

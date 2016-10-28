@@ -2,7 +2,7 @@
  enum {
    TIMER_PERIOD_MILLI = 1000,
    AM_ID = 20,
-   MAX_ARRAY_SIZE = 2
+   MAX_ARRAY_SIZE = 600
    //20-29 channels
  };
 

@@ -1,0 +1,130 @@
+<?xml version="1.0" ?><component loc="73:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP" safe="">
+      <documentation loc="63:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc">
+        <short>
+ Implementation of the SPI bus abstraction for the atm128
+ microcontroller.</short>
+        <long>
+ Implementation of the SPI bus abstraction for the atm128
+ microcontroller.
+
+ @author Philip Levis
+ @author Martin Turon
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="81:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" name="MISO" provided="0" ref="0x409c34a0">
+      <component-ref nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="MISO" ref="0x409c34a0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x409c3678" scoped=""/>
+        <function-ref name="isInput" ref="0x409c3758" scoped=""/>
+        <function-ref name="toggle" ref="0x409c3838" scoped=""/>
+        <function-ref name="isOutput" ref="0x409c3918" scoped=""/>
+        <function-ref name="get" ref="0x409c39f8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x409c3ad8" scoped=""/>
+        <function-ref name="set" ref="0x409c3bb8" scoped=""/>
+        <function-ref name="clr" ref="0x409c3c98" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="79:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" name="SCK" provided="0" ref="0x409c4050">
+      <component-ref nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="SCK" ref="0x409c4050" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x409c4228" scoped=""/>
+        <function-ref name="isInput" ref="0x409c4308" scoped=""/>
+        <function-ref name="toggle" ref="0x409c43e8" scoped=""/>
+        <function-ref name="isOutput" ref="0x409c44c8" scoped=""/>
+        <function-ref name="get" ref="0x409c45a8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x409c4688" scoped=""/>
+        <function-ref name="set" ref="0x409c4768" scoped=""/>
+        <function-ref name="clr" ref="0x409c4848" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="78:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" name="SS" provided="0" ref="0x409c2658">
+      <component-ref nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="SS" ref="0x409c2658" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x409c2830" scoped=""/>
+        <function-ref name="isInput" ref="0x409c2910" scoped=""/>
+        <function-ref name="toggle" ref="0x409c29f0" scoped=""/>
+        <function-ref name="isOutput" ref="0x409c2ad0" scoped=""/>
+        <function-ref name="get" ref="0x409c2bb0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x409c2c90" scoped=""/>
+        <function-ref name="set" ref="0x409c2d70" scoped=""/>
+        <function-ref name="clr" ref="0x409c2e50" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="75:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" name="AsyncStdControl" provided="1" ref="0x409c2198">
+      <component-ref nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="AsyncStdControl" ref="0x409c2198" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AsyncStdControl" qname="AsyncStdControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="start" ref="0x409c2370" scoped=""/>
+        <function-ref name="stop" ref="0x409c2450" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="82:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" name="Mcu" provided="0" ref="0x409c3ea0">
+      <component-ref nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Mcu" ref="0x409c3ea0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.McuPowerState" qname="McuPowerState"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="update" ref="0x409c10c0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="74:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" name="SPI" provided="1" ref="0x409a97d8">
+      <component-ref nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="SPI" ref="0x409a97d8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.spi.Atm128Spi" qname="Atm128Spi"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="initSlave" ref="0x409a99b0" scoped=""/>
+        <function-ref name="sleep" ref="0x409c6db0" scoped=""/>
+        <function-ref name="isSpiEnabled" ref="0x409a9b70" scoped=""/>
+        <function-ref name="dataReady" ref="0x409c6e90" scoped=""/>
+        <function-ref name="initMaster" ref="0x409a9d30" scoped=""/>
+        <function-ref name="setMasterBit" ref="0x409a9e10" scoped=""/>
+        <function-ref name="enableInterrupt" ref="0x409a9ef0" scoped=""/>
+        <function-ref name="read" ref="0x409c6010" scoped=""/>
+        <function-ref name="setMasterDoubleSpeed" ref="0x409c60f0" scoped=""/>
+        <function-ref name="isInterruptEnabled" ref="0x409c61d0" scoped=""/>
+        <function-ref name="setClock" ref="0x409c62b0" scoped=""/>
+        <function-ref name="isInterruptPending" ref="0x409c6390" scoped=""/>
+        <function-ref name="setClockPolarity" ref="0x409c6470" scoped=""/>
+        <function-ref name="isMasterDoubleSpeed" ref="0x409c65d0" scoped=""/>
+        <function-ref name="setDataOrder" ref="0x409c66b0" scoped=""/>
+        <function-ref name="write" ref="0x409c6790" scoped=""/>
+        <function-ref name="enableSpi" ref="0x409c6870" scoped=""/>
+        <function-ref name="isMasterBitSet" ref="0x409c6950" scoped=""/>
+        <function-ref name="getClockPhase" ref="0x409c6a30" scoped=""/>
+        <function-ref name="getClock" ref="0x409c6b10" scoped=""/>
+        <function-ref name="hasWriteCollided" ref="0x409c6bf0" scoped=""/>
+        <function-ref name="getClockPolarity" ref="0x409a9a90" scoped=""/>
+        <function-ref name="setClockPhase" ref="0x409a9c50" scoped=""/>
+        <function-ref name="isOrderLsbFirst" ref="0x409c6cd0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="80:/opt/tinyos-2.1.2/tos/chips/atm128/spi/HplAtm128SpiP.nc" name="MOSI" provided="0" ref="0x409c4a38">
+      <component-ref nicename="tos.chips.atm128.spi.HplAtm128SpiP" qname="HplAtm128SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="MOSI" ref="0x409c4a38" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x409c4c10" scoped=""/>
+        <function-ref name="isInput" ref="0x409c4cf0" scoped=""/>
+        <function-ref name="toggle" ref="0x409c4dd0" scoped=""/>
+        <function-ref name="isOutput" ref="0x409c4eb0" scoped=""/>
+        <function-ref name="get" ref="0x409c3010" scoped=""/>
+        <function-ref name="makeOutput" ref="0x409c30f0" scoped=""/>
+        <function-ref name="set" ref="0x409c31d0" scoped=""/>
+        <function-ref name="clr" ref="0x409c32b0" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>
