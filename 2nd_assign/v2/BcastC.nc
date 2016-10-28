@@ -18,13 +18,15 @@ module BcastC
 
 implementation 
 {
-	message_t packet;
+	message_t forward_packet;
+	message_t source_packet;
 	bool busy = FALSE;
 	uint16_t node_id = 0;
 	uint16_t seq_num = 0;
 	msg_t *rec_msg;
 	msg_t cache[ MAX_ARRAY_SIZE ];
 	uint16_t index = 0;
+	int counter = 0;
 	
 	
 	task void init()
@@ -57,7 +59,7 @@ implementation
 		else 
 		{
 			node_id = TOS_NODE_ID;
-			i = rand()%100;
+			i = rand()%5000;
 			i++;
 			call Timer.startPeriodic(i);
 		}
@@ -67,15 +69,19 @@ implementation
 	
 	event void Timer.fired()
 	{
+		
 		if ( busy == TRUE )
 		{
 			return;
 		}
 
-		if( (!busy) && ((node_id%2 == 1)))
+		if( node_id%2 == 1 && counter<5)
 		{
 			msg_t *bcast_msg; 
-			bcast_msg = ( msg_t* ) ( call Packet.getPayload( &packet, sizeof( msg_t) ) );
+			int i;
+
+			bcast_msg = ( msg_t* ) ( call Packet.getPayload( &source_packet, sizeof( msg_t) ) );
+			counter++;
 			
 			if ( bcast_msg == NULL )
 			{
@@ -85,17 +91,18 @@ implementation
 			bcast_msg->nodeid = node_id;
 			bcast_msg->seq_num = seq_num;
 			
-			if( call AMSend.send( AM_BROADCAST_ADDR, &packet, sizeof( msg_t ) ) == SUCCESS)
+			if( call AMSend.send( AM_BROADCAST_ADDR, &source_packet, sizeof( msg_t ) ) == SUCCESS)
 			{
 				
 				busy = TRUE;
 			}
-			
-			cache[ index ] = *bcast_msg;
-		
-			index = ( index + 1 ) % MAX_ARRAY_SIZE;
-			
+
 			dbg("Send", "send %d %d, time: %s\n", bcast_msg->nodeid, bcast_msg->seq_num, sim_time_string());
+		}
+		else if(counter == 5)
+		{
+			call Timer.stop();
+			dbg( "Send", "Timer stopped\n");
 		}
 	}
 	
@@ -105,11 +112,11 @@ implementation
 
 		if ( busy == TRUE )
 		{
-			call Forward_timer.startOneShot( node_id*10 );
+			call Forward_timer.startOneShot( node_id%10 );
 			return;
 		}
 
-		bcast_msg = ( msg_t* ) ( call Packet.getPayload( &packet, sizeof( msg_t) ) );
+		bcast_msg = ( msg_t* ) ( call Packet.getPayload( &forward_packet, sizeof( msg_t) ) );
 		
 		
 		if ( bcast_msg == NULL )
@@ -121,19 +128,24 @@ implementation
 		bcast_msg->seq_num = rec_msg->seq_num;
 		
 		
-		if( call AMSend.send( AM_BROADCAST_ADDR, &packet, sizeof( bcast_msg ) ) == SUCCESS)
+		if( call AMSend.send( AM_BROADCAST_ADDR, &forward_packet, sizeof( msg_t ) ) == SUCCESS)
 		{
 			busy = TRUE;
 		}
 		
 		dbg("Send", "send %d %d\n", bcast_msg->nodeid, bcast_msg->seq_num);
 
-		
+			
 		
 	}
 	event void AMSend.sendDone( message_t* msg, error_t error )
 	{
-		if( &packet == msg ) 
+		if( &source_packet == msg ) 
+		{
+			dbg("Send", "BUSY\n");
+			busy = FALSE;
+		}
+		else if( &forward_packet == msg ) 
 		{
 			dbg("Send", "BUSY\n");
 			busy = FALSE;
@@ -147,7 +159,10 @@ implementation
 		{
 			rec_msg = ( msg_t* ) payload;
 			dbg("Receive", "receive %d %d, time: %s\n", rec_msg->nodeid, rec_msg->seq_num, sim_time_string());
-
+			if(rec_msg->nodeid == node_id)
+			{
+				return msg;
+			}
 			for ( i = 0; i < MAX_ARRAY_SIZE; i++ )
 			{
 				if ( ( cache[i].nodeid == rec_msg->nodeid ) && ( cache[i].seq_num >= rec_msg->seq_num ) )
@@ -159,8 +174,8 @@ implementation
 			cache[ index ] = *rec_msg;
 		
 			index = ( index + 1 ) % MAX_ARRAY_SIZE;
-
-			call Forward_timer.startOneShot(node_id/10);
+			
+			call Forward_timer.startOneShot(node_id%10);
 			//post search();
 			
 		}

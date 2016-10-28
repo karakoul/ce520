@@ -1299,7 +1299,7 @@ typedef struct sim_log_channel {
 } sim_log_channel_t;
 
 enum __nesc_unnamed4272 {
-  SIM_LOG_OUTPUT_COUNT = 194U
+  SIM_LOG_OUTPUT_COUNT = 196U
 };
 
 sim_log_output_t outputs[SIM_LOG_OUTPUT_COUNT];
@@ -3364,7 +3364,7 @@ enum __nesc_unnamed4295 {
 enum __nesc_unnamed4296 {
   TIMER_PERIOD_MILLI = 1000, 
   AM_ID = 20, 
-  MAX_ARRAY_SIZE = 600
+  MAX_ARRAY_SIZE = 5
 };
 
 
@@ -4043,11 +4043,11 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFrom$fire
 #line 83
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(
 # 48 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40b7a3a8);
+uint8_t arg_0x40b723a8);
 # 64 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startPeriodic(
 # 48 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40b7a3a8, 
+uint8_t arg_0x40b723a8, 
 # 64 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
 uint32_t dt);
 
@@ -4060,9 +4060,16 @@ uint32_t dt);
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startOneShot(
 # 48 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40b7a3a8, 
+uint8_t arg_0x40b723a8, 
 # 73 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
 uint32_t dt);
+
+
+
+
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$stop(
+# 48 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
+uint8_t arg_0x40b723a8);
 # 82 "/opt/tinyos-2.1.2/tos/lib/timer/Counter.nc"
 static void /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC$0$Counter$overflow(void );
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
@@ -4089,7 +4096,7 @@ error_t error);
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40be60a0, 
+am_id_t arg_0x40bde0a0, 
 # 103 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4102,7 +4109,7 @@ error_t error);
 # 75 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$send(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40bbf6a8, 
+uint8_t arg_0x40be06a8, 
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4116,7 +4123,7 @@ uint8_t len);
 #line 100
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40bbf6a8, 
+uint8_t arg_0x40be06a8, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4824,25 +4831,29 @@ static error_t BcastC$init$postTask(void );
 static error_t BcastC$Control$start(void );
 # 64 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
 static void BcastC$Timer$startPeriodic(uint32_t dt);
-# 30 "BcastC.nc"
+#line 78
+static void BcastC$Timer$stop(void );
+# 32 "BcastC.nc"
 enum BcastC$__nesc_unnamed4333 {
-#line 30
+#line 32
   BcastC$init = 3U
 };
-#line 30
+#line 32
 typedef int BcastC$__nesc_sillytask_init[BcastC$init];
 #line 21
-message_t BcastC$packet[1000];
+message_t BcastC$forward_packet[1000];
+message_t BcastC$source_packet[1000];
 bool BcastC$busy[1000];
 uint16_t BcastC$node_id[1000];
 uint16_t BcastC$seq_num[1000];
 msg_t *BcastC$rec_msg[1000];
 msg_t BcastC$cache[1000][MAX_ARRAY_SIZE];
 uint16_t BcastC$index[1000];
+int BcastC$counter[1000];
 
 
 static inline void BcastC$init$runTask(void );
-#line 42
+#line 44
 static inline void BcastC$Boot$booted(void );
 
 
@@ -4851,22 +4862,15 @@ static inline void BcastC$Boot$booted(void );
 
 
 static inline void BcastC$Control$startDone(error_t error);
-#line 66
+#line 68
 static inline void BcastC$Control$stopDone(error_t error);
 
 static inline void BcastC$Timer$fired(void );
-#line 102
+#line 109
 static inline void BcastC$Forward_timer$fired(void );
-#line 134
-static inline void BcastC$AMSend$sendDone(message_t *msg, error_t error);
-
-
-
-
-
-
-
-
+#line 141
+static void BcastC$AMSend$sendDone(message_t *msg, error_t error);
+#line 155
 static inline message_t *BcastC$Receive$receive(message_t *msg, void *payload, uint8_t len);
 # 53 "/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128TimerCtrl8.nc"
 static Atm128_TIFR_t /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$TimerCtrl$getInterruptFlag(void );
@@ -5190,7 +5194,7 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFrom$stop
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(
 # 48 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40b7a3a8);
+uint8_t arg_0x40b723a8);
 #line 71
 enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4336 {
 #line 71
@@ -5252,6 +5256,11 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$s
 
 
 static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startOneShot(uint8_t num, uint32_t dt);
+
+
+
+
+static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$stop(uint8_t num);
 #line 204
 static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(uint8_t num);
 # 58 "/opt/tinyos-2.1.2/tos/lib/timer/CounterToLocalTimeC.nc"
@@ -5312,7 +5321,7 @@ static inline void /*BcastAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP$0$
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40be60a0, 
+am_id_t arg_0x40bde0a0, 
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -5329,7 +5338,7 @@ uint8_t len);
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40bbf6a8, 
+uint8_t arg_0x40be06a8, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -5840,17 +5849,20 @@ inline static void BcastC$Forward_timer$startOneShot(uint32_t dt){
 #line 73
 }
 #line 73
-# 143 "BcastC.nc"
+# 155 "BcastC.nc"
 static inline message_t *BcastC$Receive$receive(message_t *msg, void *payload, uint8_t len)
 {
   int i;
 
-#line 146
+#line 158
   if (len == sizeof(msg_t )) 
     {
       BcastC$rec_msg[sim_node()] = (msg_t *)payload;
-      sim_log_debug(161U, "Receive", "receive %d %d, time: %s\n", __nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->nodeid.nxdata), __nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->seq_num.nxdata), sim_time_string());
-
+      sim_log_debug(163U, "Receive", "receive %d %d, time: %s\n", __nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->nodeid.nxdata), __nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->seq_num.nxdata), sim_time_string());
+      if (__nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->nodeid.nxdata) == BcastC$node_id[sim_node()]) 
+        {
+          return msg;
+        }
       for (i = 0; i < MAX_ARRAY_SIZE; i++) 
         {
           if (__nesc_ntoh_uint16(BcastC$cache[sim_node()][i].nodeid.nxdata) == __nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->nodeid.nxdata) && __nesc_ntoh_uint16(BcastC$cache[sim_node()][i].seq_num.nxdata) >= __nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->seq_num.nxdata)) 
@@ -5863,7 +5875,7 @@ static inline message_t *BcastC$Receive$receive(message_t *msg, void *payload, u
 
       BcastC$index[sim_node()] = (BcastC$index[sim_node()] + 1) % MAX_ARRAY_SIZE;
 
-      BcastC$Forward_timer$startOneShot(BcastC$node_id[sim_node()] / 10);
+      BcastC$Forward_timer$startOneShot(BcastC$node_id[sim_node()] % 10);
     }
 
 
@@ -6153,7 +6165,7 @@ inline static error_t BcastC$Control$start(void ){
 #line 104
 }
 #line 104
-# 49 "BcastC.nc"
+# 51 "BcastC.nc"
 static inline void BcastC$Control$startDone(error_t error)
 {
   int i = 0;
@@ -6165,7 +6177,7 @@ static inline void BcastC$Control$startDone(error_t error)
   else 
     {
       BcastC$node_id[sim_node()] = TOS_NODE_ID;
-      i = rand() % 100;
+      i = rand() % 5000;
       i++;
       BcastC$Timer$startPeriodic(i);
     }
@@ -6186,9 +6198,9 @@ static inline void TossimPacketModelC$startDoneTask$runTask(void )
   TossimPacketModelC$Control$startDone(SUCCESS);
 }
 
-# 66 "BcastC.nc"
+# 68 "BcastC.nc"
 static inline void BcastC$Control$stopDone(error_t error)
-#line 66
+#line 68
 {
 }
 
@@ -6283,7 +6295,7 @@ static inline void TossimPacketModelC$sendDoneTask$runTask(void )
   TossimPacketModelC$Packet$sendDone(msg, TossimPacketModelC$running[sim_node()] ? SUCCESS : EOFF);
 }
 
-# 30 "BcastC.nc"
+# 32 "BcastC.nc"
 static inline void BcastC$init$runTask(void )
 {
   int i;
@@ -6474,16 +6486,6 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$errorTask$runTask(voi
   /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$sendDone(/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()], /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()]].msg, FAIL);
 }
 
-# 134 "BcastC.nc"
-static inline void BcastC$AMSend$sendDone(message_t *msg, error_t error)
-{
-  if (&BcastC$packet[sim_node()] == msg) 
-    {
-      sim_log_debug(160U, "Send", "BUSY\n");
-      BcastC$busy[sim_node()] = FALSE;
-    }
-}
-
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 inline static void /*BcastAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP$0$AMSend$sendDone(message_t * msg, error_t error){
 #line 110
@@ -6505,9 +6507,9 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone
 }
 
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
-inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0x40bbf6a8, message_t * msg, error_t error){
+inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0x40be06a8, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x40bbf6a8) {
+  switch (arg_0x40be06a8) {
 #line 100
     case 0U:
 #line 100
@@ -6517,7 +6519,7 @@ inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t
 #line 100
     default:
 #line 100
-      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0x40bbf6a8, msg, error);
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0x40be06a8, msg, error);
 #line 100
       break;
 #line 100
@@ -6639,13 +6641,13 @@ inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$errorTask$postTask
 }
 #line 67
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
-inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0x40be60a0, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0x40bde0a0, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0x40be60a0, addr, msg, len);
+  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0x40bde0a0, addr, msg, len);
 #line 80
 
 #line 80
@@ -7446,6 +7448,19 @@ static inline void CpmModelC$sim_gain_ack_handle(sim_event_t *evt)
   CpmModelC$free_receive_message((CpmModelC$receive_message_t *)evt->data);
 }
 
+# 164 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
+static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$stop(uint8_t num)
+{
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$m_timers[sim_node()][num].isrunning = FALSE;
+}
+
+# 78 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
+inline static void BcastC$Timer$stop(void ){
+#line 78
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$stop(0U);
+#line 78
+}
+#line 78
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 inline static error_t BcastC$AMSend$send(am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
@@ -7488,20 +7503,22 @@ inline static void * BcastC$Packet$getPayload(message_t * msg, uint8_t len){
 #line 126
 }
 #line 126
-# 68 "BcastC.nc"
+# 70 "BcastC.nc"
 static inline void BcastC$Timer$fired(void )
 {
+
   if (BcastC$busy[sim_node()] == TRUE) 
     {
       return;
     }
 
-  if (!BcastC$busy[sim_node()] && BcastC$node_id[sim_node()] % 2 == 1) 
+  if (BcastC$node_id[sim_node()] % 2 == 1 && BcastC$counter[sim_node()] < 5) 
     {
       msg_t *bcast_msg;
+      int i;
 
-#line 78
-      bcast_msg = (msg_t *)BcastC$Packet$getPayload(&BcastC$packet[sim_node()], sizeof(msg_t ));
+      bcast_msg = (msg_t *)BcastC$Packet$getPayload(&BcastC$source_packet[sim_node()], sizeof(msg_t ));
+      BcastC$counter[sim_node()]++;
 
       if (bcast_msg == (void *)0) 
         {
@@ -7511,31 +7528,36 @@ static inline void BcastC$Timer$fired(void )
       __nesc_hton_uint16(bcast_msg->nodeid.nxdata, BcastC$node_id[sim_node()]);
       __nesc_hton_uint16(bcast_msg->seq_num.nxdata, BcastC$seq_num[sim_node()]);
 
-      if (BcastC$AMSend$send(AM_BROADCAST_ADDR, &BcastC$packet[sim_node()], sizeof(msg_t )) == SUCCESS) 
+      if (BcastC$AMSend$send(AM_BROADCAST_ADDR, &BcastC$source_packet[sim_node()], sizeof(msg_t )) == SUCCESS) 
         {
 
           BcastC$busy[sim_node()] = TRUE;
         }
 
-      BcastC$cache[sim_node()][BcastC$index[sim_node()]] = *bcast_msg;
-
-      BcastC$index[sim_node()] = (BcastC$index[sim_node()] + 1) % MAX_ARRAY_SIZE;
-
       sim_log_debug(158U, "Send", "send %d %d, time: %s\n", __nesc_ntoh_uint16(bcast_msg->nodeid.nxdata), __nesc_ntoh_uint16(bcast_msg->seq_num.nxdata), sim_time_string());
+    }
+  else {
+#line 102
+    if (BcastC$counter[sim_node()] == 5) 
+      {
+        BcastC$Timer$stop();
+        sim_log_debug(159U, "Send", "Timer stopped\n");
+      }
     }
 }
 
+#line 109
 static inline void BcastC$Forward_timer$fired(void )
 {
   msg_t *bcast_msg;
 
   if (BcastC$busy[sim_node()] == TRUE) 
     {
-      BcastC$Forward_timer$startOneShot(BcastC$node_id[sim_node()] * 10);
+      BcastC$Forward_timer$startOneShot(BcastC$node_id[sim_node()] % 10);
       return;
     }
 
-  bcast_msg = (msg_t *)BcastC$Packet$getPayload(&BcastC$packet[sim_node()], sizeof(msg_t ));
+  bcast_msg = (msg_t *)BcastC$Packet$getPayload(&BcastC$forward_packet[sim_node()], sizeof(msg_t ));
 
 
   if (bcast_msg == (void *)0) 
@@ -7547,12 +7569,12 @@ static inline void BcastC$Forward_timer$fired(void )
   __nesc_hton_uint16(bcast_msg->seq_num.nxdata, __nesc_ntoh_uint16(BcastC$rec_msg[sim_node()]->seq_num.nxdata));
 
 
-  if (BcastC$AMSend$send(AM_BROADCAST_ADDR, &BcastC$packet[sim_node()], sizeof bcast_msg) == SUCCESS) 
+  if (BcastC$AMSend$send(AM_BROADCAST_ADDR, &BcastC$forward_packet[sim_node()], sizeof(msg_t )) == SUCCESS) 
     {
       BcastC$busy[sim_node()] = TRUE;
     }
 
-  sim_log_debug(159U, "Send", "send %d %d\n", __nesc_ntoh_uint16(bcast_msg->nodeid.nxdata), __nesc_ntoh_uint16(bcast_msg->seq_num.nxdata));
+  sim_log_debug(160U, "Send", "send %d %d\n", __nesc_ntoh_uint16(bcast_msg->nodeid.nxdata), __nesc_ntoh_uint16(bcast_msg->seq_num.nxdata));
 }
 
 # 204 "/opt/tinyos-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
@@ -7561,9 +7583,9 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$d
 }
 
 # 83 "/opt/tinyos-2.1.2/tos/lib/timer/Timer.nc"
-inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(uint8_t arg_0x40b7a3a8){
+inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(uint8_t arg_0x40b723a8){
 #line 83
-  switch (arg_0x40b7a3a8) {
+  switch (arg_0x40b723a8) {
 #line 83
     case 0U:
 #line 83
@@ -7579,7 +7601,7 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$f
 #line 83
     default:
 #line 83
-      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(arg_0x40b7a3a8);
+      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(arg_0x40b723a8);
 #line 83
       break;
 #line 83
@@ -7646,7 +7668,7 @@ uint8_t len)
   if (/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg != (void *)0) {
       return EBUSY;
     }
-  sim_log_debug(189U, "AMQueue", "AMQueue: request to send from %hhu (%p): passed checks\n", clientId, msg);
+  sim_log_debug(191U, "AMQueue", "AMQueue: request to send from %hhu (%p): passed checks\n", clientId, msg);
 
   /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg = msg;
   /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Packet$setPayloadLength(msg, len);
@@ -7656,12 +7678,12 @@ uint8_t len)
       am_id_t amId = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMPacket$type(msg);
       am_addr_t dest = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMPacket$destination(msg);
 
-      sim_log_debug(190U, "AMQueue", "%s: request to send from %hhu (%p): queue empty\n", __FUNCTION__, clientId, msg);
+      sim_log_debug(192U, "AMQueue", "%s: request to send from %hhu (%p): queue empty\n", __FUNCTION__, clientId, msg);
       /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()] = clientId;
 
       err = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(amId, dest, msg, len);
       if (err != SUCCESS) {
-          sim_log_debug(191U, "AMQueue", "%s: underlying send failed.\n", __FUNCTION__);
+          sim_log_debug(193U, "AMQueue", "%s: underlying send failed.\n", __FUNCTION__);
           /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()] = 1;
           /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg = (void *)0;
         }
@@ -7669,7 +7691,7 @@ uint8_t len)
       return err;
     }
   else {
-      sim_log_debug(192U, "AMQueue", "AMQueue: request to send from %hhu (%p): queue not empty\n", clientId, msg);
+      sim_log_debug(194U, "AMQueue", "AMQueue: request to send from %hhu (%p): queue not empty\n", clientId, msg);
     }
   return SUCCESS;
 }
@@ -7755,7 +7777,7 @@ static inline void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm
 static inline void HplAtm128Timer0AsyncP$cancel_compare(void )
 #line 577
 {
-  sim_log_debug(188U, "HplAtm128CompareC", "Cancelling compare at 0x%p\n", HplAtm128Timer0AsyncP$compare[sim_node()]);
+  sim_log_debug(190U, "HplAtm128CompareC", "Cancelling compare at 0x%p\n", HplAtm128Timer0AsyncP$compare[sim_node()]);
   if (HplAtm128Timer0AsyncP$compare[sim_node()] != (void *)0) {
       HplAtm128Timer0AsyncP$compare[sim_node()]->cancelled = 1;
       HplAtm128Timer0AsyncP$compare[sim_node()]->cleanup = sim_queue_cleanup_total;
@@ -7784,7 +7806,7 @@ static inline void HplAtm128Timer0AsyncP$cancel_overflow(void )
 {
   if (HplAtm128Timer0AsyncP$overflow[sim_node()] != (void *)0) {
       HplAtm128Timer0AsyncP$overflow[sim_node()]->cancelled = 1;
-      sim_log_debug(187U, "HplAtm128Timer0AsyncP", "Cancelling overflow %p.\n", HplAtm128Timer0AsyncP$overflow[sim_node()]);
+      sim_log_debug(189U, "HplAtm128Timer0AsyncP", "Cancelling overflow %p.\n", HplAtm128Timer0AsyncP$overflow[sim_node()]);
       HplAtm128Timer0AsyncP$overflow[sim_node()]->cleanup = sim_queue_cleanup_total;
     }
 }
@@ -7799,11 +7821,11 @@ static inline void HplAtm128Timer0AsyncP$timer0_overflow_handle(sim_event_t *evt
   else {
       if ((atm128RegFile[sim_node()][ATM128_TIMSK] & (1 << TOIE0)) != 0) {
           atm128RegFile[sim_node()][ATM128_TIFR] &= ~(1 << TOV0);
-          sim_log_debug(184U, "HplAtm128Timer0AsyncP", "Overflow interrupt at %s\n", sim_time_string());
+          sim_log_debug(186U, "HplAtm128Timer0AsyncP", "Overflow interrupt at %s\n", sim_time_string());
           INTERRUPT_16();
         }
       else {
-          sim_log_debug(185U, "HplAtm128Timer0AsyncP", "Setting overflow bit at %s\n", sim_time_string());
+          sim_log_debug(187U, "HplAtm128Timer0AsyncP", "Setting overflow bit at %s\n", sim_time_string());
           atm128RegFile[sim_node()][ATM128_TIFR] |= 1 << TOV0;
         }
       HplAtm128Timer0AsyncP$configure_overflow(evt);
@@ -7853,7 +7875,7 @@ static inline void HplAtm128Timer0AsyncP$Timer0$set(uint8_t newVal)
   uint8_t curVal = HplAtm128Timer0AsyncP$Timer0$get();
 
 #line 299
-  sim_log_debug(177U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting timer: %hhu\n", newVal);
+  sim_log_debug(179U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting timer: %hhu\n", newVal);
   if (newVal == curVal) {
       return;
     }
@@ -7880,7 +7902,7 @@ static inline void HplAtm128Timer0AsyncP$Timer0$set(uint8_t newVal)
 static inline void HplAtm128Timer0AsyncP$timer0_compare_handle(sim_event_t *evt)
 #line 187
 {
-  sim_log_debug(167U, "HplAtm128Timer0AsyncP", "Beginning compare 0x%p at %s\n", evt, sim_time_string());
+  sim_log_debug(169U, "HplAtm128Timer0AsyncP", "Beginning compare 0x%p at %s\n", evt, sim_time_string());
   if (evt->cancelled) {
       return;
     }
@@ -7889,21 +7911,21 @@ static inline void HplAtm128Timer0AsyncP$timer0_compare_handle(sim_event_t *evt)
 
 #line 194
       sim_print_now(timeStr, 128);
-      sim_log_debug(168U, "HplAtm128Timer0AsyncP", "Handling compare at 0x%p @ %s\n", evt, sim_time_string());
+      sim_log_debug(170U, "HplAtm128Timer0AsyncP", "Handling compare at 0x%p @ %s\n", evt, sim_time_string());
 
       if ((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0 && !((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0)) {
-          sim_log_debug(169U, "HplAtm128Timer0AsyncP", "%s: CTC is set, clear timer.\n", __FUNCTION__);
+          sim_log_debug(171U, "HplAtm128Timer0AsyncP", "%s: CTC is set, clear timer.\n", __FUNCTION__);
           HplAtm128Timer0AsyncP$Timer0$set(0);
         }
       else {
-          sim_log_debug(170U, "HplAtm128Timer0AsyncP", "%s: TCCR is 0x%hhx, %i, %i\n", __FUNCTION__, * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33], (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0), (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0));
+          sim_log_debug(172U, "HplAtm128Timer0AsyncP", "%s: TCCR is 0x%hhx, %i, %i\n", __FUNCTION__, * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33], (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0), (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0));
         }
 
       if ((atm128RegFile[sim_node()][ATM128_TIMSK] & (1 << OCIE0)) != 0) {
-          sim_log_debug(171U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
+          sim_log_debug(173U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
           atm128RegFile[sim_node()][ATM128_TIFR] &= ~(1 << OCF0);
-          sim_log_debug(172U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
-          sim_log_debug(173U, "HplAtm128Timer0AsyncP", "Compare interrupt @ %s\n", timeStr);
+          sim_log_debug(174U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
+          sim_log_debug(175U, "HplAtm128Timer0AsyncP", "Compare interrupt @ %s\n", timeStr);
           INTERRUPT_15();
         }
       else {
@@ -7923,7 +7945,7 @@ static inline sim_event_t *HplAtm128Timer0AsyncP$allocate_compare(void )
   sim_event_t *newEvent = sim_queue_allocate_event();
 
 #line 225
-  sim_log_debug(174U, "HplAtm128Timer0AsyncP", "Allocated compare at 0x%p\n", newEvent);
+  sim_log_debug(176U, "HplAtm128Timer0AsyncP", "Allocated compare at 0x%p\n", newEvent);
   newEvent->handle = HplAtm128Timer0AsyncP$timer0_compare_handle;
   newEvent->cleanup = sim_queue_cleanup_none;
   return newEvent;
@@ -8341,7 +8363,7 @@ inline static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm
 static inline void HplAtm128Timer0AsyncP$Timer0Ctrl$setControl(Atm128TimerControl_t x)
 #line 364
 {
-  sim_log_debug(179U, "HplAtm128Timer0AsyncP", "Setting control to be 0x%hhx\n", x.flat);
+  sim_log_debug(181U, "HplAtm128Timer0AsyncP", "Setting control to be 0x%hhx\n", x.flat);
   * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33] = x.flat;
 }
 
@@ -8418,7 +8440,7 @@ inline static error_t BcastC$init$postTask(void ){
 #line 67
 }
 #line 67
-# 42 "BcastC.nc"
+# 44 "BcastC.nc"
 static inline void BcastC$Boot$booted(void )
 {
   BcastC$init$postTask();
@@ -10061,7 +10083,7 @@ static uint8_t HplAtm128Timer0AsyncP$Timer0$get(void )
   elapsed = HplAtm128Timer0AsyncP$sim_to_clock(elapsed);
   elapsed = elapsed >> HplAtm128Timer0AsyncP$shiftFromScale();
   rval = (uint8_t )(elapsed & 0xff);
-  sim_log_debug(176U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting timer: %hhu\n", rval);
+  sim_log_debug(178U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting timer: %hhu\n", rval);
   return rval;
 }
 
@@ -10140,7 +10162,7 @@ static Atm128_TIFR_t HplAtm128Timer0AsyncP$Timer0Ctrl$getInterruptFlag(void )
 static uint8_t HplAtm128Timer0AsyncP$Compare$get(void )
 #line 457
 {
-  sim_log_debug(182U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting compare: %hhu\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31]);
+  sim_log_debug(184U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting compare: %hhu\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31]);
   return * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31];
 }
 
@@ -10247,6 +10269,24 @@ static bool SimSchedulerBasicP$Scheduler$runNextTask(void )
   return TRUE;
 }
 
+# 141 "BcastC.nc"
+static void BcastC$AMSend$sendDone(message_t *msg, error_t error)
+{
+  if (&BcastC$source_packet[sim_node()] == msg) 
+    {
+      sim_log_debug(161U, "Send", "BUSY\n");
+      BcastC$busy[sim_node()] = FALSE;
+    }
+  else {
+#line 148
+    if (&BcastC$forward_packet[sim_node()] == msg) 
+      {
+        sim_log_debug(162U, "Send", "BUSY\n");
+        BcastC$busy[sim_node()] = FALSE;
+      }
+    }
+}
+
 # 163 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$sendDone(uint8_t last, message_t * msg, error_t err)
 #line 163
@@ -10332,7 +10372,7 @@ static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(am_id_t id, 
       /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$sendDone(/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()], msg, err);
     }
   else {
-      sim_log_debug(193U, "PointerBug", "%s received send done for %p, signaling for %p.\n", __FUNCTION__, msg, /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()]].msg);
+      sim_log_debug(195U, "PointerBug", "%s received send done for %p, signaling for %p.\n", __FUNCTION__, msg, /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()]].msg);
     }
 }
 
@@ -10458,13 +10498,13 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
       uint8_t tifr = (uint8_t )/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$TimerCtrl$getInterruptFlag().flat;
 
 #line 101
-      sim_log_debug(162U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: TIFR is %hhx\n", tifr);
+      sim_log_debug(164U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: TIFR is %hhx\n", tifr);
       if ((interrupt_in != 0 && interrupt_in < /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MINDT) || tifr & (1 << OCF0)) {
           if (interrupt_in < /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MINDT) {
-              sim_log_debug(163U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: under min: %hhu.\n", interrupt_in);
+              sim_log_debug(165U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: under min: %hhu.\n", interrupt_in);
             }
           else {
-              sim_log_debug(164U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: OCF set.\n");
+              sim_log_debug(166U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: OCF set.\n");
             }
           {
 #line 109
@@ -10476,14 +10516,14 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
 
       if (!/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$set[sim_node()]) {
           newOcr0 = /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MAXT;
-          sim_log_debug(165U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: no alarm set, set at max.\n");
+          sim_log_debug(167U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: no alarm set, set at max.\n");
         }
       else 
         {
           uint32_t now = /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$Counter$get();
 
 #line 120
-          sim_log_debug(166U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: now-t0 = %llu, dt = %llu\n", now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()], /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]);
+          sim_log_debug(168U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: now-t0 = %llu, dt = %llu\n", now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()], /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]);
 
           if ((uint32_t )(now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()]) >= /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]) 
             {
@@ -10527,7 +10567,7 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
 static void HplAtm128Timer0AsyncP$Compare$set(uint8_t t)
 #line 463
 {
-  sim_log_debug(183U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting compare: %hhu\n", t);
+  sim_log_debug(185U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting compare: %hhu\n", t);
   /* atomic removed: atomic calls only */
 #line 465
   {
@@ -10608,7 +10648,7 @@ static void HplAtm128Timer0AsyncP$configure_overflow(sim_event_t *evt)
   overflowTime += sim_time();
   overflowTime -= (sim_time() - HplAtm128Timer0AsyncP$last_zero()) % (1 << HplAtm128Timer0AsyncP$shiftFromScale());
 
-  sim_log_debug(186U, "HplAtm128Timer0AsyncP", "Scheduling new overflow for %i at time %llu\n", sim_node(), overflowTime);
+  sim_log_debug(188U, "HplAtm128Timer0AsyncP", "Scheduling new overflow for %i at time %llu\n", sim_node(), overflowTime);
 
   evt->time = overflowTime;
 }
@@ -10655,7 +10695,7 @@ static void HplAtm128Timer0AsyncP$configure_compare(sim_event_t *evt)
   phaseOffset %= HplAtm128Timer0AsyncP$clock_to_sim(1 << HplAtm128Timer0AsyncP$shiftFromScale());
   compareTime -= phaseOffset;
 
-  sim_log_debug(175U, "HplAtm128Timer0AsyncP", "Configuring new compare of %i for %i at time %llu  (@ %llu)\n", (int )compareVal, sim_node(), compareTime, sim_time());
+  sim_log_debug(177U, "HplAtm128Timer0AsyncP", "Configuring new compare of %i for %i at time %llu  (@ %llu)\n", (int )compareVal, sim_node(), compareTime, sim_time());
 
   evt->time = compareTime;
 }
@@ -11153,10 +11193,16 @@ static int __nesc_nido_resolve(int __nesc_mote,
   /* Module LedsP */
 
   /* Module BcastC */
-  if (!strcmp(varname, "BcastC$packet"))
+  if (!strcmp(varname, "BcastC$forward_packet"))
   {
-    *addr = (uintptr_t)&BcastC$packet[__nesc_mote];
-    *size = sizeof(BcastC$packet[__nesc_mote]);
+    *addr = (uintptr_t)&BcastC$forward_packet[__nesc_mote];
+    *size = sizeof(BcastC$forward_packet[__nesc_mote]);
+    return 0;
+  }
+  if (!strcmp(varname, "BcastC$source_packet"))
+  {
+    *addr = (uintptr_t)&BcastC$source_packet[__nesc_mote];
+    *size = sizeof(BcastC$source_packet[__nesc_mote]);
     return 0;
   }
   if (!strcmp(varname, "BcastC$busy"))
@@ -11193,6 +11239,12 @@ static int __nesc_nido_resolve(int __nesc_mote,
   {
     *addr = (uintptr_t)&BcastC$index[__nesc_mote];
     *size = sizeof(BcastC$index[__nesc_mote]);
+    return 0;
+  }
+  if (!strcmp(varname, "BcastC$counter"))
+  {
+    *addr = (uintptr_t)&BcastC$counter[__nesc_mote];
+    *size = sizeof(BcastC$counter[__nesc_mote]);
     return 0;
   }
 
@@ -11481,13 +11533,15 @@ static void __nesc_nido_initialise(int __nesc_mote)
   /* Module LedsP */
 
   /* Module BcastC */
-  memset((void *)&BcastC$packet[__nesc_mote], 0, sizeof BcastC$packet[__nesc_mote]);
+  memset((void *)&BcastC$forward_packet[__nesc_mote], 0, sizeof BcastC$forward_packet[__nesc_mote]);
+  memset((void *)&BcastC$source_packet[__nesc_mote], 0, sizeof BcastC$source_packet[__nesc_mote]);
   BcastC$busy[__nesc_mote] = FALSE;
   BcastC$node_id[__nesc_mote] = 0;
   BcastC$seq_num[__nesc_mote] = 0;
   memset((void *)&BcastC$rec_msg[__nesc_mote], 0, sizeof BcastC$rec_msg[__nesc_mote]);
   memset((void *)&BcastC$cache[__nesc_mote], 0, sizeof BcastC$cache[__nesc_mote]);
   BcastC$index[__nesc_mote] = 0;
+  BcastC$counter[__nesc_mote] = 0;
 
   /* Module Atm128AlarmAsyncP$0 */
   memset((void *)&/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$set[__nesc_mote], 0, sizeof /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$set[__nesc_mote]);

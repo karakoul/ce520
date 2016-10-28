@@ -2,7 +2,7 @@ import re
 from collections import defaultdict
 
 messages = []
-numOfNodes = 10
+numOfNodes = 51
 nodes = defaultdict( list )
 totalTransmissions = 0;
 recvMessages = defaultdict( list )
@@ -88,7 +88,7 @@ def printCoverage():
 
     # for each message
     # 
-  # print msg
+  print msg
   print total_message_received/float(len(messages)*numOfNodes)
 
 def printMessages():
