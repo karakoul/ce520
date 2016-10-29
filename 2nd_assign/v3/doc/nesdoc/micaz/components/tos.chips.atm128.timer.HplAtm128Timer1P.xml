@@ -1,0 +1,153 @@
+<?xml version="1.0" ?><component loc="42:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P" safe="">
+      <documentation loc="34:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc">
+        <short>
+ Internal component of the HPL interface to Atmega128 timer 1.</short>
+        <long>
+ Internal component of the HPL interface to Atmega128 timer 1.
+
+ @author Martin Turon &lt;mturon@xbow.com&gt;
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="47:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" name="TimerCtrl" provided="1" ref="0x407fe010">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="TimerCtrl" ref="0x407fe010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128TimerCtrl16" qname="HplAtm128TimerCtrl16"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getInterruptFlag" ref="0x407fe1e8" scoped=""/>
+        <function-ref name="setCtrlCapture" ref="0x407fe2c8" scoped=""/>
+        <function-ref name="getInterruptMask" ref="0x407fe3a8" scoped=""/>
+        <function-ref name="getCtrlCompare" ref="0x407fe488" scoped=""/>
+        <function-ref name="setInterruptMask" ref="0x407fe568" scoped=""/>
+        <function-ref name="setInterruptFlag" ref="0x407fe648" scoped=""/>
+        <function-ref name="getCtrlClock" ref="0x407fe728" scoped=""/>
+        <function-ref name="getCtrlCapture" ref="0x407fe808" scoped=""/>
+        <function-ref name="setCtrlCompare" ref="0x407fe8e8" scoped=""/>
+        <function-ref name="setCtrlClock" ref="0x407fe9c8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="53:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" name="Timer0Ctrl" provided="0" ref="0x4080c010">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Timer0Ctrl" ref="0x4080c010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128TimerCtrl8" qname="HplAtm128TimerCtrl8"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getControl" ref="0x4080c1e8" scoped=""/>
+        <function-ref name="getInterruptFlag" ref="0x4080c2c8" scoped=""/>
+        <function-ref name="getInterruptMask" ref="0x4080c3a8" scoped=""/>
+        <function-ref name="setInterruptMask" ref="0x4080c488" scoped=""/>
+        <function-ref name="setInterruptFlag" ref="0x4080c568" scoped=""/>
+        <function-ref name="setControl" ref="0x4080c648" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" name="CompareA" provided="1" ref="0x407fbbf0">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CompareA" ref="0x407fbbf0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Compare" qname="HplAtm128Compare"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="test" ref="0x407f91a0" scoped=""/>
+        <function-ref name="fired" ref="0x407fa790" scoped=""/>
+        <function-ref name="get" ref="0x407fa278" scoped=""/>
+        <function-ref name="reset" ref="0x407faa08" scoped=""/>
+        <function-ref name="isOn" ref="0x407f9418" scoped=""/>
+        <function-ref name="set" ref="0x407fa4f0" scoped=""/>
+        <function-ref name="start" ref="0x407fac80" scoped=""/>
+        <function-ref name="stop" ref="0x407faef8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="48:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" name="Capture" provided="1" ref="0x407fed00">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Capture" ref="0x407fed00" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Capture" qname="HplAtm128Capture"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="setEdge" ref="0x407fb7b0" scoped=""/>
+        <function-ref name="test" ref="0x407fb2c0" scoped=""/>
+        <function-ref name="get" ref="0x407fd370" scoped=""/>
+        <function-ref name="captured" ref="0x407fd888" scoped=""/>
+        <function-ref name="reset" ref="0x407fdb28" scoped=""/>
+        <function-ref name="isOn" ref="0x407fb538" scoped=""/>
+        <function-ref name="set" ref="0x407fd5e8" scoped=""/>
+        <function-ref name="start" ref="0x407fdda0" scoped=""/>
+        <function-ref name="stop" ref="0x407fb048" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="50:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" name="CompareB" provided="1" ref="0x407f9830">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CompareB" ref="0x407f9830" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Compare" qname="HplAtm128Compare"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="test" ref="0x407f7d90" scoped=""/>
+        <function-ref name="fired" ref="0x407f73b0" scoped=""/>
+        <function-ref name="get" ref="0x407f9e78" scoped=""/>
+        <function-ref name="reset" ref="0x407f7628" scoped=""/>
+        <function-ref name="isOn" ref="0x407f6048" scoped=""/>
+        <function-ref name="set" ref="0x407f7110" scoped=""/>
+        <function-ref name="start" ref="0x407f78a0" scoped=""/>
+        <function-ref name="stop" ref="0x407f7b18" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" name="CompareC" provided="1" ref="0x407f6460">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CompareC" ref="0x407f6460" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Compare" qname="HplAtm128Compare"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="test" ref="0x407f59f0" scoped=""/>
+        <function-ref name="fired" ref="0x407f5010" scoped=""/>
+        <function-ref name="get" ref="0x407f6aa8" scoped=""/>
+        <function-ref name="reset" ref="0x407f5288" scoped=""/>
+        <function-ref name="isOn" ref="0x407f5c68" scoped=""/>
+        <function-ref name="set" ref="0x407f6d20" scoped=""/>
+        <function-ref name="start" ref="0x407f5500" scoped=""/>
+        <function-ref name="stop" ref="0x407f5778" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1P.nc" name="Timer" provided="1" ref="0x407ebc58">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1P" qname="HplAtm128Timer1P"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Timer" ref="0x407ebc58" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Timer" qname="HplAtm128Timer"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="off" ref="0x407ff778" scoped=""/>
+        <function-ref name="test" ref="0x407ff288" scoped=""/>
+        <function-ref name="get" ref="0x407e82e8" scoped=""/>
+        <function-ref name="setScale" ref="0x407ff9f0" scoped=""/>
+        <function-ref name="getScale" ref="0x407ffc90" scoped=""/>
+        <function-ref name="reset" ref="0x407e8a78" scoped=""/>
+        <function-ref name="overflow" ref="0x407e8800" scoped=""/>
+        <function-ref name="isOn" ref="0x407ff500" scoped=""/>
+        <function-ref name="set" ref="0x407e8560" scoped=""/>
+        <function-ref name="start" ref="0x407e8cf0" scoped=""/>
+        <function-ref name="stop" ref="0x407ff010" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

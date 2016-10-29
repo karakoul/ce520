@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Component: tos.platforms.micaz.chips.cc2420.HplCC2420AlarmC</title>
+  </head>
+  <body>
+    <h2>Component: tos.platforms.micaz.chips.cc2420.HplCC2420AlarmC
+    </h2>
+    <b>generic configuration HplCC2420AlarmC()</b>
+    <p>
+ A platform independent abstraction of an asynchronous 32KHz, 16-bit
+ timer for the CC2420. As these timers (the Alarm interface) are
+ usually part of an HAL, they are platform specific. But as the
+ CC2420 needs to be cross-platform, this component bridges between
+ the two, providing a platform-independent abstraction of
+ CC2420-specific Alarm. This is a Atmega128 implementation that
+ uses the Compare1A register.
+
+ 
+    <p>
+    <dl>
+      <dt><b>Author:</b>
+      <dd>
+        Philip Levis
+ 
+      </dd>
+      <dt><b>Version:</b>
+      <dd>
+        $Revision: 1.6 $ $Date: 2010-06-29 22:07:54 $
+
+      </dd>
+    </dl>
+    <p><p><div id=heading>Provides</div><div id=funcsig>interface <a href="../ihtml/tos.lib.timer.Alarm.html">Alarm</a>&lt;T32khz, uint32_t&gt;</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Init.html">Init</a></div><p><div id=heading>Wiring</div><p>
+    <map name="comp">
+      <area shape="rect" id="node2" href="../chtml/tos.platforms.mica.Alarm32khz32C.html" title="Alarm32khz32C" alt="" coords="5,120,163,179">
+
+      <area shape="poly" id="edge2" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint32_t&gt;" alt="" coords="87,54 87,106 81,106 81,54">
+
+      <area shape="rect" id="edge2" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint32_t&gt;" alt="" coords="84,78,249,95">
+
+      <area shape="rect" id="node4" href="../chtml/tos.system.NoInitC.html" title="NoInitC" alt="" coords="241,125,319,173">
+
+      <area shape="poly" id="edge4" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="283,54 283,111 277,111 277,54">
+
+      <area shape="rect" id="edge4" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="280,78,300,95">
+
+    </map>
+    <img src="tos.platforms.micaz.chips.cc2420.HplCC2420AlarmC.png" usemap="#comp" id=imgwiring>
+  </body>
+</html>

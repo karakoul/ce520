@@ -1,0 +1,202 @@
+<?xml version="1.0" ?><component loc="25:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc" nicename="tos.platforms.mica.AlarmCounterMilliP" qname="AlarmCounterMilliP">
+      <documentation loc="11:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc">
+        <short>
+ Configure hardware timer 0 for use as the mica family's millisecond
+ timer.</short>
+        <long>
+ Configure hardware timer 0 for use as the mica family's millisecond
+ timer.  This component does not follow the TEP102 HAL guidelines as
+ there is only one compare register for timer 0, which is used to
+ implement HilTimerMilliC. Hence it isn't useful to expose an
+ AlarmMilliC or CounterMillIC component.
+ 
+ @author David Gay &lt;dgay@intel-research.net&gt;
+ @author Martin Turon &lt;mturon@xbow.com&gt;
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="37:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc">
+          <from><interface-ref name="CounterMilli32" ref="0x40596da0" scoped=""/></from>
+          <to><interface-ref name="Counter" ref="0x40620160" scoped=""/></to>
+        </wire>
+        <wire loc="35:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc">
+          <from><interface-ref name="Init" ref="0x405837d8" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x406232c0" scoped=""/></to>
+        </wire>
+        <wire loc="36:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc">
+          <from><interface-ref name="AlarmMilli32" ref="0x405901c8" scoped=""/></from>
+          <to><interface-ref name="Alarm" ref="0x406236f8" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="29:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc" name="CounterMilli32" provided="1" ref="0x40596da0">
+      <component-ref nicename="tos.platforms.mica.AlarmCounterMilliP" qname="AlarmCounterMilliP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CounterMilli32" ref="0x40596da0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4900"/>
+            <typename><typedef-ref name="TMilli" ref="0x403a4ac8"/></typename>
+          </type-tag>
+          <type-int alignment="I:1" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40213848"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x4058a508" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x4058a9f8" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x4058a780" scoped=""/>
+        <function-ref name="overflow" ref="0x4058ac70" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="27:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc" name="Init" provided="1" ref="0x405837d8">
+      <component-ref nicename="tos.platforms.mica.AlarmCounterMilliP" qname="AlarmCounterMilliP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Init" ref="0x405837d8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x405839b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="28:/opt/tinyos-2.1.2/tos/platforms/mica/AlarmCounterMilliP.nc" name="AlarmMilli32" provided="1" ref="0x405901c8">
+      <component-ref nicename="tos.platforms.mica.AlarmCounterMilliP" qname="AlarmCounterMilliP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="AlarmMilli32" ref="0x405901c8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Alarm" qname="Alarm"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4900"/>
+            <typename><typedef-ref name="TMilli" ref="0x403a4ac8"/></typename>
+          </type-tag>
+          <type-int alignment="I:1" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40213848"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x4058f690" scoped=""/>
+        <function-ref name="fired" ref="0x40590e30" scoped=""/>
+        <function-ref name="startAt" ref="0x4058f350" scoped=""/>
+        <function-ref name="isRunning" ref="0x4058f0d8" scoped=""/>
+        <function-ref name="getAlarm" ref="0x4058f908" scoped=""/>
+        <function-ref name="start" ref="0x40590918" scoped=""/>
+        <function-ref name="stop" ref="0x40590bb8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="25:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc" name="Init" provided="1" ref="0x406232c0">
+      <component-ref nicename="tos.chips.atm128.timer.Atm128AlarmAsyncC" qname="AlarmCounterMilliP.Atm128AlarmAsyncC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Init" ref="0x406232c0" scoped=""/></type-interface>
+      <attribute-value>
+        <attribute-ref name="atleastonce" ref="0x403515d0"/>
+        <value-structured>
+          <type-tag alignment="I:1" size="I:0"><attribute-ref name="atleastonce" ref="0x403515d0"/></type-tag>
+        </value-structured>
+      </attribute-value>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x40623498" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="27:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc" name="Counter" provided="1" ref="0x40620160">
+      <component-ref nicename="tos.chips.atm128.timer.Atm128AlarmAsyncC" qname="AlarmCounterMilliP.Atm128AlarmAsyncC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Counter" ref="0x40620160" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4900"/>
+            <typename><typedef-ref name="TMilli" ref="0x403a4ac8"/></typename>
+          </type-tag>
+          <type-int alignment="I:1" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40213848"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x406208b0" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x40620da0" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x40620b28" scoped=""/>
+        <function-ref name="overflow" ref="0x4061f048" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="26:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc" name="Alarm" provided="1" ref="0x406236f8">
+      <component-ref nicename="tos.chips.atm128.timer.Atm128AlarmAsyncC" qname="AlarmCounterMilliP.Atm128AlarmAsyncC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Alarm" ref="0x406236f8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Alarm" qname="Alarm"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4900"/>
+            <typename><typedef-ref name="TMilli" ref="0x403a4ac8"/></typename>
+          </type-tag>
+          <type-int alignment="I:1" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40213848"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x40621ba0" scoped=""/>
+        <function-ref name="fired" ref="0x40621370" scoped=""/>
+        <function-ref name="startAt" ref="0x40621860" scoped=""/>
+        <function-ref name="isRunning" ref="0x406215e8" scoped=""/>
+        <function-ref name="getAlarm" ref="0x40621e18" scoped=""/>
+        <function-ref name="start" ref="0x40623e48" scoped=""/>
+        <function-ref name="stop" ref="0x406210f8" scoped=""/>
+      </interface-functions>
+    </interface><component loc="23(AlarmCounterMilliP.Atm128AlarmAsyncC):/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc" nicename="tos.chips.atm128.timer.Atm128AlarmAsyncC" qname="AlarmCounterMilliP.Atm128AlarmAsyncC">
+      <documentation loc="11:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+        <short>
+ Build a 32-bit alarm and counter from the atmega128's 8-bit timer 0
+ in asynchronous mode.</short>
+        <long>
+ Build a 32-bit alarm and counter from the atmega128's 8-bit timer 0
+ in asynchronous mode. Attempting to use the generic Atm128AlarmC
+ component and the generic timer components runs into problems
+ apparently related to letting timer 0 overflow.
+ 
+ So, instead, this version (inspired by the 1.x code and a remark from
+ Martin Turon) directly builds a 32-bit alarm and counter on top of timer 0
+ and never lets timer 0 overflow.
+
+ @author David Gay
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.chips.atm128.timer.Atm128AlarmAsyncC" qname="Atm128AlarmAsyncC"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4900"/>
+            <typename><typedef-ref name="TMilli" ref="0x403a4ac8"/></typename>
+          </type-tag>
+          <value cst="I:3">
+            <type-int alignment="I:1" cname="int" size="I:2"/>
+          </value>
+        </arguments>
+      </instance>
+      <configuration/>
+      <wiring>
+        <wire loc="36:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+          <from><interface-ref name="Alarm" ref="0x406236f8" scoped=""/></from>
+          <to><interface-ref name="Alarm" ref="0x40eb3448" scoped=""/></to>
+        </wire>
+        <wire loc="35:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+          <from><interface-ref name="Init" ref="0x406232c0" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x40eb3010" scoped=""/></to>
+        </wire>
+        <wire loc="37:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+          <from><interface-ref name="Counter" ref="0x40620160" scoped=""/></from>
+          <to><interface-ref name="Counter" ref="0x40eb1eb0" scoped=""/></to>
+        </wire>
+        <wire loc="39:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+          <from><interface-ref name="Timer" ref="0x40eaf0c0" scoped=""/></from>
+          <to><interface-ref name="Timer" ref="0x405e0cb0" scoped=""/></to>
+        </wire>
+        <wire loc="40:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+          <from><interface-ref name="TimerCtrl" ref="0x40ee5278" scoped=""/></from>
+          <to><interface-ref name="TimerCtrl" ref="0x405da010" scoped=""/></to>
+        </wire>
+        <wire loc="41:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+          <from><interface-ref name="Compare" ref="0x40ee5aa0" scoped=""/></from>
+          <to><interface-ref name="Compare" ref="0x405da970" scoped=""/></to>
+        </wire>
+        <wire loc="42:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128AlarmAsyncC.nc">
+          <from><interface-ref name="TimerAsync" ref="0x40ee34f0" scoped=""/></from>
+          <to><interface-ref name="TimerAsync" ref="0x405e84f8" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component></referenced></component>

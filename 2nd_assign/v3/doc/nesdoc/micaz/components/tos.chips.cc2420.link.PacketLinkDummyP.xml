@@ -1,0 +1,37 @@
+<?xml version="1.0" ?><component loc="38:/opt/tinyos-2.1.2/tos/chips/cc2420/link/PacketLinkDummyP.nc" nicename="tos.chips.cc2420.link.PacketLinkDummyP" qname="PacketLinkDummyP">
+      <documentation loc="32:/opt/tinyos-2.1.2/tos/chips/cc2420/link/PacketLinkDummyP.nc">
+        <short>
+ Dummy module for Packet Link layer
+ </short>
+        <long>
+ Dummy module for Packet Link layer
+ @author David Moss
+ @author Jon Wyant
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="44:/opt/tinyos-2.1.2/tos/chips/cc2420/link/PacketLinkDummyP.nc" name="PacketAcknowledgements" provided="0" ref="0x40cb2a58">
+      <component-ref nicename="tos.chips.cc2420.link.PacketLinkDummyP" qname="PacketLinkDummyP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="PacketAcknowledgements" ref="0x40cb2a58" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketAcknowledgements" qname="PacketAcknowledgements"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="requestAck" ref="0x40cb2c30" scoped=""/>
+        <function-ref name="noAck" ref="0x40cb2d10" scoped=""/>
+        <function-ref name="wasAcked" ref="0x40cb2df0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="40:/opt/tinyos-2.1.2/tos/chips/cc2420/link/PacketLinkDummyP.nc" name="PacketLink" provided="1" ref="0x40cb22a0">
+      <component-ref nicename="tos.chips.cc2420.link.PacketLinkDummyP" qname="PacketLinkDummyP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="PacketLink" ref="0x40cb22a0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketLink" qname="PacketLink"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getRetryDelay" ref="0x40cb2478" scoped=""/>
+        <function-ref name="setRetries" ref="0x40cb2558" scoped=""/>
+        <function-ref name="getRetries" ref="0x40cb2638" scoped=""/>
+        <function-ref name="setRetryDelay" ref="0x40cb2718" scoped=""/>
+        <function-ref name="wasDelivered" ref="0x40cb27f8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

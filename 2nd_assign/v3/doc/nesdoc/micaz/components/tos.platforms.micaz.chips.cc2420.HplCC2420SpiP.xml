@@ -1,0 +1,56 @@
+<?xml version="1.0" ?><component loc="38:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420SpiP.nc" nicename="tos.platforms.micaz.chips.cc2420.HplCC2420SpiP" qname="HplCC2420SpiP" safe="">
+      <documentation loc="32:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420SpiP.nc">
+        <short>
+ Automatic slave select update for the SpiResource
+
+ </short>
+        <long>
+ Automatic slave select update for the SpiResource
+
+ @author Miklos Maroti
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="45:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420SpiP.nc" name="SS" provided="0" ref="0x40a61488">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420SpiP" qname="HplCC2420SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="SS" ref="0x40a61488" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40a61660" scoped=""/>
+        <function-ref name="isInput" ref="0x40a61740" scoped=""/>
+        <function-ref name="toggle" ref="0x40a61820" scoped=""/>
+        <function-ref name="isOutput" ref="0x40a61900" scoped=""/>
+        <function-ref name="get" ref="0x40a619e0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40a61ac0" scoped=""/>
+        <function-ref name="set" ref="0x40a61ba0" scoped=""/>
+        <function-ref name="clr" ref="0x40a61c80" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="40:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420SpiP.nc" name="Resource" provided="1" ref="0x40a64570">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420SpiP" qname="HplCC2420SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Resource" ref="0x40a64570" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Resource" qname="Resource"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="release" ref="0x40a64748" scoped=""/>
+        <function-ref name="immediateRequest" ref="0x40a64828" scoped=""/>
+        <function-ref name="request" ref="0x40a64908" scoped=""/>
+        <function-ref name="granted" ref="0x40a649e8" scoped=""/>
+        <function-ref name="isOwner" ref="0x40a64ac8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420SpiP.nc" name="SubResource" provided="0" ref="0x40a64d30">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420SpiP" qname="HplCC2420SpiP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="SubResource" ref="0x40a64d30" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Resource" qname="Resource"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="release" ref="0x40a64f08" scoped=""/>
+        <function-ref name="immediateRequest" ref="0x40a61010" scoped=""/>
+        <function-ref name="request" ref="0x40a610f0" scoped=""/>
+        <function-ref name="granted" ref="0x40a611d0" scoped=""/>
+        <function-ref name="isOwner" ref="0x40a612b0" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Component: tos.platforms.mica.Alarm32khz32C</title>
+  </head>
+  <body>
+    <h2>Component: tos.platforms.mica.Alarm32khz32C
+    </h2>
+    <b>generic configuration Alarm32khz32C()</b>
+    <p>
+ 32-bit 32kHz Alarm component as per TEP102 HAL guidelines. The mica
+ family 32kHz Alarm is built on hardware timer 1, and actually runs at
+ CPU frequency / 256. You can use the MeasureClockC.cyclesPerJiffy()
+ command to figure out the exact frequency.
+ <p>
+ Upto three of these alarms can be created (one per hardware compare
+ register). Note that creating one of these Alarms consumes a 16-bit
+ 32kHz Alarm (see Alarm32khz16C).
+
+ 
+    <p>
+    <dl>
+      <dt><b>Author:</b>
+      <dd>
+        David Gay &lt;dgay@intel-research.net&gt;
+
+      </dd>
+    </dl>
+    <p><p><div id=heading>Provides</div><div id=funcsig>interface <a href="../ihtml/tos.lib.timer.Alarm.html">Alarm</a>&lt;T32khz, uint32_t&gt;</div><p><div id=heading>Wiring</div><p>
+    <map name="comp">
+      <area shape="rect" id="node2" href="../chtml/tos.lib.timer.TransformAlarmC.html" title="TransformAlarmC\n(Transform32)" alt="" coords="89,120,247,171">
+
+      <area shape="poly" id="edge2" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint32_t&gt;" alt="" coords="171,53 171,106 165,106 165,53">
+
+      <area shape="rect" id="edge2" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint32_t&gt;" alt="" coords="168,78,333,95">
+
+      <area shape="rect" id="node3" href="../chtml/tos.platforms.mica.AlarmOne16C.html" title="AlarmOne16C\n(Alarm16)" alt="" coords="5,237,147,299">
+
+      <area shape="poly" id="edge4" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;TOne, uint16_t&gt;" alt="" coords="103,173 80,196 74,209 72,224 67,223 69,208 75,193 99,169">
+
+      <area shape="rect" id="edge4" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;TOne, uint16_t&gt;" alt="" coords="77,195,231,213">
+
+      <area shape="rect" id="node4" href="../chtml/tos.platforms.mica.Counter32khz32C.html" title="Counter32khz32C" alt="" coords="173,239,347,297">
+
+      <area shape="poly" id="edge6" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;T32khz, uint32_t&gt;" alt="" coords="209,169 233,193 250,224 245,227 229,196 205,173">
+
+      <area shape="rect" id="edge6" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;T32khz, uint32_t&gt;" alt="" coords="241,195,420,213">
+
+    </map>
+    <img src="tos.platforms.mica.Alarm32khz32C.png" usemap="#comp" id=imgwiring>
+  </body>
+</html>

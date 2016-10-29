@@ -1,0 +1,3 @@
+COMPONENT=SimpleFloodingAppC
+include $(MAKERULES)
+
