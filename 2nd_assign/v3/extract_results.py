@@ -2,9 +2,9 @@ import re
 from collections import defaultdict
 
 messages = []
-numOfNodes = 17
+numOfNodes = 0
 nodes = defaultdict( list )
-totalTransmissions = 0;
+totalTransmissions = 0
 recvMessages = defaultdict( list )
 
 class Message():
@@ -13,6 +13,8 @@ class Message():
       self.srcID = srcID
       self.seqNo = seqNo
       self.transmissions = 1
+      self.firstSent = ""
+      self.lastRcv = ""
 
   def __hash__( self ):
     return hash( ( self.srcID, self.seqNo ) )
@@ -22,6 +24,12 @@ class Message():
 
   def __ne__( self, other ):
     return not ( self == other )
+
+  def setFirstSent( self, time ):
+  	self.firstSent = time
+
+  def setLastReceived( self, time ):
+  	self.lastRcv = time
 
   def incrTransmissions( self ):
     self.transmissions += 1
@@ -40,7 +48,25 @@ class Message():
 
   def printMsg( self ):
     print "SourceID: " + str( self.srcID ) + " SeqNo: " + str( self.seqNo ) + " Transmitted: " + str( self.transmissions )
+    print "First sent: " + self.firstSent
+    print "Last Recv: " + self.lastRcv
 
+  def getLatency( self ):
+  	match = re.search( r'([0-9]+):([0-9]+):([0-9.]+)', self.firstSent, re.M | re.I )
+  	
+  	if ( match ):
+  		firstSentNs = int( match.group(1) ) * 3600 + int( match.group(2) ) * 60 + float( match.group(3) )
+  	else:
+  		return
+
+  	match = re.search( r'([0-9]+):([0-9]+):([0-9.]+)', self.lastRcv, re.M | re.I )
+  	
+  	if ( match ):
+  		lastRcvNs = int( match.group(1) ) * 3600 + int( match.group(2) ) * 60 + float( match.group(3) )
+  	else:
+  		return
+  	
+  	print "Latency: " + str( lastRcvNs - firstSentNs )
 
 
 def printTotalTransmissions():
@@ -68,10 +94,12 @@ def printActualPerNodeTransmissions():
 
 
 def printAveragePerNodeTransmissions():
-  print "Average per node transmissions"
+	print "============= Average per node transmissions ============="
+	print "Average per node transmissions: " + str( totalTransmissions / float( numOfNodes ) )
+	print "============= Average per node transmissions =============\n"    
 
 def printCoverage():
-  total_message_received = 0
+  totalMsgsRecv = 0
   msg = "\n============= Coverage =============\n"
   for message in messages:
     nodeRecv = 0
@@ -83,13 +111,15 @@ def printCoverage():
         nodeRecv += 1
         recvBy.append( node )
 
-    total_message_received += nodeRecv
+    totalMsgsRecv += nodeRecv
     msg += str( nodeRecv ) + "/" + str( numOfNodes ) + " nodes  Received by: " + str( recvBy ) + "\n" 
 
-    # for each message
-    # 
+  msg += "\n===================================="
+  msg += "\nTotal Coverage Percentage: " + str( 100.0 * totalMsgsRecv / float ( len( messages ) * numOfNodes ) ) + "%"
+  msg += "\n============= Coverage =============\n"
+
   print msg
-  print total_message_received/float(len(messages)*numOfNodes)
+
 
 def printMessages():
   msg = "\n============= Messages =============\n"
@@ -136,6 +166,35 @@ def handleSend( nodeID, send ):
      nodes[ nodeID ].get( nodeID )[ idx ].incrTransmissions()
 
 
+def calcLatency():
+	f = open( 'results.txt', 'r' )
+	messageList = []
+
+	for line in f:
+		match = re.search( r'DEBUG \((\d+)\): (\w+) (\d+) (\d+), time: ([0-9:.]+)', line, re.M | re.I ) # finds SEND message
+
+		if ( match ):
+			srcID = match.group(3)
+  			seqNo = match.group(4)
+  			msg = Message( srcID, seqNo )
+  			time = match.group(5)
+
+  			if ( match.group(2).startswith( "send" ) ):
+  				msg.setFirstSent( time )
+  				if ( msg not in messageList ):
+  					messageList.append( msg )
+  			elif ( match.group(2).startswith( "receive" ) ):
+  				msg.setLastReceived( time )
+  				if ( msg not in messageList ):
+  					messageList.append( msg )
+  				else:
+  					idx = messageList.index( msg )
+  					messageList[idx].setLastReceived( time )
+  				
+
+  	messageList[idx].getLatency()
+
+
 # fileName = raw_input( "Give the fileName: " )
 fileName = 'results.txt'
 fd = open( fileName, 'r' )
@@ -161,10 +220,13 @@ for line in fd:
   if ( recv ):
     handleReceive( nodeID, recv )
 
+fd.close()
+
 printActualPerNodeTransmissions() 
 printTotalTransmissions()
-#printAveragePerNodeTransmissions()
-print "Coverage (number of nodes that received a given message)"
+printAveragePerNodeTransmissions()
 printCoverage()
 print "Minimum, average and maximum message latency"
-printMessages()
+# search the file for the 1st occurence of a message, and search the file for the last occur of each message
+#printMessages()
+calcLatency()
