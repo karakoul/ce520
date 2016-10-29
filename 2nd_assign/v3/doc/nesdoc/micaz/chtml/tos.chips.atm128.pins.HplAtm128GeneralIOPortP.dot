@@ -1,0 +1,26 @@
+digraph "tos.chips.atm128.pins.HplAtm128GeneralIOPortP" {
+  n0x40431740 [shape=ellipse, style=filled, label="Pin2", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit2" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit2)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  n0x40439660 [shape=ellipse, style=filled, label="Pin5", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit5" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit5)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  n0x40432348 [shape=ellipse, style=filled, label="Pin0", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit0" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit0)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  n0x40430200 [shape=ellipse, style=filled, label="Pin3", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit3" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit3)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  n0x40438060 [shape=ellipse, style=filled, label="Pin6", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit6" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit6)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  n0x40432d30 [shape=ellipse, style=filled, label="Pin1", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit1" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit1)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  n0x40430be8 [shape=ellipse, style=filled, label="Pin4", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit4" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit4)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  n0x40438a48 [shape=ellipse, style=filled, label="Pin7", fontsize=12];
+  "HplAtm128GeneralIOPortP.Bit7" [fontsize=12, shape=box, style=dashed, label="HplAtm128GeneralIOPinP\n(Bit7)", URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOPinP.html"];
+  "n0x40431740" -> "HplAtm128GeneralIOPortP.Bit2" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "n0x40439660" -> "HplAtm128GeneralIOPortP.Bit5" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "n0x40432348" -> "HplAtm128GeneralIOPortP.Bit0" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "n0x40430200" -> "HplAtm128GeneralIOPortP.Bit3" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "n0x40438060" -> "HplAtm128GeneralIOPortP.Bit6" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "n0x40432d30" -> "HplAtm128GeneralIOPortP.Bit1" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "n0x40430be8" -> "HplAtm128GeneralIOPortP.Bit4" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "n0x40438a48" -> "HplAtm128GeneralIOPortP.Bit7" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+}

@@ -1,0 +1,6 @@
+<area shape="rect" id="node2" href="../chtml/tos.platforms.mica.Alarm32khz32C.html" title="Alarm32khz32C" alt="" coords="5,120,163,179">
+<area shape="poly" id="edge2" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint32_t&gt;" alt="" coords="87,54 87,106 81,106 81,54">
+<area shape="rect" id="edge2" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint32_t&gt;" alt="" coords="84,78,249,95">
+<area shape="rect" id="node4" href="../chtml/tos.system.NoInitC.html" title="NoInitC" alt="" coords="241,125,319,173">
+<area shape="poly" id="edge4" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="283,54 283,111 277,111 277,54">
+<area shape="rect" id="edge4" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="280,78,300,95">

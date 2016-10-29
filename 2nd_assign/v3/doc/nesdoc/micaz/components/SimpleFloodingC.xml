@@ -1,0 +1,182 @@
+<?xml version="1.0" ?><component loc="46:SimpleFloodingC.nc" nicename="SimpleFloodingC" qname="SimpleFloodingC">
+      <documentation loc="1:SimpleFloodingC.nc">
+        <short>
+ Assignment 2
+
+ Develop an algorithm/mechanism for a best-effort network-wide broadcast.</short>
+        <long>
+ Assignment 2
+
+ Develop an algorithm/mechanism for a best-effort network-wide broadcast.
+ The approach is to propagate a packet to nodes using simple flooding. 
+ For each broadcast, the system should, eventually, reach a steady silent state where nodes stop transmitting packets. 
+ To achieve this, duplicate packets should be handled appropriately.
+ Your mechanism should also try to avoid collisions that might occur 
+ if two or more nodes that are in range of each other attempt to transmit a packet simultaneously. 
+ This is especially important given that the radio support of the sensor nodes is rather simple 
+ (there are no sophisticated collision detection/avoidance schemes).
+
+ Evaluate your algorithm in TOSSIM for different network topologies (chain, tree, grid), different number of nodes, 
+ and different number of concurrent sources. Use an application issues a broadcast periodically. 
+ For each case, record (i) the actual per-node transmissions, (ii) the total number of transmissions, 
+ (iii) the average per-node transmissions, (iv) the coverage (number of nodes that received a given message), 
+ and (v) the minimum, average and maximum message latency.
+ 
+ Develop a simple application that uses the mechanism to propagate to the network every message it receives over the serial port
+ 
+ Staging
+
+ 1. Develop and test your flooding mechanism using TOSSIM
+ 2. Develop code that receives a packet from the serial port
+ 3. Add code to transmit the received packet via the broadcast mechanism
+ 4. Add your flooding algorithm 
+
+ Hints
+
+ Read carefully the radio communication tutorial
+ Think how to use the LEDs of the nodes in order to visualize the state of the system during real trials, 
+ in a practical way that is easy to observe.
+ Try to see how well randomness works vs more deterministic back-off algorithms.
+ Note that when using TOSSIM all nodes will run the same code/firmware. 
+ Node-specific behavior in the simulations can be achieved by introducing branches in the code, based on the local node identifier.
+ 
+ @author Apostolos Tsaousis
+ @author Katerina Karakoula
+ @date   October 28 2016
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="54:SimpleFloodingC.nc" name="AMControl" provided="0" ref="0x40509338">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="AMControl" ref="0x40509338" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x40509510" scoped=""/>
+        <function-ref name="stopDone" ref="0x405095f0" scoped=""/>
+        <function-ref name="start" ref="0x405096d0" scoped=""/>
+        <function-ref name="stop" ref="0x405097b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="53:SimpleFloodingC.nc" name="Boot" provided="0" ref="0x404ffea0">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Boot" ref="0x404ffea0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Boot" qname="Boot"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="booted" ref="0x404fa0c0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="55:SimpleFloodingC.nc" name="Packet" provided="0" ref="0x405379d0">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Packet" ref="0x405379d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40537ba8" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40537c88" scoped=""/>
+        <function-ref name="getPayload" ref="0x40537d68" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40537e48" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40537f28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="57:SimpleFloodingC.nc" name="AMSend" provided="0" ref="0x40548380">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="AMSend" ref="0x40548380" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40548558" scoped=""/>
+        <function-ref name="getPayload" ref="0x40548638" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40548718" scoped=""/>
+        <function-ref name="cancel" ref="0x405487f8" scoped=""/>
+        <function-ref name="sendDone" ref="0x405488d8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="76:SimpleFloodingC.nc" name="init" provided="0" ref="0x4053be18">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="init" ref="0x4053be18" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TaskBasic" qname="TaskBasic"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="postTask" ref="0x40547010" scoped=""/>
+        <function-ref name="runTask" ref="0x405470f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="56:SimpleFloodingC.nc" name="Receive" provided="0" ref="0x40541d50">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Receive" ref="0x40541d50" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40541f28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="52:SimpleFloodingC.nc" name="Leds" provided="0" ref="0x404ff298">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Leds" ref="0x404ff298" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x404ff470" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x404ff550" scoped=""/>
+        <function-ref name="led1On" ref="0x404ff630" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x404ff710" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x404ff7f0" scoped=""/>
+        <function-ref name="get" ref="0x404ff8d0" scoped=""/>
+        <function-ref name="led1Off" ref="0x404ff9b0" scoped=""/>
+        <function-ref name="led2Off" ref="0x404ffd30" scoped=""/>
+        <function-ref name="set" ref="0x404ffa90" scoped=""/>
+        <function-ref name="led0On" ref="0x404ffb70" scoped=""/>
+        <function-ref name="led2On" ref="0x404ffc50" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="50:SimpleFloodingC.nc" name="Forward" provided="0" ref="0x404f4c10">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Forward" ref="0x404f4c10" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4900"/>
+            <typename><typedef-ref name="TMilli" ref="0x403a4ac8"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x404ec730" scoped=""/>
+        <function-ref name="fired" ref="0x404ed9b0" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x404ec0f0" scoped=""/>
+        <function-ref name="isOneShot" ref="0x404ede60" scoped=""/>
+        <function-ref name="getdt" ref="0x404ecbe0" scoped=""/>
+        <function-ref name="gett0" ref="0x404ec988" scoped=""/>
+        <function-ref name="isRunning" ref="0x404edc08" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x404ed258" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x404ec410" scoped=""/>
+        <function-ref name="startOneShot" ref="0x404ed4d8" scoped=""/>
+        <function-ref name="stop" ref="0x404ed758" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:SimpleFloodingC.nc" name="Broadcast" provided="0" ref="0x404f2010">
+      <component-ref nicename="SimpleFloodingC" qname="SimpleFloodingC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Broadcast" ref="0x404f2010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:2"><struct-ref ref="0x403a4900"/>
+            <typename><typedef-ref name="TMilli" ref="0x403a4ac8"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x404fcb00" scoped=""/>
+        <function-ref name="fired" ref="0x404f2d90" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x404fc4c0" scoped=""/>
+        <function-ref name="isOneShot" ref="0x404fc268" scoped=""/>
+        <function-ref name="getdt" ref="0x404fb010" scoped=""/>
+        <function-ref name="gett0" ref="0x404fcd58" scoped=""/>
+        <function-ref name="isRunning" ref="0x404fc010" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x404f2638" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x404fc7e0" scoped=""/>
+        <function-ref name="startOneShot" ref="0x404f28b8" scoped=""/>
+        <function-ref name="stop" ref="0x404f2b38" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

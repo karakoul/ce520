@@ -1,0 +1,11 @@
+digraph "tos.platforms.micaz.MotePlatformC" {
+  n0x403f6878 [shape=ellipse, style=filled, label="PlatformInit", fontsize=12];
+  "MotePlatformP" [fontsize=12, shape=box, URL="../chtml/tos.platforms.micaz.MotePlatformP.html"];
+  "MotePlatformP" [fontsize=12, shape=box, URL="../chtml/tos.platforms.micaz.MotePlatformP.html"];
+  "HplAtm128GeneralIOC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.chips.atm128.pins.HplAtm128GeneralIOC.html"];
+  "MotePlatformP" [fontsize=12, shape=box, URL="../chtml/tos.platforms.micaz.MotePlatformP.html"];
+  n0x403f6c48 [shape=ellipse, style=filled, label="SubInit", fontsize=12];
+  "n0x403f6878" -> "MotePlatformP" [label="Init", URL="../ihtml/tos.interfaces.Init.html", fontsize=10];
+  "MotePlatformP" -> "HplAtm128GeneralIOC" [label="GeneralIO", URL="../ihtml/tos.interfaces.GeneralIO.html", fontsize=10];
+  "MotePlatformP" -> "n0x403f6c48" [label="Init", URL="../ihtml/tos.interfaces.Init.html", fontsize=10];
+}

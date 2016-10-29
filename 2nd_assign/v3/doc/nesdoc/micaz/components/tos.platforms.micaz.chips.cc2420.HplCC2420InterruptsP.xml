@@ -1,0 +1,57 @@
+<?xml version="1.0" ?><component loc="45:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc" nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP" qname="HplCC2420InterruptsP" safe="">
+      <documentation loc="32:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc">
+        <short>
+ MicaZ implementation of the CC2420 interrupts.</short>
+        <long>
+ MicaZ implementation of the CC2420 interrupts. FIFOP is a real
+ interrupt, while CCA and FIFO are emulated through timer polling.
+ &lt;pre&gt;
+  $Id: HplCC2420InterruptsP.nc,v 1.6 2008-06-26 04:39:12 regehr Exp $
+ &lt;pre&gt;
+
+ @author Philip Levis
+ @author Matt Miller
+ @author David Moss
+ @version @version $Revision: 1.6 $ $Date: 2008-06-26 04:39:12 $
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="51:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc" name="CC_CCA" provided="0" ref="0x4093a250">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP" qname="HplCC2420InterruptsP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CC_CCA" ref="0x4093a250" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x4093a428" scoped=""/>
+        <function-ref name="isInput" ref="0x4093a508" scoped=""/>
+        <function-ref name="toggle" ref="0x4093a5e8" scoped=""/>
+        <function-ref name="isOutput" ref="0x4093a6c8" scoped=""/>
+        <function-ref name="get" ref="0x4093a7a8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x4093a888" scoped=""/>
+        <function-ref name="set" ref="0x4093a968" scoped=""/>
+        <function-ref name="clr" ref="0x4093aa48" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="47:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc" name="CCA" provided="1" ref="0x4091fb80">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP" qname="HplCC2420InterruptsP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CCA" ref="0x4091fb80" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioInterrupt" qname="GpioInterrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x4091fd58" scoped=""/>
+        <function-ref name="disable" ref="0x4091fe38" scoped=""/>
+        <function-ref name="enableFallingEdge" ref="0x4091ff18" scoped=""/>
+        <function-ref name="enableRisingEdge" ref="0x4093a010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="69:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc" name="CCATask" provided="0" ref="0x40938ac0">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP" qname="HplCC2420InterruptsP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CCATask" ref="0x40938ac0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TaskBasic" qname="TaskBasic"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="postTask" ref="0x40938c98" scoped=""/>
+        <function-ref name="runTask" ref="0x40938d78" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

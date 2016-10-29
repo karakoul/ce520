@@ -1,0 +1,18 @@
+<area shape="rect" id="node2" href="../chtml/tos.chips.atm128.timer.Atm128GpioCaptureC.html" title="Atm128GpioCaptureC\n(CaptureSFDC)" alt="" coords="5,120,197,171">
+<area shape="poly" id="edge2" href="../ihtml/tos.interfaces.GpioCapture.html" title="GpioCapture" alt="" coords="104,53 104,106 99,106 99,53">
+<area shape="rect" id="edge2" href="../ihtml/tos.interfaces.GpioCapture.html" title="GpioCapture" alt="" coords="101,78,183,95">
+<area shape="rect" id="node7" href="../chtml/tos.chips.atm128.timer.HplAtm128Timer1C.html" title="HplAtm128Timer1C" alt="" coords="9,237,193,296">
+<area shape="poly" id="edge8" href="../ihtml/tos.chips.atm128.timer.HplAtm128Capture.html" title="HplAtm128Capture&lt;uint16_t&gt;" alt="" coords="104,171 104,224 99,224 99,171">
+<area shape="rect" id="edge8" href="../ihtml/tos.chips.atm128.timer.HplAtm128Capture.html" title="HplAtm128Capture&lt;uint16_t&gt;" alt="" coords="101,195,299,213">
+<area shape="rect" id="node4" href="../chtml/tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP.html" title="HplCC2420InterruptsP" alt="" coords="231,121,428,169">
+<area shape="poly" id="edge4" href="../ihtml/tos.interfaces.GpioInterrupt.html" title="GpioInterrupt" alt="" coords="332,53 332,108 327,108 327,53">
+<area shape="rect" id="edge4" href="../ihtml/tos.interfaces.GpioInterrupt.html" title="GpioInterrupt" alt="" coords="329,78,415,95">
+<area shape="rect" id="node9" href="../chtml/tos.platforms.micaz.chips.cc2420.HplCC2420PinsC.html" title="HplCC2420PinsC" alt="" coords="248,237,411,296">
+<area shape="poly" id="edge12" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="332,170 332,223 327,223 327,170">
+<area shape="rect" id="edge12" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="329,195,393,213">
+<area shape="rect" id="node6" href="../chtml/tos.chips.atm128.pins.Atm128GpioInterruptC.html" title="Atm128GpioInterruptC\n(InterruptFIFOPC)" alt="" coords="452,120,652,171">
+<area shape="poly" id="edge6" href="../ihtml/tos.interfaces.GpioInterrupt.html" title="GpioInterrupt" alt="" coords="555,53 555,106 549,106 549,53">
+<area shape="rect" id="edge6" href="../ihtml/tos.interfaces.GpioInterrupt.html" title="GpioInterrupt" alt="" coords="552,78,637,95">
+<area shape="rect" id="node8" href="../chtml/tos.chips.atm128.pins.HplAtm128InterruptC.html" title="HplAtm128InterruptC" alt="" coords="452,237,652,296">
+<area shape="poly" id="edge10" href="../ihtml/tos.chips.atm128.pins.HplAtm128Interrupt.html" title="HplAtm128Interrupt" alt="" coords="555,171 555,224 549,224 549,171">
+<area shape="rect" id="edge10" href="../ihtml/tos.chips.atm128.pins.HplAtm128Interrupt.html" title="HplAtm128Interrupt" alt="" coords="552,195,680,213">

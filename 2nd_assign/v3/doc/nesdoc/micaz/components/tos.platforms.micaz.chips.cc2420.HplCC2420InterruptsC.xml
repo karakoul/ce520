@@ -1,0 +1,441 @@
+<?xml version="1.0" ?><component loc="37:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc" nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsC" qname="HplCC2420InterruptsC">
+      <documentation loc="32:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc">
+        <short>
+ </short>
+        <long>
+ @author Jonathan Hui &lt;jhui@archrock.com&gt;
+ @version $Revision: 1.5 $ $Date: 2007-04-30 17:31:08 $
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="49:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc">
+          <from><interface-ref name="CaptureSFD" ref="0x408e37f0" scoped=""/></from>
+          <to><interface-ref name="Capture" ref="0x408e2ad0" scoped=""/></to>
+        </wire>
+        <wire loc="59:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc">
+          <from><interface-ref name="InterruptCCA" ref="0x408e3ef0" scoped=""/></from>
+          <to><interface-ref name="CCA" ref="0x4091fb80" scoped=""/></to>
+        </wire>
+        <wire loc="54:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc">
+          <from><interface-ref name="InterruptFIFOP" ref="0x408c9618" scoped=""/></from>
+          <to><interface-ref name="Interrupt" ref="0x408f08e0" scoped=""/></to>
+        </wire>
+        <wire loc="50:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc">
+          <from><interface-ref name="Atm128Capture" ref="0x408e0220" scoped=""/></from>
+          <to><interface-ref name="Capture" ref="0x407e0010" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc">
+          <from><interface-ref name="Atm128Interrupt" ref="0x408f0ed8" scoped=""/></from>
+          <to><interface-ref name="Int6" ref="0x408fb6f8" scoped=""/></to>
+        </wire>
+        <wire loc="60:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc">
+          <from><interface-ref name="CC_CCA" ref="0x4093a250" scoped=""/></from>
+          <to><interface-ref name="CCA" ref="0x408d4270" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="39:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc" name="CaptureSFD" provided="1" ref="0x408e37f0">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsC" qname="HplCC2420InterruptsC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CaptureSFD" ref="0x408e37f0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioCapture" qname="GpioCapture"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="captureFallingEdge" ref="0x408e39c8" scoped=""/>
+        <function-ref name="disable" ref="0x408e3aa8" scoped=""/>
+        <function-ref name="captured" ref="0x408e3b88" scoped=""/>
+        <function-ref name="captureRisingEdge" ref="0x408e3c68" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="40:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc" name="InterruptCCA" provided="1" ref="0x408e3ef0">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsC" qname="HplCC2420InterruptsC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="InterruptCCA" ref="0x408e3ef0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioInterrupt" qname="GpioInterrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x408c90e0" scoped=""/>
+        <function-ref name="disable" ref="0x408c91c0" scoped=""/>
+        <function-ref name="enableFallingEdge" ref="0x408c92a0" scoped=""/>
+        <function-ref name="enableRisingEdge" ref="0x408c9380" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="41:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsC.nc" name="InterruptFIFOP" provided="1" ref="0x408c9618">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsC" qname="HplCC2420InterruptsC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="InterruptFIFOP" ref="0x408c9618" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioInterrupt" qname="GpioInterrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x408c97f0" scoped=""/>
+        <function-ref name="disable" ref="0x408c98d0" scoped=""/>
+        <function-ref name="enableFallingEdge" ref="0x408c99b0" scoped=""/>
+        <function-ref name="enableRisingEdge" ref="0x408c9a90" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="8:/opt/tinyos-2.1.2/tos/chips/atm128/pins/Atm128GpioInterruptC.nc" name="Interrupt" provided="1" ref="0x408f08e0">
+      <component-ref nicename="tos.chips.atm128.pins.Atm128GpioInterruptC" qname="HplCC2420InterruptsC.InterruptFIFOPC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Interrupt" ref="0x408f08e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioInterrupt" qname="GpioInterrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x408f0ab8" scoped=""/>
+        <function-ref name="disable" ref="0x408f0b98" scoped=""/>
+        <function-ref name="enableFallingEdge" ref="0x408f0c78" scoped=""/>
+        <function-ref name="enableRisingEdge" ref="0x408f0d58" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc" name="Capture" provided="1" ref="0x408e2ad0">
+      <component-ref nicename="tos.chips.atm128.timer.Atm128GpioCaptureC" qname="HplCC2420InterruptsC.CaptureSFDC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Capture" ref="0x408e2ad0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioCapture" qname="GpioCapture"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="captureFallingEdge" ref="0x408e2ca8" scoped=""/>
+        <function-ref name="disable" ref="0x408e2d88" scoped=""/>
+        <function-ref name="captured" ref="0x408e2e68" scoped=""/>
+        <function-ref name="captureRisingEdge" ref="0x408e0010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="85:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc" name="CCA" provided="1" ref="0x408d4270">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420PinsC" qname="HplCC2420PinsC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CCA" ref="0x408d4270" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x408d4448" scoped=""/>
+        <function-ref name="isInput" ref="0x408d4528" scoped=""/>
+        <function-ref name="toggle" ref="0x408d4608" scoped=""/>
+        <function-ref name="isOutput" ref="0x408d46e8" scoped=""/>
+        <function-ref name="get" ref="0x408d47c8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x408d48a8" scoped=""/>
+        <function-ref name="set" ref="0x408d4988" scoped=""/>
+        <function-ref name="clr" ref="0x408d4a68" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="9:/opt/tinyos-2.1.2/tos/chips/atm128/pins/Atm128GpioInterruptC.nc" name="Atm128Interrupt" provided="0" ref="0x408f0ed8">
+      <component-ref nicename="tos.chips.atm128.pins.Atm128GpioInterruptC" qname="HplCC2420InterruptsC.InterruptFIFOPC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Atm128Interrupt" ref="0x408f0ed8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.pins.HplAtm128Interrupt" qname="HplAtm128Interrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x408e50c0" scoped=""/>
+        <function-ref name="fired" ref="0x408e51a0" scoped=""/>
+        <function-ref name="disable" ref="0x408e5280" scoped=""/>
+        <function-ref name="edge" ref="0x408e5360" scoped=""/>
+        <function-ref name="enable" ref="0x408e5440" scoped=""/>
+        <function-ref name="getValue" ref="0x408e5520" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc" name="CC_CCA" provided="0" ref="0x4093a250">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP" qname="HplCC2420InterruptsP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CC_CCA" ref="0x4093a250" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x4093a428" scoped=""/>
+        <function-ref name="isInput" ref="0x4093a508" scoped=""/>
+        <function-ref name="toggle" ref="0x4093a5e8" scoped=""/>
+        <function-ref name="isOutput" ref="0x4093a6c8" scoped=""/>
+        <function-ref name="get" ref="0x4093a7a8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x4093a888" scoped=""/>
+        <function-ref name="set" ref="0x4093a968" scoped=""/>
+        <function-ref name="clr" ref="0x4093aa48" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="47:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc" name="Capture" provided="1" ref="0x407e0010">
+      <component-ref nicename="tos.chips.atm128.timer.HplAtm128Timer1C" qname="HplAtm128Timer1C"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Capture" ref="0x407e0010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Capture" qname="HplAtm128Capture"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="setEdge" ref="0x407efa88" scoped=""/>
+        <function-ref name="test" ref="0x407ef598" scoped=""/>
+        <function-ref name="get" ref="0x407e0658" scoped=""/>
+        <function-ref name="captured" ref="0x407e0b70" scoped=""/>
+        <function-ref name="reset" ref="0x407e0e10" scoped=""/>
+        <function-ref name="isOn" ref="0x407ef810" scoped=""/>
+        <function-ref name="set" ref="0x407e08d0" scoped=""/>
+        <function-ref name="start" ref="0x407ef0a8" scoped=""/>
+        <function-ref name="stop" ref="0x407ef320" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc" name="Int6" provided="1" ref="0x408fb6f8">
+      <component-ref nicename="tos.chips.atm128.pins.HplAtm128InterruptC" qname="HplAtm128InterruptC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Int6" ref="0x408fb6f8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.pins.HplAtm128Interrupt" qname="HplAtm128Interrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x408fb8d0" scoped=""/>
+        <function-ref name="fired" ref="0x408fb9b0" scoped=""/>
+        <function-ref name="disable" ref="0x408fba90" scoped=""/>
+        <function-ref name="edge" ref="0x408fbb70" scoped=""/>
+        <function-ref name="enable" ref="0x408fbc50" scoped=""/>
+        <function-ref name="getValue" ref="0x408fbd30" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="47:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc" name="CCA" provided="1" ref="0x4091fb80">
+      <component-ref nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP" qname="HplCC2420InterruptsP"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="CCA" ref="0x4091fb80" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioInterrupt" qname="GpioInterrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x4091fd58" scoped=""/>
+        <function-ref name="disable" ref="0x4091fe38" scoped=""/>
+        <function-ref name="enableFallingEdge" ref="0x4091ff18" scoped=""/>
+        <function-ref name="enableRisingEdge" ref="0x4093a010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc" name="Atm128Capture" provided="0" ref="0x408e0220">
+      <component-ref nicename="tos.chips.atm128.timer.Atm128GpioCaptureC" qname="HplCC2420InterruptsC.CaptureSFDC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Atm128Capture" ref="0x408e0220" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Capture" qname="HplAtm128Capture"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="setEdge" ref="0x408d7ca0" scoped=""/>
+        <function-ref name="test" ref="0x408d77b0" scoped=""/>
+        <function-ref name="get" ref="0x408e0868" scoped=""/>
+        <function-ref name="captured" ref="0x408e0d80" scoped=""/>
+        <function-ref name="reset" ref="0x408d7048" scoped=""/>
+        <function-ref name="isOn" ref="0x408d7a28" scoped=""/>
+        <function-ref name="set" ref="0x408e0ae0" scoped=""/>
+        <function-ref name="start" ref="0x408d72c0" scoped=""/>
+        <function-ref name="stop" ref="0x408d7538" scoped=""/>
+      </interface-functions>
+    </interface><component loc="40(HplCC2420InterruptsC.CaptureSFDC):/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc" nicename="tos.chips.atm128.timer.Atm128GpioCaptureC" qname="HplCC2420InterruptsC.CaptureSFDC">
+      <documentation loc="35:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc">
+        <short>
+ Expose capture capability as a GpioCapture interface from TEP117.</short>
+        <long>
+ Expose capture capability as a GpioCapture interface from TEP117.
+
+ @author Martin Turon, Crossbow &lt;mturon@xbow.com&gt;
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.chips.atm128.timer.Atm128GpioCaptureC" qname="Atm128GpioCaptureC"/>
+      </instance>
+      <module/>
+    </component><component loc="83:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc" nicename="tos.platforms.micaz.chips.cc2420.HplCC2420PinsC" qname="HplCC2420PinsC">
+      <documentation loc="70:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+        <short>
+ Mapping the CC2420 pins to Atmega128 pins for the micaZ platform.</short>
+        <long>
+ Mapping the CC2420 pins to Atmega128 pins for the micaZ platform.
+ Information on the function of these pins can be found on pages
+ 14-15 of the CC2420 datasheet (rev 1.2).
+
+ &lt;pre&gt;
+ $Id: HplCC2420PinsC.nc,v 1.6 2010-06-29 22:07:54 scipio Exp $
+ &lt;/pre&gt;
+
+ @author Philip Levis
+ @version $Revision: 1.6 $ $Date: 2010-06-29 22:07:54 $
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="101:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+          <from><interface-ref name="FIFO" ref="0x408d3660" scoped=""/></from>
+          <to><interface-ref name="PortB7" ref="0x40414210" scoped=""/></to>
+        </wire>
+        <wire loc="102:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+          <from><interface-ref name="FIFOP" ref="0x408d1068" scoped=""/></from>
+          <to><interface-ref name="PortE6" ref="0x40423ce8" scoped=""/></to>
+        </wire>
+        <wire loc="103:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+          <from><interface-ref name="RSTN" ref="0x408d1a50" scoped=""/></from>
+          <to><interface-ref name="PortA6" ref="0x404104b0" scoped=""/></to>
+        </wire>
+        <wire loc="100:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+          <from><interface-ref name="CSN" ref="0x408d4c48" scoped=""/></from>
+          <to><interface-ref name="PortB0" ref="0x4040f8e0" scoped=""/></to>
+        </wire>
+        <wire loc="105:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+          <from><interface-ref name="VREN" ref="0x408d0e78" scoped=""/></from>
+          <to><interface-ref name="PortA5" ref="0x40411a98" scoped=""/></to>
+        </wire>
+        <wire loc="99:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+          <from><interface-ref name="CCA" ref="0x408d4270" scoped=""/></from>
+          <to><interface-ref name="PortD6" ref="0x4041ec08" scoped=""/></to>
+        </wire>
+        <wire loc="104:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420PinsC.nc">
+          <from><interface-ref name="SFD" ref="0x408d0490" scoped=""/></from>
+          <to><interface-ref name="PortD4" ref="0x4041f750" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="41:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc" nicename="tos.chips.atm128.timer.HplAtm128Timer1C" qname="HplAtm128Timer1C">
+      <documentation loc="34:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+        <short>
+ HPL interface to Atmega128 timer 1.</short>
+        <long>
+ HPL interface to Atmega128 timer 1.
+
+ @author Martin Turon &lt;mturon@xbow.com&gt;
+ @author David Gay &lt;dgay@intel-research.net&gt;
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="56:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+          <from><interface-ref name="TimerCtrl" ref="0x407dc208" scoped=""/></from>
+          <to><interface-ref name="TimerCtrl" ref="0x407fe010" scoped=""/></to>
+        </wire>
+        <wire loc="57:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+          <from><interface-ref name="Capture" ref="0x407e0010" scoped=""/></from>
+          <to><interface-ref name="Capture" ref="0x407fed00" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+          <from><interface-ref name="Timer" ref="0x407e52f0" scoped=""/></from>
+          <to><interface-ref name="Timer" ref="0x407ebc58" scoped=""/></to>
+        </wire>
+        <wire loc="59:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+          <from><interface-ref name="Compare" ref="0x407ee1b0" scoped=""/>
+          <arguments>
+            <value cst="I:0">
+              <type-int alignment="I:1" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </from>
+          <to><interface-ref name="CompareA" ref="0x407fbbf0" scoped=""/></to>
+        </wire>
+        <wire loc="60:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+          <from><interface-ref name="Compare" ref="0x407ee1b0" scoped=""/>
+          <arguments>
+            <value cst="I:1">
+              <type-int alignment="I:1" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </from>
+          <to><interface-ref name="CompareB" ref="0x407f9830" scoped=""/></to>
+        </wire>
+        <wire loc="61:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+          <from><interface-ref name="Compare" ref="0x407ee1b0" scoped=""/>
+          <arguments>
+            <value cst="I:2">
+              <type-int alignment="I:1" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </from>
+          <to><interface-ref name="CompareC" ref="0x407f6460" scoped=""/></to>
+        </wire>
+        <wire loc="63:/opt/tinyos-2.1.2/tos/chips/atm128/timer/HplAtm128Timer1C.nc">
+          <from><interface-ref name="Timer0Ctrl" ref="0x4080c010" scoped=""/></from>
+          <to><interface-ref name="TimerCtrl" ref="0x405da010" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="6(HplCC2420InterruptsC.InterruptFIFOPC):/opt/tinyos-2.1.2/tos/chips/atm128/pins/Atm128GpioInterruptC.nc" nicename="tos.chips.atm128.pins.Atm128GpioInterruptC" qname="HplCC2420InterruptsC.InterruptFIFOPC">
+      <documentation loc="3:/opt/tinyos-2.1.2/tos/chips/atm128/pins/Atm128GpioInterruptC.nc">
+        <short>
+ </short>
+        <long>
+ @author Phil Levis
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.chips.atm128.pins.Atm128GpioInterruptC" qname="Atm128GpioInterruptC"/>
+      </instance>
+      <module/>
+    </component><component loc="41:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc" nicename="tos.chips.atm128.pins.HplAtm128InterruptC" qname="HplAtm128InterruptC">
+      <documentation loc="36:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+        <short>
+ Component providing access to all external interrupt pins on ATmega128.</short>
+        <long>
+ Component providing access to all external interrupt pins on ATmega128.
+ @author Martin Turon &lt;mturon@xbow.com&gt;
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="77:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int6" ref="0x408fb6f8" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x40926840" scoped=""/></to>
+        </wire>
+        <wire loc="72:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int1" ref="0x408feaf0" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x40914e68" scoped=""/></to>
+        </wire>
+        <wire loc="75:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int4" ref="0x408fc5d8" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x4092a408" scoped=""/></to>
+        </wire>
+        <wire loc="78:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int7" ref="0x408fa010" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x40924a08" scoped=""/></to>
+        </wire>
+        <wire loc="73:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int2" ref="0x408fd418" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x40911010" scoped=""/></to>
+        </wire>
+        <wire loc="76:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int5" ref="0x408fce58" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x409285e8" scoped=""/></to>
+        </wire>
+        <wire loc="71:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int0" ref="0x408fe270" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x408f8cf0" scoped=""/></to>
+        </wire>
+        <wire loc="74:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="Int3" ref="0x408fdc98" scoped=""/></from>
+          <to><interface-ref name="Irq" ref="0x4090f228" scoped=""/></to>
+        </wire>
+        <wire loc="80:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x40902510" scoped=""/></from>
+          <to><interface-ref name="IntSig0" ref="0x408f7b50" scoped=""/></to>
+        </wire>
+        <wire loc="81:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x40913630" scoped=""/></from>
+          <to><interface-ref name="IntSig1" ref="0x408f6010" scoped=""/></to>
+        </wire>
+        <wire loc="82:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x409117c8" scoped=""/></from>
+          <to><interface-ref name="IntSig2" ref="0x408f6488" scoped=""/></to>
+        </wire>
+        <wire loc="83:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x4090f9e0" scoped=""/></from>
+          <to><interface-ref name="IntSig3" ref="0x408f6900" scoped=""/></to>
+        </wire>
+        <wire loc="84:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x4092abc0" scoped=""/></from>
+          <to><interface-ref name="IntSig4" ref="0x408f6d78" scoped=""/></to>
+        </wire>
+        <wire loc="85:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x40928da0" scoped=""/></from>
+          <to><interface-ref name="IntSig5" ref="0x408f52b0" scoped=""/></to>
+        </wire>
+        <wire loc="86:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x40925010" scoped=""/></from>
+          <to><interface-ref name="IntSig6" ref="0x408f5728" scoped=""/></to>
+        </wire>
+        <wire loc="87:/opt/tinyos-2.1.2/tos/chips/atm128/pins/HplAtm128InterruptC.nc">
+          <from><interface-ref name="IrqSignal" ref="0x40923270" scoped=""/></from>
+          <to><interface-ref name="IntSig7" ref="0x408f5ba0" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="45:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc" nicename="tos.platforms.micaz.chips.cc2420.HplCC2420InterruptsP" qname="HplCC2420InterruptsP" safe="">
+      <documentation loc="32:/opt/tinyos-2.1.2/tos/platforms/micaz/chips/cc2420/HplCC2420InterruptsP.nc">
+        <short>
+ MicaZ implementation of the CC2420 interrupts.</short>
+        <long>
+ MicaZ implementation of the CC2420 interrupts. FIFOP is a real
+ interrupt, while CCA and FIFO are emulated through timer polling.
+ &lt;pre&gt;
+  $Id: HplCC2420InterruptsP.nc,v 1.6 2008-06-26 04:39:12 regehr Exp $
+ &lt;pre&gt;
+
+ @author Philip Levis
+ @author Matt Miller
+ @author David Moss
+ @version @version $Revision: 1.6 $ $Date: 2008-06-26 04:39:12 $
+</long>
+      </documentation>
+      <module/>
+    </component></referenced></component>

@@ -1,0 +1,48 @@
+<?xml version="1.0" ?><component abstract="" loc="40:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc" nicename="tos.chips.atm128.timer.Atm128GpioCaptureC" qname="Atm128GpioCaptureC" safe="">
+      <documentation loc="35:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc">
+        <short>
+ Expose capture capability as a GpioCapture interface from TEP117.</short>
+        <long>
+ Expose capture capability as a GpioCapture interface from TEP117.
+
+ @author Martin Turon, Crossbow &lt;mturon@xbow.com&gt;
+</long>
+      </documentation>
+      <parameters>
+      </parameters>
+      <module/>
+    <specification><interface loc="42:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc" name="Capture" provided="1" ref="0x408c8660">
+      <component-ref nicename="tos.chips.atm128.timer.Atm128GpioCaptureC" qname="Atm128GpioCaptureC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Capture" ref="0x408c8660" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioCapture" qname="GpioCapture"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="captureFallingEdge" ref="0x408c8838" scoped=""/>
+        <function-ref name="disable" ref="0x408c8918" scoped=""/>
+        <function-ref name="captured" ref="0x408c89f8" scoped=""/>
+        <function-ref name="captureRisingEdge" ref="0x408c8ad8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/chips/atm128/timer/Atm128GpioCaptureC.nc" name="Atm128Capture" provided="0" ref="0x408c8e70">
+      <component-ref nicename="tos.chips.atm128.timer.Atm128GpioCaptureC" qname="Atm128GpioCaptureC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Atm128Capture" ref="0x408c8e70" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.atm128.timer.HplAtm128Capture" qname="HplAtm128Capture"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned short" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x402131e8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="setEdge" ref="0x408dd908" scoped=""/>
+        <function-ref name="test" ref="0x408dd418" scoped=""/>
+        <function-ref name="get" ref="0x408df4d8" scoped=""/>
+        <function-ref name="captured" ref="0x408df9f0" scoped=""/>
+        <function-ref name="reset" ref="0x408dfc90" scoped=""/>
+        <function-ref name="isOn" ref="0x408dd690" scoped=""/>
+        <function-ref name="set" ref="0x408df750" scoped=""/>
+        <function-ref name="start" ref="0x408dff08" scoped=""/>
+        <function-ref name="stop" ref="0x408dd1a0" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

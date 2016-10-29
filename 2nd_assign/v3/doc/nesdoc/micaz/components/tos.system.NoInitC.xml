@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><component loc="16:/opt/tinyos-2.1.2/tos/system/NoInitC.nc" nicename="tos.system.NoInitC" qname="NoInitC" safe="">
+      <documentation loc="10:/opt/tinyos-2.1.2/tos/system/NoInitC.nc">
+        <short>
+ A do-nothing Init implementation.</short>
+        <long>
+ A do-nothing Init implementation. Useful for implementing components whose
+ specification has an Init, but whose implementation doesn't need one.
+
+ @author David Gay &lt;david.e.gay@intel.com&gt;
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="18:/opt/tinyos-2.1.2/tos/system/NoInitC.nc" name="Init" provided="1" ref="0x408bc798">
+      <component-ref nicename="tos.system.NoInitC" qname="NoInitC"/>
+      <type-interface alignment="I:1" size="I:2"><interface-ref name="Init" ref="0x408bc798" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x408bc970" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>
