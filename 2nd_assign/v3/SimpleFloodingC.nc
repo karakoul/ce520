@@ -60,11 +60,13 @@ module SimpleFloodingC
     interface Boot;
     interface SplitControl as AMControl;
     interface Packet;
-    interface Receive;
+    interface Receive as Rec;
+    interface Receive as SerialRec;
     interface AMSend;
 #ifdef SIMPLE_FLOODING_BUTTON
-	interface Get<button_state_t>;
-	interface Notify<button_state_t>;
+	  interface Get<button_state_t>;
+	  interface Notify<button_state_t>;
+    interface AMPacket;
 #endif
   }
 }
@@ -130,7 +132,7 @@ implementation
     }
   }
 
-  event message_t* Receive.receive( message_t* msg, void* payload, uint8_t len )
+  event message_t* Rec.receive( message_t* msg, void* payload, uint8_t len )
   {
     if ( len != sizeof( bcast_msg_t ) )
     {
@@ -264,10 +266,6 @@ implementation
 
         broadcastBusy = TRUE;
       }
-      
-	  call Leds.led0Off();
-call Leds.led1Off();
-call Leds.led2Off();
       if ( broadcasts == MAX_BROADCASTS )
       {
         call Broadcast.stop();
@@ -292,6 +290,57 @@ call Leds.led2Off();
 			broadcastBusy = TRUE;
 		}
 	} 
+event message_t* SerialRec.receive( message_t* msg, void* payload, uint8_t len ) {
+    if ( len != sizeof( bcast_msg_t ) )
+    {
+      return msg;
+    }
+    else
+    {
+      int i;
+      bcast_msg_t* recvMsg;
+      recvMsg = ( bcast_msg_t * ) payload;
+     call Leds.led1Toggle();
+
+      dbg("Receive", "receive %d %d, time: %s\n", recvMsg->sourceID, recvMsg->seqNo, sim_time_string());
+
+
+      if ( recvMsg->sourceID == nodeID )
+      {
+        dbg( "Debug", "Discard\n" );
+        return msg;
+      }
+
+      for ( i = 0; i < MAX_CACHE_SIZE; i++ )
+      {
+        if ( ( cache[i].sourceID == recvMsg->sourceID ) && ( cache[i].seqNo >= recvMsg->seqNo ) )
+        {
+          dbg( "Debug", "Discard\n" );
+          return msg;
+        }
+
+      }
+
+      cache[ index ] = *recvMsg;
+      dbg( "Debug", "Cache[%d]: %d:%d\n", index, cache[index].sourceID, cache[index].seqNo );
+      if(recvMsg->sourceID == 1){
+      call Leds.led0Toggle();
+      } else if(recvMsg->sourceID == 2){
+        call Leds.led1Toggle();
+      }
+      else{
+        call Leds.led2Toggle();
+      }
+
+        index = ( index + 1 ) % MAX_CACHE_SIZE;
+
+        dbg( "SimpleFloodingC", "Received Message with sourceID: %d and seqNo: %d\n", recvMsg->sourceID, recvMsg->seqNo );
+
+        call Forward.startOneShot( nodeID * BROADCAST_PERIOD_MILLI );
+
+        return msg;
+      }
+}
 #endif
 }
 

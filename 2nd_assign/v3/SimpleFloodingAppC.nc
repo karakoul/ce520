@@ -57,6 +57,15 @@ implementation
 	components UserButtonC;
 	App.Get -> UserButtonC;
 	App.Notify -> UserButtonC;
+	
+	components SerialActiveMessageC;
+  	components new SerialAMSenderC( AM_ID );
+  	components new SerialAMReceiverC( AM_ID );
+	App.Packet -> SerialAMSenderC;
+  	App.AMPacket -> SerialAMSenderC;
+ 	App.AMSend -> SerialAMSenderC;
+  	App.AMControl -> SerialActiveMessageC;
+  	App.SerialRec -> SerialAMReceiverC;
 	#endif
 	
 	#ifndef SIMPLE_FLOODING_BUTTON
@@ -68,7 +77,7 @@ implementation
 
 	App.Forward -> Forward;
 	App.Leds -> LedsC;
-	App.Receive -> AMReceiverC;
+	App.Rec -> AMReceiverC;
 	App.AMSend -> AMSenderC;
 	App.AMControl -> ActiveMessageC;
 	App.Packet -> AMSenderC;
