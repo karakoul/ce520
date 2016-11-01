@@ -4099,7 +4099,7 @@ error_t error);
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40bdc730, 
+am_id_t arg_0x40be09f8, 
 # 103 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4112,7 +4112,7 @@ error_t error);
 # 75 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$send(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40bdfca0, 
+uint8_t arg_0x40be0010, 
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4126,7 +4126,7 @@ uint8_t len);
 #line 100
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40bdfca0, 
+uint8_t arg_0x40be0010, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4814,14 +4814,14 @@ static void SimpleFloodingC$Forward$startOneShot(uint32_t dt);
 static void SimpleFloodingC$Broadcast$startPeriodic(uint32_t dt);
 #line 78
 static void SimpleFloodingC$Broadcast$stop(void );
-# 76 "SimpleFloodingC.nc"
+# 87 "SimpleFloodingC.nc"
 enum SimpleFloodingC$__nesc_unnamed4333 {
-#line 76
+#line 87
   SimpleFloodingC$init = 3U
 };
-#line 76
+#line 87
 typedef int SimpleFloodingC$__nesc_sillytask_init[SimpleFloodingC$init];
-#line 64
+#line 75
 bcast_msg_t SimpleFloodingC$cache[1000][5];
 uint16_t SimpleFloodingC$nodeID[1000];
 uint16_t SimpleFloodingC$seqNo[1000];
@@ -4835,25 +4835,19 @@ message_t SimpleFloodingC$forwardPacket[1000];
 
 
 static inline void SimpleFloodingC$init$runTask(void );
-#line 89
+#line 100
 static inline void SimpleFloodingC$Boot$booted(void );
-
-
-
-
-
-
-
+#line 112
 static inline void SimpleFloodingC$AMControl$startDone(error_t error);
-#line 116
+#line 133
 static inline message_t *SimpleFloodingC$Receive$receive(message_t *msg, void *payload, uint8_t len);
-#line 160
+#line 177
 static inline void SimpleFloodingC$AMControl$stopDone(error_t error);
 
 static void SimpleFloodingC$AMSend$sendDone(message_t *msg, error_t error);
-#line 179
+#line 196
 static inline void SimpleFloodingC$Forward$fired(void );
-#line 210
+#line 228
 static inline void SimpleFloodingC$Broadcast$fired(void );
 # 46 "/opt/tinyos-2.1.2/tos/interfaces/GeneralIO.nc"
 static void LedsP$Led0$makeOutput(void );
@@ -5326,7 +5320,7 @@ static inline void /*SimpleFloodingAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueue
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40bdc730, 
+am_id_t arg_0x40be09f8, 
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -5343,7 +5337,7 @@ uint8_t len);
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40bdfca0, 
+uint8_t arg_0x40be0010, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -5854,7 +5848,7 @@ inline static void SimpleFloodingC$Forward$startOneShot(uint32_t dt){
 #line 73
 }
 #line 73
-# 116 "SimpleFloodingC.nc"
+# 133 "SimpleFloodingC.nc"
 static inline message_t *SimpleFloodingC$Receive$receive(message_t *msg, void *payload, uint8_t len)
 {
   if (len != sizeof(bcast_msg_t )) 
@@ -5866,7 +5860,7 @@ static inline message_t *SimpleFloodingC$Receive$receive(message_t *msg, void *p
       int i;
       bcast_msg_t *recvMsg;
 
-#line 126
+#line 143
       recvMsg = (bcast_msg_t *)payload;
 
       sim_log_debug(150U, "Receive", "receive %d %d, time: %s\n", __nesc_ntoh_uint16(recvMsg->sourceID.nxdata), __nesc_ntoh_uint16(recvMsg->seqNo.nxdata), sim_time_string());
@@ -6183,12 +6177,13 @@ inline static void SimpleFloodingC$Broadcast$startPeriodic(uint32_t dt){
 #line 64
 }
 #line 64
-# 97 "SimpleFloodingC.nc"
+# 112 "SimpleFloodingC.nc"
 static inline void SimpleFloodingC$AMControl$startDone(error_t error)
 {
   if (error == SUCCESS) 
     {
       SimpleFloodingC$nodeID[sim_node()] = TOS_NODE_ID;
+
 
       sim_log_debug(149U, "Debug", "nodeID: %d\n", SimpleFloodingC$nodeID[sim_node()]);
 
@@ -6198,6 +6193,7 @@ static inline void SimpleFloodingC$AMControl$startDone(error_t error)
         }
     }
   else 
+
     {
       SimpleFloodingC$AMControl$start();
     }
@@ -6218,9 +6214,9 @@ static inline void TossimPacketModelC$startDoneTask$runTask(void )
   TossimPacketModelC$Control$startDone(SUCCESS);
 }
 
-# 160 "SimpleFloodingC.nc"
+# 177 "SimpleFloodingC.nc"
 static inline void SimpleFloodingC$AMControl$stopDone(error_t error)
-#line 160
+#line 177
 {
 }
 
@@ -6315,7 +6311,7 @@ static inline void TossimPacketModelC$sendDoneTask$runTask(void )
   TossimPacketModelC$Packet$sendDone(msg, TossimPacketModelC$running[sim_node()] ? SUCCESS : EOFF);
 }
 
-# 76 "SimpleFloodingC.nc"
+# 87 "SimpleFloodingC.nc"
 static inline void SimpleFloodingC$init$runTask(void )
 {
   int i;
@@ -6529,9 +6525,9 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone
 }
 
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
-inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0x40bdfca0, message_t * msg, error_t error){
+inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0x40be0010, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x40bdfca0) {
+  switch (arg_0x40be0010) {
 #line 100
     case 0U:
 #line 100
@@ -6541,7 +6537,7 @@ inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t
 #line 100
     default:
 #line 100
-      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0x40bdfca0, msg, error);
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0x40be0010, msg, error);
 #line 100
       break;
 #line 100
@@ -6663,13 +6659,13 @@ inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$errorTask$postTask
 }
 #line 67
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
-inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0x40bdc730, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0x40be09f8, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0x40bdc730, addr, msg, len);
+  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0x40be09f8, addr, msg, len);
 #line 80
 
 #line 80
@@ -7512,7 +7508,7 @@ inline static void * SimpleFloodingC$Packet$getPayload(message_t * msg, uint8_t 
 #line 126
 }
 #line 126
-# 179 "SimpleFloodingC.nc"
+# 196 "SimpleFloodingC.nc"
 static inline void SimpleFloodingC$Forward$fired(void )
 {
   if (SimpleFloodingC$forwardBusy[sim_node()] == TRUE) 
@@ -7554,7 +7550,7 @@ inline static void SimpleFloodingC$Broadcast$stop(void ){
 #line 78
 }
 #line 78
-# 210 "SimpleFloodingC.nc"
+# 228 "SimpleFloodingC.nc"
 static inline void SimpleFloodingC$Broadcast$fired(void )
 {
   if (SimpleFloodingC$broadcastBusy[sim_node()] == TRUE) 
@@ -8458,11 +8454,15 @@ inline static error_t SimpleFloodingC$init$postTask(void ){
 #line 67
 }
 #line 67
-# 89 "SimpleFloodingC.nc"
+# 100 "SimpleFloodingC.nc"
 static inline void SimpleFloodingC$Boot$booted(void )
 {
 
   SimpleFloodingC$init$postTask();
+
+
+
+
 
   SimpleFloodingC$AMControl$start();
 }
@@ -10288,7 +10288,7 @@ static bool SimSchedulerBasicP$Scheduler$runNextTask(void )
   return TRUE;
 }
 
-# 162 "SimpleFloodingC.nc"
+# 179 "SimpleFloodingC.nc"
 static void SimpleFloodingC$AMSend$sendDone(message_t *msg, error_t error)
 {
   if (&SimpleFloodingC$broadcastPacket[sim_node()] == msg) 
@@ -10298,7 +10298,7 @@ static void SimpleFloodingC$AMSend$sendDone(message_t *msg, error_t error)
       SimpleFloodingC$broadcastBusy[sim_node()] = FALSE;
     }
   else {
-#line 170
+#line 187
     if (&SimpleFloodingC$forwardPacket[sim_node()] == msg) 
       {
         sim_log_debug(156U, "Debug", "Fwd Sent done %s\n", sim_time_string());
