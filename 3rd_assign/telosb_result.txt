@@ -1,0 +1,5 @@
+nesc1: warning: calls to Packet.payloadLength in SimpleFloodingC fan out, but there is no combine function specified for the return type
+nesc1: warning: calls to Packet.getPayload in SimpleFloodingC fan out, but there is no combine function specified for the return type
+nesc1: warning: calls to Packet.maxPayloadLength in SimpleFloodingC fan out, but there is no combine function specified for the return type
+nesc1: warning: calls to AMSend.getPayload in SimpleFloodingC fan out, but there is no combine function specified for the return type
+nesc1: warning: calls to AMSend.maxPayloadLength in SimpleFloodingC fan out, but there is no combine function specified for the return type
