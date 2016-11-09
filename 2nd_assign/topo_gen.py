@@ -36,10 +36,13 @@ if(topo_type == '2'):
 		nodes[i].append(i+1)
 		nodes[i+1].append(i)
 
-#graph
+#grid
 if(topo_type == '3'):
 	for i in range(1,num_nodes+1):
-		num_of_neighbors = randint(1,num_nodes+1)
+		if(num_nodes>4):
+			num_of_neighbors = 4
+		else:
+			num_of_neighbors = num_nodes-1
 		for j in range(num_of_neighbors):
 			neighbor = i
 			while neighbor==i:
