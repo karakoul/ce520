@@ -5,7 +5,7 @@ configuration QueryPropagationAppC
 
 implementation
 {
-	components MainC, QueryPropagationC as App;
+	components MainC, QueryPropagationC as App, LedsC;
 	components new TimerMilliC() as QueryTimer;
 	components new TimerMilliC() as ForwardQueryTimer;
 	components new TimerMilliC() as SensorTimer;
@@ -15,8 +15,20 @@ implementation
 
 	components new DemoSensorC();
 
-	App.Boot -> MainC.Boot;
+#ifdef QUERY_SERIAL
+	components SerialActiveMessageC;
+  	components new SerialAMSenderC( AM_ID );
+  	components new SerialAMReceiverC( AM_ID );
+	
+	App.Packet -> SerialAMSenderC;
+  	App.AMPacket -> SerialAMSenderC;
+ 	App.AMSend -> SerialAMSenderC;
+  	App.AMControl -> SerialActiveMessageC;
+  	App.SerialRec -> SerialAMReceiverC;
+#endif
 
+	App.Boot -> MainC.Boot;
+	App.Leds -> LedsC;
 	App.QueryTimer -> QueryTimer;
 	App.ForwardQueryTimer -> ForwardQueryTimer;
 	App.SensorTimer -> SensorTimer;
@@ -27,4 +39,5 @@ implementation
 	App.AMPacket -> AMSenderC;
 
 	App.Read -> DemoSensorC;
+
 }

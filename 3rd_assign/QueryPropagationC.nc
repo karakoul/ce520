@@ -1,4 +1,5 @@
 #include "QueryPropagation.h"
+#define QUERY_SERIAL
 
 module QueryPropagationC
 {
@@ -14,6 +15,12 @@ module QueryPropagationC
     interface AMSend;
     interface Receive;
     interface Read<uint16_t>;
+    interface Leds;
+
+#ifdef QUERY_SERIAL
+    interface Timer<TMilli> as Broadcast;
+    interface Receive as SerialRec;
+#endif
   }
 }
 
@@ -56,9 +63,11 @@ implementation
       nodeID = TOS_NODE_ID;
 
       // for simulation purposes only
+#ifndef QUERY_SERIAL
       if(nodeID == 1){
         call QueryTimer.startOneShot( 1000 );
       }
+#endif
 
     }
     else
@@ -104,7 +113,38 @@ implementation
 
   }
 
-   event void ForwardQueryTimer.fired()
+#ifdef QUERY_SERIAL
+  event void Broadcast.fired()
+  {
+
+  }
+
+  event message_t* SerialRec.receive( message_t* msg, void* payload, uint8_t len )
+  {
+    if ( len != sizeof( query_t ) )
+    {
+      return msg;
+    }
+    else
+    {
+      int i;
+      query_t* recvMsg;
+      recvMsg = ( query_t * ) payload;
+
+      cache[ index ] = *recvMsg;
+
+      index = ( index + 1 ) % MAX_CACHE_SIZE;
+      
+      call ForwardQueryTimer.startOneShot( nodeID * BROADCAST_PERIOD_MILLI );
+
+      call Leds.led0Toggle();
+
+      return msg;
+    }
+  }
+#endif
+
+  event void ForwardQueryTimer.fired()
   {
     if ( broadcastBusy == TRUE && forwardBusy == TRUE )
     {
@@ -124,7 +164,6 @@ implementation
 
       if ( call AMSend.send( AM_BROADCAST_ADDR, &fwdQueryPacket, sizeof( query_t ) ) == SUCCESS )
       {
-        //dbg( "Debug", "Send %s\n", sim_time_string() );
         dbg("Query", "Query Forward %d %d, time: %s\n", broadcastQuery->sensorID, broadcastQuery->seqNo, sim_time_string());
         forwardBusy = TRUE;
         fwdIndex = ( fwdIndex + 1 ) % MAX_CACHE_SIZE;
@@ -188,6 +227,12 @@ implementation
 
   event message_t* Receive.receive( message_t* msg, void* payload, uint8_t len )
   {
+    if ( len == sizeof( aggregation_none_t ) )
+    {
+      call Leds.led1Toggle();
+      return msg;
+    }
+
     if ( len != sizeof( query_t ) ) // check if type is aggregationType
     {
        dbg( "Query", "RECEIVED\n");
