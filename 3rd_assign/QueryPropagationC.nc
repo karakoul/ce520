@@ -1,5 +1,5 @@
 #include "QueryPropagation.h"
-#define QUERY_SERIAL
+//#define QUERY_SERIAL
 
 module QueryPropagationC
 {
@@ -8,6 +8,7 @@ module QueryPropagationC
     interface Timer<TMilli> as QueryTimer;
     interface Timer<TMilli> as ForwardQueryTimer;
     interface Timer<TMilli> as SensorTimer;
+    interface Timer<TMilli> as ResultTimer;
     interface Boot;
     interface SplitControl as AMControl;
     interface Packet;
@@ -29,6 +30,7 @@ implementation
   message_t queryPacket;
   message_t fwdQueryPacket;
   message_t nonePacket;
+  message_t resultPacket;
   uint16_t seqNo;
   bool broadcastBusy;
   bool forwardBusy;
@@ -37,6 +39,11 @@ implementation
   uint16_t index;
   uint16_t fwdIndex;
   bool sensorState[3];
+  /*none_t*/
+  none_t results[MAX_CACHE_SIZE];
+  uint16_t parent;
+  uint16_t noneIndex;
+  uint16_t noneFwdIndex;
 
   event void Boot.booted()
   {
@@ -47,10 +54,28 @@ implementation
     fwdIndex = 0;
     broadcastBusy = FALSE;
     forwardBusy = FALSE;
+    parent = 0;
+    noneIndex = 0;
+    noneFwdIndex = 0;
 
     for( i = 0; i < 3; i++ )
     {
       sensorState[i] = FALSE;
+    }
+    for( i = 0; i < MAX_CACHE_SIZE; i++ )
+    {
+      cache[i].sensorID = 0;
+      cache[i].seqNo = 0;
+      cache[i].sensorT = 0;
+      cache[i].samplingPeriod = 0;
+      cache[i].lifeTime = 0;
+      cache[i].aggregationMode = 0;
+      cache[i].currentPeriod = 0;
+      cache[i].address = 0;
+
+      results[i].sensorID = 0;
+      results[i].sensorValue = 0;
+      results[i].iterPeriod = 0;
     }
 
     call AMControl.start();
@@ -104,6 +129,9 @@ implementation
     dbg("Query", "Sender address %d\n", query->address);
 
     // seqNo++;
+    cache[index] = *query;
+    index = ( index + 1 ) % MAX_CACHE_SIZE;
+    call SensorTimer.startPeriodic(query->samplingPeriod);
 
     if ( call AMSend.send( AM_BROADCAST_ADDR, &queryPacket, sizeof( query_t ) ) == SUCCESS )
     {
@@ -130,14 +158,14 @@ implementation
       int i;
       query_t* recvMsg;
       recvMsg = ( query_t * ) payload;
-
+      
+      recvMsg->address = call AMPacket.address();
       cache[ index ] = *recvMsg;
 
       index = ( index + 1 ) % MAX_CACHE_SIZE;
       
       call ForwardQueryTimer.startOneShot( nodeID * BROADCAST_PERIOD_MILLI );
 
-      call Leds.led0Toggle();
 
       return msg;
     }
@@ -159,7 +187,6 @@ implementation
       {
         return;
       }
-
       *broadcastQuery = cache[ fwdIndex ];
 
       if ( call AMSend.send( AM_BROADCAST_ADDR, &fwdQueryPacket, sizeof( query_t ) ) == SUCCESS )
@@ -175,9 +202,11 @@ implementation
   event void SensorTimer.fired()
   {
     //metrhsh
+
     call Read.read();
 
     cache[0].lifeTime -= cache[0].samplingPeriod;
+    cache[0].currentPeriod += 1;
     dbg("Lifetime", "New lifetime = %d \n", cache[0].lifeTime);
 
     if( cache[0].lifeTime < cache[0].samplingPeriod )
@@ -189,33 +218,58 @@ implementation
 
   event void Read.readDone(error_t result, uint16_t data) 
   {
-//    dbg("Brightness", "Check %d \n", data);
+    //dbg("Brightness", "Check %d \n", data);
     if(result == SUCCESS) 
     {
-      aggregation_none_t *resultMsg = ( aggregation_none_t * ) call Packet.getPayload( &nonePacket, sizeof( aggregation_none_t ) );;
 
-      resultMsg->sensorID = nodeID;
-      resultMsg->sensorValue = data;
-      resultMsg->iterPeriod = 0;
+      none_t *resultMsg = ( none_t * ) call Packet.getPayload( &nonePacket, sizeof( none_t ) );;
+      
 
-      if ( call AMSend.send( cache[0].address, &nonePacket, sizeof( aggregation_none_t ) ) == SUCCESS )
+      resultMsg->sensorID = cache[0].sensorID;
+      resultMsg->sensorValue = data+nodeID;
+      resultMsg->iterPeriod = cache[0].currentPeriod;
+
+      if ( call AMSend.send( cache[0].address, &nonePacket, sizeof( none_t ) ) == SUCCESS )
       {
         dbg( "Query", "Results Send: Type = %d, Time: %s\n", resultMsg->sensorValue, sim_time_string() );
         broadcastBusy = TRUE;
       }
 
     }
-    else 
+    
+    
+  }
+  event void ResultTimer.fired()
+  {
+    if ( broadcastBusy == TRUE && forwardBusy == TRUE )
     {
+      call ResultTimer.startOneShot( nodeID * BROADCAST_PERIOD_MILLI );
       return;
     }
-    
-    
+    else
+    {
+      none_t* sendResult = ( none_t * ) call Packet.getPayload( &resultPacket, sizeof( none_t ) );
+
+      if ( sendResult == NULL )
+      {
+        return;
+      }
+      *sendResult = results[ noneFwdIndex ];
+
+      if ( call AMSend.send( parent, &resultPacket, sizeof( none_t ) ) == SUCCESS )
+      {
+        dbg("Query", "Query Forward %d %d, time: %s\n", sendResult->sensorID, sendResult->iterPeriod, sim_time_string());
+        forwardBusy = TRUE;
+        noneFwdIndex = ( noneFwdIndex + 1 ) % MAX_CACHE_SIZE;
+      }
+
+    }
+
   }
 
   event void AMSend.sendDone( message_t *msg, error_t error )
   {
-    if ( &queryPacket == msg )
+    if ( &queryPacket == msg || &nonePacket == msg)
     {
       broadcastBusy = FALSE;
     }
@@ -227,9 +281,32 @@ implementation
 
   event message_t* Receive.receive( message_t* msg, void* payload, uint8_t len )
   {
-    if ( len == sizeof( aggregation_none_t ) )
+    int i;
+    if ( len == sizeof( none_t ) )
     {
-      call Leds.led1Toggle();
+      none_t *recvResult;
+      recvResult = ( none_t * ) payload; 
+      //check if it is already in
+        
+      if( recvResult->sensorID == nodeID )
+      {
+        dbg("None", "result for iteration %d is %d\n", recvResult->iterPeriod, recvResult->sensorValue);
+        return msg;
+      }
+      for ( i = 0; i < MAX_CACHE_SIZE; i++ )
+      {
+        if ( ( results[i].sensorID == recvResult->sensorID ) && ( results[i].iterPeriod >= recvResult->iterPeriod ) )
+        {
+          dbg( "Debug", "Discard\n" );
+          return msg;
+        }
+
+      } 
+      results[ noneIndex ] = *recvResult;
+
+      noneIndex = ( noneIndex + 1 ) % MAX_CACHE_SIZE;
+
+      call ResultTimer.startOneShot( nodeID * BROADCAST_PERIOD_MILLI );
       return msg;
     }
 
@@ -261,11 +338,15 @@ implementation
 
       }
 
+      recvQuery->address = call AMPacket.address();
       cache[ index ] = *recvQuery;
 
       index = ( index + 1 ) % MAX_CACHE_SIZE;
 
+      parent = cache[0].address;
+
       call ForwardQueryTimer.startOneShot( nodeID * BROADCAST_PERIOD_MILLI );
+
 
       if( sensorState[ recvQuery->sensorT ] == FALSE )
       {
