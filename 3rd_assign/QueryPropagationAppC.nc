@@ -1,5 +1,7 @@
 #include "QueryPropagation.h"
 
+//#define QUERY_SERIAL
+
 configuration QueryPropagationAppC
 {}
 
@@ -9,6 +11,7 @@ implementation
 	components new TimerMilliC() as QueryTimer;
 	components new TimerMilliC() as ForwardQueryTimer;
 	components new TimerMilliC() as SensorTimer;
+	components new TimerMilliC() as ResultTimer;
 	components new AMSenderC( AM_ID );
 	components new AMReceiverC( AM_ID );
 	components ActiveMessageC; 
@@ -32,6 +35,7 @@ implementation
 	App.QueryTimer -> QueryTimer;
 	App.ForwardQueryTimer -> ForwardQueryTimer;
 	App.SensorTimer -> SensorTimer;
+	App.ResultTimer -> ResultTimer;
 	App.AMSend -> AMSenderC;
 	App.Receive -> AMReceiverC;
 	App.AMControl -> ActiveMessageC;
