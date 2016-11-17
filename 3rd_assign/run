@@ -8,13 +8,23 @@ from TOSSIM import *
 t = TOSSIM.Tossim([])
 r = t.radio()
 # t.addChannel("Query",sys.stdout);
-#t.addChannel("Lifetime",sys.stdout);
-t.addChannel("None",sys.stdout);
+# t.addChannel("Lifetime",sys.stdout);
+# t.addChannel("None",sys.stdout);
+# t.addChannel("DEBUG",sys.stdout);
+t.addChannel("Depth", sys.stdout);
+
 
 r.add( int(1), int(2), float(0.0) )
 r.add( int(2), int(1), float(-1.0) )
 r.add( int(2), int(3), float(-1.0) )
 r.add( int(3), int(2), float(-1.0) )
+r.add( int(3), int(4), float(-1.0) )
+r.add( int(4), int(3), float(-1.0) )
+r.add( int(4), int(5), float(-1.0) )
+r.add( int(5), int(4), float(-1.0) )
+r.add( int(5), int(6), float(-1.0) )
+r.add( int(6), int(5), float(-1.0) )
+
 
 noise = open( "/opt/tinyos-2.1.2/tos/lib/tossim/noise/meyer-heavy.txt", "r" )
 
@@ -23,16 +33,16 @@ for line in noise:
 	if str1:
 		val = int(str1)
 
-		for i in range(1, 4):
+		for i in range(1, 7):
 			t.getNode(i).addNoiseTraceReading( val )
 
-for i in range(1, 4):
+for i in range(1, 7):
 	print( "Creating noise model for " + str(i) + "\n" );
 	t.getNode(i).createNoiseModel()
 
-for i in range(1,4):
+for i in range(1,7):
 	t.getNode(i).bootAtTime(0);
 
-for i in range( 1000000 ):
+for i in range( 10000000 ):
 	t.runNextEvent()
 

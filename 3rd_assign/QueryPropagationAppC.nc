@@ -12,6 +12,7 @@ implementation
 	components new TimerMilliC() as ForwardQueryTimer;
 	components new TimerMilliC() as SensorTimer;
 	components new TimerMilliC() as ResultTimer;
+	components new TimerMilliC() as PiggybackTimer;
 	components new AMSenderC( AM_ID );
 	components new AMReceiverC( AM_ID );
 	components ActiveMessageC; 
@@ -36,7 +37,8 @@ implementation
 	App.ForwardQueryTimer -> ForwardQueryTimer;
 	App.SensorTimer -> SensorTimer;
 	App.ResultTimer -> ResultTimer;
-	App.AMSend -> AMSenderC;
+	App.PiggybackTimer -> PiggybackTimer;
+	App.Radio -> AMSenderC;
 	App.Receive -> AMReceiverC;
 	App.AMControl -> ActiveMessageC;
 	App.Packet -> AMSenderC;

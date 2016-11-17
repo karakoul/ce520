@@ -3,8 +3,13 @@
 #ifndef QUERY_PROPAGATION_H
 #define QUERY_PROPAGATION_H
  
-#define MAX_CACHE_SIZE 5
+#define MAX_CACHE_SIZE 20
 #define BROADCAST_PERIOD_MILLI 1 
+#define PAYLOAD_LENGTH 10
+
+#define NONE 1
+#define PIGGYBACK 2
+#define STATS 3
 
 enum
 {
@@ -24,6 +29,7 @@ typedef nx_struct
 	nx_uint16_t aggregationMode;	// type 1: none, type 2: piggyback, type 3: stats
 	nx_uint16_t currentPeriod; // indicates the current period
 	nx_uint16_t address;
+	nx_uint16_t depth;
 
 } query_t;
 
@@ -37,12 +43,24 @@ typedef nx_struct
 
 typedef nx_struct
 {
+	nx_uint16_t sensorID;
+	nx_uint16_t sensorValue[PAYLOAD_LENGTH];
+	nx_uint16_t iterPeriod;
+	nx_uint16_t depth;
 
-} aggregation_piggyback_t;
+} piggyback_t;
 
 typedef nx_struct
 {
 
-} aggregation_stats_t;
+} stats_t;
+
+typedef struct
+{
+	uint16_t iter;
+	uint16_t sensorValue[ PAYLOAD_LENGTH ];
+	bool check;
+
+} cacheP_t;
 
 #endif
