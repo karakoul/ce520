@@ -1,3 +1,0 @@
-COMPONENT=QueryPropagationAppC
-include $(MAKERULES)
-

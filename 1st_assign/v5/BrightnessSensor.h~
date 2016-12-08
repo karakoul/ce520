@@ -1,7 +1,0 @@
-enum { AM_BRIGHTNESS = 3 };
-
-typedef nx_struct BrightnessMessage {
-
-	nx_uint16_t brightness;
-
-} Bright_Msg;
