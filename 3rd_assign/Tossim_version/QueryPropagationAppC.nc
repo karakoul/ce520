@@ -7,16 +7,18 @@ implementation
 {
 	components MainC, QueryPropagationC as App, LedsC;
 	components new TimerMilliC() as QueryTimer;
+	components new TimerMilliC() as ForwardQueryTimer;
 	components new TimerMilliC() as SensorTimer;
-	components new TimerMilliC() as ResultTimer;
 	components new TimerMilliC() as PiggybackTimer;
 	components new TimerMilliC() as StatsTimer;
 	components new TimerMilliC() as JoinTimer;
-	components new HamamatsuS1087ParC();
+	components new TimerMilliC() as ResultTimer;
 	
 	components new AMSenderC( AM_ID );
 	components new AMReceiverC( AM_ID );
 	components ActiveMessageC; 
+
+	components new DemoSensorC(); // TODO: hamamatsu
 
 	components SerialActiveMessageC;
   	components new SerialAMSenderC( AM_ID );
@@ -36,11 +38,14 @@ implementation
 
 	App.Boot -> MainC.Boot;
 	App.Leds -> LedsC;
-	App.Read -> HamamatsuS1087ParC;
 	App.QueryTimer -> QueryTimer;
+	App.JoinTimer -> JoinTimer;
+	App.ForwardQueryTimer -> ForwardQueryTimer;
 	App.SensorTimer -> SensorTimer;
-	App.ResultTimer -> ResultTimer;
 	App.PiggybackTimer -> PiggybackTimer;
 	App.StatsTimer -> StatsTimer;
-	App.JoinTimer -> JoinTimer;
+	App.ResultTimer -> ResultTimer;
+	
+	App.Read -> DemoSensorC;
+
 }

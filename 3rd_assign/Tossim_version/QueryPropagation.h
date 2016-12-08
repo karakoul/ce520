@@ -1,5 +1,12 @@
 #ifndef QUERY_PROPAGATION_H
 #define QUERY_PROPAGATION_H
+ 
+#define MAX_CACHE_SIZE 20
+#define BROADCAST_PERIOD_MILLI 2
+#define PAYLOAD_LENGTH 10
+
+#define DEBUG_INFO
+#define SIMULATION
 
 enum
 {
@@ -35,17 +42,11 @@ typedef nx_struct
 typedef nx_struct
 {
 	nx_uint16_t sensorID;
-	nx_uint16_t sensorValue[ 10 ];
+	nx_uint16_t sensorValue[ PAYLOAD_LENGTH ];
 	nx_uint16_t period;
 	nx_uint16_t depth;
 
 } piggyback_t;
-
-typedef struct
-{
-	int16_t period;
-	uint16_t sensorValue;
-} cacheP_t;
 
 typedef nx_struct
 {
@@ -63,6 +64,12 @@ typedef nx_struct
 typedef struct
 {
 	int16_t period;
+	uint16_t sensorValue;
+} cacheP_t;
+
+typedef struct
+{
+	int16_t period;
 	uint16_t maxValue;
 	uint16_t avgValue;
 	uint16_t minValue;
@@ -72,11 +79,9 @@ typedef struct
 
 typedef nx_struct
 {
-	nx_uint8_t sensorID;
+	nx_uint16_t sensorID;
 
 } join_t;
-
-
 
 
 #endif
