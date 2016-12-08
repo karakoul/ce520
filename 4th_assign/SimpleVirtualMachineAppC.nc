@@ -14,10 +14,10 @@ implementation
 	components new SerialAMSenderC( AM_ID );
   components new SerialAMReceiverC( AM_ID );
 
-  components new DemoSensorC();
-  App.Read -> DemoSensorC;
-  //components new HamamatsuS1087ParC();
-  //App.Read -> HamamatsuS1087ParC;
+  //components new DemoSensorC();
+  //App.Read -> DemoSensorC;
+  components new HamamatsuS1087ParC();
+  App.Read -> HamamatsuS1087ParC;
 
   App.Boot -> MainC.Boot;
 	App.Leds -> LedsC;

@@ -15,7 +15,7 @@ enum
 
 typedef nx_struct
 {
-	nx_uint8_t id;
+	nx_int8_t id;
 	nx_uint8_t instr;
 	nx_int8_t registers[ NUM_REGISTER ];
 
@@ -31,7 +31,6 @@ typedef nx_struct
 
 typedef struct
 {
-	int8_t appID;						/* The virtual id assigned by the VM for a specific application */
 	int8_t id;							/* The id assigned by the user when sending the binary through serial */
 	uint8_t binary[ MAX_APP_SIZE ];		/* Binary code of the application */
 	int8_t registers[ NUM_REGISTER ];	/* Registers for each application, R1 - R6 */

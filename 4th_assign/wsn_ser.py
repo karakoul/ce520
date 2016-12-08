@@ -52,12 +52,18 @@ class SerialManager(threading.Thread):
 				self.spare=0	
 
 
+serial_port = tos.Serial("/dev/ttyUSB1",115200)
+am = tos.AM(serial_port)
 
 def getRegs( regs ):
     registers = ""
 
     for i in range( 2, 8 ):
-        registers = registers + "R" + str(i-1) + " = " + str( regs[i] ) + "\n"
+        registers = registers + "R" + str(i-1) + " = "
+        if regs[i] > 127:
+        	registers = registers + str( -( 256-regs[i] ) ) + "\n"
+        else:
+        	registers = registers + str( regs[i] ) + "\n"
 
     return registers
 
@@ -99,26 +105,25 @@ def getCmd( instr ):
 
 def receiver(rx):
 	while True:
-		serial_port = tos.Serial("/dev/ttyUSB0",115200)
-		am = tos.AM(serial_port)
+		# serial_port = tos.Serial("/dev/ttyUSB0",115200)
+		# am = tos.AM(serial_port)
 		pckt = am.read()
 		if pckt is not None:
 			# print pckt.type
 			# print pckt.destination
 			# print pckt.source
 			print pckt.data
-			if(len(pckt.data)!=0): 
-				if(pckt.data[0]!=0  ):
-					print "[AppID:" + str(pckt.data[0]) + "] " + getCmd( pckt.data[1] )
-					print getRegs( pckt.data )
+			if(len(pckt.data)==8): 
+				print "[AppID:" + str(pckt.data[0]) + "] " + getCmd( pckt.data[1] )
+				print getRegs( pckt.data )
 			
 
 
 def transmitter(tx):
 	AM_ID=20
 
-	serial_port = tos.Serial("/dev/ttyUSB0",115200)
-	am = tos.AM(serial_port)
+	# serial_port = tos.Serial("/dev/ttyUSB0",115200)
+	# am = tos.AM(serial_port)
 
 	tx_pckt = tos.Packet( [('id', 'int', 2),('seqNum',  'int', 2),
 						   ('code','blob',30)   
@@ -126,48 +131,42 @@ def transmitter(tx):
 
 	while True:
 
-		code = bytearray()
+		# code = bytearray()
 
-		fileName = raw_input("Enter application file name: ")
+		fileName = raw_input("Enter application: ")
 		if fileName == "q":
 			os._exit(1)
-		fileName = "app"+fileName+".hex"
-		fd = open(fileName, 'rb')
-		code_send = []
-		try:
-		    byte = fd.read(5)
-		    while byte != "":
-		        # Do stuff with byte.
-	        	print byte
-	        	code_send.append(int(byte[2:4],16))
-		        byte = fd.read(5)
-		finally:
-		    fd.close()
 
-		length = len(code_send)
-		code_send += (30 - length)*[0]
+		with open("app" + fileName, "rb") as f: code = bytearray(f.read())
 
-		print code_send
+		length = len( code )
 
+		for i in xrange(length,30):
+			code.append(0)
 
+		# print code
 
 		appId = raw_input("Enter the id of the app: ")
 		if appId == "q":
 			os._exit(1)
-		tx_pckt.id = int(appId)
-		tx_pckt.seqNum = 0
-		tx_pckt.code = code_send
 
-		
+		tx_pckt.seqNum = 0
+		seqNum = raw_input( "Do you want to terminate app? (y/n): " )
+		if seqNum == "y":
+			tx_pckt.seqNum = -1
+
+ 
+		tx_pckt.id = int(appId)
+		tx_pckt.code = code
 
 		am.write(tx_pckt,AM_ID, None, False)
-		print "sent"
+		# print "sent"
 
 
 def main():
 	tx = Queue.Queue()
 	rx = Queue.Queue()
-	Manager = SerialManager(rx,tx,"/dev/ttyUSB0",115200,20)	
+	Manager = SerialManager(rx,tx,"/dev/ttyUSB1",115200,20)	
 	Manager.deamon = False
 	Manager.start()
 

@@ -29,6 +29,7 @@ implementation
 	bool readBusy = FALSE;
 	int8_t appRunning = 0;
 	message_t packet;
+	bool serialBusy = FALSE;
 
 	void init()
 	{
@@ -39,12 +40,18 @@ implementation
 			apps[i].id = -1;
 			apps[i].status = APP_WAIT;
 			apps[i].getResults = FALSE;
+			apps[i].hasTimer = FALSE;
+			apps[i].timerCnt = 0;
+			apps[i].pc = 3;
+			memset( apps[i].binary, 0, sizeof( uint8_t ) * MAX_APP_SIZE );
+			memset( apps[i].registers, 0, sizeof( int8_t ) * NUM_REGISTER );
 
 			results[i].id = -1;
 			results[i].data = 0;
 
 			timers[i].id = -1;
 			timers[i].duration = 0;
+			timers[i].period = 0;
 		}
 
 	}
@@ -57,16 +64,53 @@ implementation
 		{
 			if ( apps[i].id == appID )
 			{
-				apps[i].status = APP_TERMINATE;
+				apps[i].status = APP_WAIT; // TERMINATE
 				memset( apps[i].registers, 0, sizeof( int8_t ) * NUM_REGISTER );
 				memset( apps[i].binary, 0, sizeof( uint8_t ) * MAX_APP_SIZE );
-				apps[i].pc = 0;
+				apps[i].pc = 3;
 				apps[i].id = -1;
 				apps[i].getResults = FALSE;
 				apps[i].timerCnt = 0;
 				apps[i].hasTimer = FALSE;
 
-				return;
+				switch ( i )
+				{
+					case 0:
+						call Leds.led0Off();
+						break;
+					case 1:
+						call Leds.led1Off();
+						break;
+					case 2:
+						call Leds.led2Off();
+						break;
+				}
+
+
+				break;
+			}
+		}
+
+		for ( i = 0; i < MAX_APPS; i++ )
+		{
+			if ( results[i].id == appID )
+			{
+				results[i].id = -1;
+				results[i].data = 0;
+
+				break;
+			}
+		}
+
+		for ( i = 0; i < MAX_APPS; i++ )
+		{
+			if ( timers[i].id == appID )
+			{
+				timers[i].id = -1;
+				timers[i].duration = 0;
+				timers[i].period = 0;
+
+				break;
 			}
 		}
 		
@@ -101,9 +145,10 @@ implementation
 		debug->instr = instr;
 		memcpy( debug->registers, app.registers, sizeof( int8_t ) * NUM_REGISTER );
 
-
-
-		if ( call SerialSend.send( AM_BROADCAST_ADDR, &packet, sizeof( debug_t ) ) == SUCCESS ) {}
+		if ( call SerialSend.send( AM_BROADCAST_ADDR, &packet, sizeof( debug_t ) ) == SUCCESS ) 
+		{
+			serialBusy = TRUE;
+		}
 
 	}
 
@@ -117,7 +162,7 @@ implementation
 
 		if ( apps[ appRunning ].status == APP_TERMINATE )
 		{
-			// delete app
+			deleteApp( apps[ appRunning ].id );
 			appRunning = ( appRunning + 1 ) % MAX_APPS;
 			post interpret();
 			return;
@@ -136,6 +181,13 @@ implementation
 
 		for ( i = 0; i < 2; i++ )
 		{
+			if ( serialBusy )
+			{
+				apps[ appRunning ].pc = pc;
+				post interpret();
+				return;
+			}
+
 			cmd = apps[ appRunning ].binary[ pc ] >> 4;
 			
 			switch ( cmd )
@@ -146,7 +198,6 @@ implementation
 					for ( j = 0; j < NUM_REGISTER; j++ )
 					{
 						dbg( "VM", "%d: reg[%d] = %d\n",apps[ appRunning ].id, j+1, apps[ appRunning ].registers[j] );
-						// SEND TO SERIAL
 					}
 					
 					if ( apps[ appRunning ].hasTimer == TRUE )
@@ -161,7 +212,7 @@ implementation
 								apps[ appRunning ].hasTimer = FALSE;
 								break;
 							}
-							else
+							else // Has found tmr in init, but timer has not yet fired
 							{
 								dbg( "VM2", "In return timerCnt == 0\n" );
 								apps[ appRunning ].status = APP_WAIT;
@@ -172,7 +223,7 @@ implementation
 								return;
 							}
 						}
-						else
+						else // else pc is in tmr handler, then pc = binary[1]+3
 						{
 							dbg( "VM2", "In timer return\n" );
 							if ( apps[ appRunning ].timerCnt != 0 )
@@ -192,13 +243,16 @@ implementation
 								return;
 							}
 						}
-						
-						// else pc = binary[2]+4
+					
 						//apps[ appRunning ].hasTimer = FALSE;
 
 					}
 
+					// if it hasnt encountered any timers
+					//apps[ appRunning ].status = TERMINATE;
+
 					deleteApp( apps[ appRunning ].id );
+
 
 					appRunning = ( appRunning + 1 ) % MAX_APPS;
 
@@ -396,7 +450,7 @@ implementation
 					{
 						if ( results[j].id == apps[ appRunning ].id )
 						{
-							apps[ appRunning ].registers[ arg1 - 1 ] = (int8_t) results[j].data; // todo
+							apps[ appRunning ].registers[ arg1 - 1 ] = (int8_t) ( results[j].data%127 ); // todo
 							results[j].id = -1;
 							break;
 						}
@@ -435,7 +489,7 @@ implementation
 
 				default:
 					dbg( "VM", "UNKNOWN\n" );
-					call Leds.led2On();
+					//call Leds.led2On();
 					return;
 					//break;
 			}
@@ -568,7 +622,10 @@ implementation
 
   	event void SerialAMControl.stopDone( error_t error ) {}
 
-  	event void SerialSend.sendDone( message_t *msg, error_t error ) {}
+  	event void SerialSend.sendDone( message_t *msg, error_t error ) 
+  	{
+  		serialBusy = FALSE;
+  	}
 
   	event message_t *SerialReceive.receive( message_t *msg, void *payload, uint8_t len )
   	{
@@ -576,38 +633,54 @@ implementation
 
   		if ( len == sizeof( app_msg_t ) )
   		{
-  			int appID;
+  			int appIndex, i;
   			app_msg_t* app = ( app_msg_t * ) payload;
-  			appID = getAppIndex( app->id );
+  			appIndex = getAppIndex( app->id );
   			//call Leds.led2On();
-
-
 
   			if ( app->seqNum == APP_TERMINATE )
   			{
-  				if ( appID != -1 )
+  				if ( appIndex != -1 )
   				{
-  					apps[ appID ].status = APP_TERMINATE;
+  					deleteApp( app->id );
+  					return msg;
   				}
 
   				return msg;
   			}
 
-  			if ( appID != -1 )
+  			if ( appIndex != -1 )
   			{
-				apps[ appID ].status = APP_READY;
-				memcpy( apps[ appID ].binary, app->binary, sizeof( uint8_t )*MAX_PAYLOAD );
-				memset(apps[ appID ].registers, 0, sizeof(int8_t) * NUM_REGISTER );
-				apps[ appID ].pc = 3;
-  				apps[appID].getResults = FALSE;
-  				apps[appID].timerCnt = 0;
-  				apps[appID].hasTimer = FALSE;
-  				
+				apps[ appIndex ].status = APP_READY;
+				memcpy( apps[ appIndex ].binary, app->binary, sizeof( uint8_t )*MAX_PAYLOAD );
+				memset(apps[ appIndex ].registers, 0, sizeof(int8_t) * NUM_REGISTER );
+				apps[ appIndex ].pc = 3;
+  				apps[ appIndex ].getResults = FALSE;
+  				apps[ appIndex ].timerCnt = 0;
+  				apps[ appIndex ].hasTimer = FALSE;
+
+  				for ( i = 0; i < MAX_APPS; i++ )
+  				{
+  					if ( results[i].id == app->id )
+  					{
+  						results[i].data = 0;
+  						break;
+  					}
+  				}
+
+  				for ( i = 0; i < MAX_APPS; i++ )
+  				{
+  					if ( timers[i].id == app->id )
+  					{
+  						timers[i].duration = 0;
+  						timers[i].period = 0;
+  						break;
+  					}
+  				}
   				
   			}
   			else
   			{
-  				//call Leds.led2On();
   				addApp( app );
   			}
   			
@@ -634,7 +707,7 @@ implementation
   				{
   					dbg( "VM", "Read done id = %d\n", apps[ indexP ].id );
 
-  					results[ idx ].data = apps[ indexP ].id; // TODO: change to data
+  					results[ idx ].data = data; // TODO: change to data
 	  				apps[ indexP ].getResults = TRUE;
 	  				apps[ indexP ].status = APP_READY;
 	  				idx = ( idx + 1 ) % MAX_APPS;

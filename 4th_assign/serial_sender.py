@@ -49,52 +49,55 @@ def getCmd( instr ):
 
 AM_ID=20
 
-code = bytearray()
+# code = bytearray()
 
+with open("app4", "rb") as f: code = bytearray(f.read())
 
-# fd = open("app1.hex", 'rb')
+# fd = open("app", 'rb')
 # code_send = []
 # try:
 #     byte = fd.read(1)
 #     while byte != "":
 #         # Do stuff with byte.
 #         if(byte!=" "):
-#         	code_send.append(int(byte))
+#         	code_send.append((byte))
 #         byte = fd.read(1)
 #         print byte
 # finally:
 #     fd.close()
 
-# length = len(code_send)
-# code_send += (20 - length)*[0]
+length = len(code)
+for i in xrange(length,30):
+    code.append(0)
+# code += (30 - length)*[0]
 
+print code
+print length
 
+serial_port = tos.Serial("/dev/ttyUSB0",115200)
+am = tos.AM(serial_port)
 
-# print code_send
+tx_pckt = tos.Packet( [('id', 'int', 2),
+                       ('seqNum',  'int', 2),
+                       ('code','blob',30)
+					  ],[])
 
-# serial_port = tos.Serial("/dev/ttyUSB0",115200)
-# am = tos.AM(serial_port)
+tx_pckt.id = 8
+tx_pckt.seqNum = 0
+tx_pckt.code = code
 
-# tx_pckt = tos.Packet( [('seqNum',  'int', 1),
-# 					   ('code','blob',20),
-# 					   ('length', 'int', 2)
-# 					   ],[])
+print tx_pckt
 
-# tx_pckt.seqNum = 0
-# tx_pckt.code = code_send
-# tx_pckt.length = 20
+# data = [13, 14, 0, 0, 0, 0, 0, 0]
 
-data = [13, 14, 0, 0, 0, 0, 0, 0]
+# print "---------------------------------------------"
+# print "[AppID:" + str(data[0]) + "] " + getCmd( data[1] )
+# print getRegs( data )
+# print "---------------------------------------------\n"
 
-
-print "---------------------------------------------"
-print "[AppID:" + str(data[0]) + "] " + getCmd( data[1] )
-print getRegs( data )
-print "---------------------------------------------\n"
-
-# input_mode = raw_input( "Enter aggregation mode: " )
-# am.write(tx_pckt,AM_ID, None, False)
-# print "Send done"
+input_mode = raw_input( "Enter aggregation mode: " )
+am.write(tx_pckt,AM_ID, None, False)
+print "Send done"
 # for i in xrange(100):
 
 # 	pckt = am.read()
