@@ -1,0 +1,3 @@
+COMPONENT=SimpleVirtualMachineAppC
+include $(MAKERULES)
+
